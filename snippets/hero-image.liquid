@@ -1,0 +1,42 @@
+<div class="hero">
+    {%- if collection.image -%}
+        {%- assign hero_image = collection.image -%}
+    {%- elsif page.metafields.accentuate.hero_image_file_name -%}
+        {%- assign hero_image = page.metafields.accentuate.hero_image_file_name -%}
+    {%- elsif hero_image_fallback -%}
+        {%- assign hero_image = hero_image_fallback -%}
+    {%- else -%}
+        {%- assign hero_image = 'Annuals_2020_BloomBox_Greenhouse_118.jpg' -%}
+    {%- endif -%}
+
+    {%- capture hero_img_url -%}{{ hero_image | img_url }}{%- endcapture -%}
+    {%- capture hero_file_img_url -%}{{ hero_image | file_img_url }}{%- endcapture -%}
+
+    {%- if hero_img_url contains 'no-image' -%}
+    <img
+        class="hero__image--img-tag"
+        srcset="
+            {{ hero_image | file_img_url: '400x', format: 'pjpg' }} 400w,
+            {{ hero_image | file_img_url: '540x', format: 'pjpg' }} 540w,
+            {{ hero_image | file_img_url: '768x', format: 'pjpg' }} 768w,
+            {{ hero_image | file_img_url: '960x', format: 'pjpg' }} 960w,
+            {{ hero_image | file_img_url: '1200x', format: 'pjpg' }} 1200w,
+            {{ hero_image | file_img_url: '1600x', format: 'pjpg' }} 1600w"
+        sizes="100vw"
+        alt="{{ hero_image.alt }}"
+        data-image>
+    {%- else -%}
+    <img
+        class="hero__image--img-tag"
+        srcset="
+            {{ hero_image | img_url: '400x', format: 'pjpg' }} 400w,
+            {{ hero_image | img_url: '540x', format: 'pjpg' }} 540w,
+            {{ hero_image | img_url: '768x', format: 'pjpg' }} 768w,
+            {{ hero_image | img_url: '960x', format: 'pjpg' }} 960w,
+            {{ hero_image | img_url: '1200x', format: 'pjpg' }} 1200w,
+            {{ hero_image | img_url: '1600x', format: 'pjpg' }} 1600w"
+        sizes="100vw"
+        alt="{{ hero_image.alt }}"
+        data-image>
+    {%- endif -%}
+</div>

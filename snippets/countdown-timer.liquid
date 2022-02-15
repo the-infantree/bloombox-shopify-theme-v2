@@ -1,0 +1,97 @@
+{%- assign timer_date = settings.countdown_date -%}
+{%- assign timer_time = settings.countdown_time -%}
+
+<div class="countdown" id="clockDiv">
+    <div class="countdown__section">
+        <span class="h1 countdown__amount--days"></span>
+        <span class="tiny-caps">Days</span>
+    </div>
+
+    <div class="countdown__section">
+        <span class="h1">:</span>
+    </div>
+
+    <div class="countdown__section">
+        <span class="h1 countdown__amount--hours"></span>
+        <span class="tiny-caps">Hours</span>
+    </div>
+
+    <div class="countdown__section">
+        <span class="h1">:</span>
+    </div>
+
+    <div class="countdown__section">
+        <span class="h1 countdown__amount--minutes"></span>
+        <span class="tiny-caps">Minutes</span>
+    </div>
+
+    <div class="countdown__section">
+        <span class="h1">:</span>
+    </div>
+
+    <div class="countdown__section">
+        <span class="h1 countdown__amount--seconds"></span>
+        <span class="tiny-caps">Seconds</span>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function getTimeRemaining(endTime) {
+        const total = Date.parse(endTime) - Date.parse(new Date());
+        const seconds = Math.floor((total / 1000) % 60);
+        const minutes = Math.floor((total / 1000 / 60) % 60);
+        const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+        return {
+            total,
+            days,
+            hours,
+            minutes,
+            seconds
+        };
+    }
+
+    function initializeClock(endTime) {
+        var clock;
+
+        document.querySelectorAll('.countdown').forEach(function(ele){
+            clock = ele;
+        
+            var daysSpan = clock.querySelector('.countdown__amount--days');
+            var hoursSpan = clock.querySelector('.countdown__amount--hours');
+            var minutesSpan = clock.querySelector('.countdown__amount--minutes');
+            var secondsSpan = clock.querySelector('.countdown__amount--seconds');
+
+            var updateClock = function() {
+                var t = getTimeRemaining(endTime);
+
+                daysSpan.innerHTML = t.days;
+                hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+                minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+                if (t.total <= 0) {
+                    clearClock();
+                }
+            }
+
+            var clearClock = function() {
+                daysSpan.innerHTML = '0';
+                hoursSpan.innerHTML = '0';
+                minutesSpan.innerHTML = '0';
+                secondsSpan.innerHTML = '0';
+                clearInterval(timeinterval);
+            }
+            
+            updateClock();
+            var timeinterval = setInterval(updateClock, 1000);
+        });
+    }
+    // let countdownDate = '2022-02-15 09:00:00';
+    var countdownDate = '{{ timer_date | timer_time }}';
+    var my_timer = countdownDate.replace(/-/g, '/');
+    var deadline = new Date(my_timer);
+
+    initializeClock(deadline);
+</script>

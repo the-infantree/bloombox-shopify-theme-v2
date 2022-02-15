@@ -1,0 +1,87 @@
+<div class="bg--dk-teal header__teal section--short">
+    <div class="container">
+        <div class="grid--60-40">
+            <div>
+
+                <h1>{{ 'customer.account.title' | t }}</h1>
+                <p class="off-white">Welcome back, {{ customer.first_name }}! Review your orders below and see <a href="/pages/reward">your rewards here</a>. Don't hesitate to <a href="/pages/contact">reach out</a> with any questions or <a href="/pages/frequently-asked-questions">see our FAQs</a>! Thanks for being a loyal customer!
+                <p><a href="/pages/reward" class="btn--secondary">View My Rewards</a></p>
+            </div>
+            <div class="text-right">
+
+                <p>{{ 'layout.customer.log_out' | t | customer_logout_link }}</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container--wide section--tall grid--70-30">
+    <div class="myaccount__order-history">
+      <h2>{{ 'customer.orders.title' | t }}</h2>
+
+      {% paginate customer.orders by 20 %}
+        {% if customer.orders.size != 0 %}
+
+          <table class="responsive-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'customer.orders.order_number' | t }}</th>
+                <th scope="col">{{ 'customer.orders.date' | t }}</th>
+                <th scope="col">{{ 'customer.orders.payment_status' | t }}</th>
+                <th scope="col">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                <th scope="col">{{ 'customer.orders.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in customer.orders %}
+                <tr>
+                  <th data-label="{{ 'customer.orders.order_number' | t }}" scope="row">
+                    <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">{{ order.name }}</a>
+                  </th>
+                  <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | time_tag: format: 'date' }}</td>
+                  <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                  <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+
+                    {% comment %} "Fulfilled" overwrites all other status updates {% endcomment %}
+                    {% if order.fulfillment_status_label == "Fulfilled" %}
+                        Delivered
+                    {% endif %}
+
+                    {% comment %} If not marked as Fulfilled, and "Processing" tag is present, show this message {% endcomment %}
+                    {% unless order.fulfillment_status_label == "Fulfilled" %}
+                        {% if order.tags contains 'Processing' %}
+                             We're picking & boxing!
+                        {% endif %}
+                    {% endunless %}
+
+                    {% unless order.tags contains 'Processing' %}
+                       {% if order.fulfillment_status_label == "Unfulfilled"  %}
+                           Unfulfilled
+                       {% endif %}
+                    {% endunless %}
+                  </td>
+                  <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% else %}
+
+          <p>{{ 'customer.orders.none' | t }}</p>
+
+        {% endif %}
+        {%- if paginate.pages > 1 -%}
+          {% include 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {% endpaginate %}
+    </div>
+    <div class="myaccount__account-details">
+      <h2 class="h4">{{ 'customer.account.details' | t }}</h2>
+
+      {{ customer.default_address | format_address }}
+
+      <p><a href="{{ routes.account_addresses_url }}" class="btn--tertiary">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+    </div>
+</div>

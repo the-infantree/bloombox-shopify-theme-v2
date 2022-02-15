@@ -1,0 +1,255 @@
+{%- assign social_icons = false -%}
+{%- assign inline_list = false -%}
+{%- assign show_selectors = false -%}
+
+{%- if
+  settings.social_facebook_link != blank
+  or settings.social_pinterest_link != blank
+  or settings.social_instagram_link != blank
+  or settings.social_youtube_link != blank
+  or settings.social_vimeo_link != blank
+  or request.page_type == 'article'
+  or request.page_type == 'blog'
+-%}
+  {%- assign social_icons = true -%}
+{%- endif -%}
+
+
+
+<footer class="site-footer bg--green">
+  {%- if settings.open_store == true -%}
+  <div class="container--wide">
+
+      <p class="h6 off-white no-margin">We now offer over-the-phone ordering!<br />
+      <span class="h4 pink">Call to order: 717-984-6214</span></p>
+
+  </div>
+  {%- endif -%}
+  <div class="container--wide footer__grid">
+
+        {%- for block in section.blocks -%}
+          <div>
+
+            {%- case block.type -%}
+              {%- when 'newsletter' -%}
+                <h2 id="email-signup" class="h3 no-margin--btm">Get BloomBox Delivered to Your&nbsp;Inbox!</h2>
+                <p>
+                    Be the first to know about new arrivals, sales, and seasonal releases!
+                </p>
+                <!-- Begin Mailchimp Signup Form -->
+                <div id="mc_embed_signup">
+                    <form action="https://getblooming.us13.list-manage.com/subscribe/post?u=c50ee0e69c184d7690f8dcd79&amp;id=8830584f5f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <div id="mc_embed_signup_scroll">
+                            <div>
+                                <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
+                                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" style="width: 100%;">
+                            </div>
+
+                            <div class="mc-field-group">
+                                <label for="mce-FNAME">Name </label>
+                                <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+                            </div>
+                            <div id="mce-responses">
+                                <div class="response" id="mce-error-response" style="display:none"></div>
+                                <div class="response" id="mce-success-response" style="display:none"></div>
+                            </div><!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_c50ee0e69c184d7690f8dcd79_8830584f5f" tabindex="-1" value=""></div>
+                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn--primary small">
+                        </div>
+                    </form>
+                </div>
+                <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='MMERGE2';ftypes[2]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+                <!--End mc_embed_signup-->
+
+              {%- when 'text' -%}
+                {%- if block.settings.text != blank -%}
+                  <div>
+                      {{ block.settings.text }}
+                  </div>
+                {%- endif -%}
+
+              {%- when 'link_list' -%}
+                {%- if block.settings.title -%}
+                  <h2 class="h4">{{ block.settings.title | escape }}</h2>
+                {%- endif -%}
+
+                {%- assign footer_linklist = block.settings.menu -%}
+                  <ul class="site-footer__linklist">
+                    {%- for link in linklists[footer_linklist].links -%}
+                      <li class="site-footer__linklist-item">
+                        <a href="{{ link.url }}"
+                          {% if link.current %} aria-current="page"{% endif %}
+                        >
+                          {{ link.title | escape }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+
+            {%- endcase -%}
+
+          </div>
+        {%- endfor -%}
+
+        <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/abstract-icon.svg?v=1612245424" class="img__abstract-icon" />
+
+        <div class="footer__social-copyright">
+            <h3 class="h6 pink" style="margin-right: 1rem; display: inline-block;">Download Our App</h3>
+            <ul class="list__social list--inline" style="display: inline-block; margin-bottom: 1.5rem;">
+                <li class="social-icons__item">
+                      <a href="https://apps.apple.com/app/bloombox-your-garden-delivered/id1579702224?ign-mpt=uo%3D2" aria-describedby="a11y-external-message">
+                          <svg aria-hidden="true" focusable="false" role="presentation" class="icon" viewBox="0 0 43 49" style="width:20px; height: auto; display: inline-block;"><path
+     d="M36.76,26.44 C36.146,33.454 42.921,35.918 43.0,35.953 C42.939,36.122 41.915,39.469 39.425,42.923 C37.274,45.908 35.46,48.878 31.531,48.938 C28.73,49.1 26.964,46.993 23.12,46.993 C19.62,46.993 17.828,48.878 14.559,49.1 C11.168,49.124 8.583,45.778 6.415,42.804 C1.980,36.720 -1.405,25.612 3.145,18.116 C5.400,14.391 9.438,12.34 13.820,11.972 C17.151,11.914 20.299,14.104 22.332,14.104 C24.371,14.104 28.195,11.472 32.212,11.859 C33.893,11.924 38.616,12.502 41.648,16.711 C41.406,16.861 36.11,19.837 36.76,26.44 ZM21.924,11.300 C21.534,8.484 22.995,5.556 24.663,3.719 C26.527,1.647 29.669,0.108 32.264,0.10 C32.596,2.878 31.379,5.759 29.579,7.832 C27.776,9.901 24.821,11.514 21.924,11.300 Z"/></svg> iOS</a>
+                </li>
+                <li class="social-icons__item">
+                      <a href="https://play.google.com/store/apps/details?id=com.getblooming.app" aria-describedby="a11y-external-message">
+                          <svg aria-hidden="true" focusable="false" role="presentation" class="icon" viewBox="0 0 39 48" style="width:20px; height: auto; display: inline-block;"><path
+ d="M38.110,33.139 C37.526,33.706 36.815,33.990 35.978,33.990 C35.161,33.990 34.459,33.706 33.876,33.139 C33.292,32.574 33.0,31.829 33.0,31.0 L33.0,18.895 C33.0,18.85 33.589,16.958 34.142,16.390 C34.696,15.822 35.160,16.7 35.978,16.7 C36.815,16.7 37.526,16.286 38.110,16.843 C38.694,17.400 38.986,18.85 38.986,18.895 L38.986,31.73 C38.986,31.886 38.694,32.574 38.110,33.139 ZM8.727,8.805 C9.880,6.921 11.431,5.455 13.377,4.402 L11.458,0.646 C11.331,0.398 11.376,0.207 11.592,0.72 C11.827,0.42 12.7,0.15 12.133,0.244 L14.80,4.30 C15.792,3.227 17.604,2.825 19.515,2.825 C21.425,2.825 23.237,3.227 24.950,4.30 L26.897,0.244 C27.23,0.15 27.202,0.42 27.437,0.72 C27.654,0.206 27.698,0.398 27.572,0.646 L25.652,4.402 C27.581,5.455 29.122,6.921 30.275,8.805 C31.430,10.690 32.6,12.749 32.6,14.986 L6.996,14.986 C6.996,12.749 7.573,10.689 8.727,8.805 ZM24.304,9.714 C24.501,9.911 24.737,10.9 25.11,10.9 C25.284,10.9 25.515,9.911 25.704,9.714 C25.892,9.517 25.986,9.282 25.986,9.9 C25.986,8.735 25.892,8.500 25.704,8.303 C25.515,8.107 25.285,8.8 25.11,8.8 C24.737,8.8 24.501,8.107 24.304,8.303 C24.107,8.500 24.9,8.735 24.9,9.9 C24.9,9.283 24.107,9.517 24.304,9.714 ZM13.304,9.714 C13.501,9.911 13.737,10.9 14.11,10.9 C14.284,10.9 14.515,9.911 14.704,9.714 C14.892,9.517 14.986,9.282 14.986,9.9 C14.986,8.735 14.892,8.500 14.704,8.303 C14.515,8.107 14.285,8.8 14.11,8.8 C13.737,8.8 13.501,8.107 13.304,8.303 C13.107,8.500 13.9,8.735 13.9,9.9 C13.9,9.283 13.107,9.517 13.304,9.714 ZM5.110,33.139 C4.526,33.706 3.815,33.990 2.978,33.990 C2.161,33.990 1.459,33.706 0.876,33.139 C0.292,32.574 0.0,31.829 0.0,31.0 L0.0,18.895 C0.0,18.85 0.589,16.958 1.142,16.390 C1.696,15.822 2.160,16.7 2.978,16.7 C3.815,16.7 4.526,16.286 5.110,16.843 C5.694,17.400 5.986,18.85 5.986,18.895 L5.986,31.73 C5.986,31.886 5.694,32.574 5.110,33.139 ZM31.999,35.0 C31.999,35.885 31.908,36.944 31.318,37.560 C30.727,38.175 30.17,38.483 29.186,38.483 L27.0,38.999 L27.0,44.999 C27.0,45.827 26.833,46.564 26.280,47.141 C25.726,47.718 25.52,48.7 24.259,48.7 C23.466,48.7 22.792,47.718 22.239,47.141 C21.686,46.564 21.0,45.827 21.0,44.999 L21.0,38.999 L18.0,38.999 L18.0,44.999 C18.0,45.827 17.312,46.564 16.758,47.141 C16.205,47.718 15.531,48.7 14.738,48.7 C13.963,48.7 13.298,47.718 12.745,47.141 C12.191,46.564 12.0,45.827 12.0,44.999 L12.0,38.999 L9.838,38.482 C8.989,38.482 8.270,38.174 7.679,37.559 C7.89,36.944 6.999,35.886 6.999,35.0 L6.999,15.999 L31.999,15.999 L31.999,35.0 Z"/></svg>
+                      Android</a>
+                 </li>
+            </ul>
+            {%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr Snapchat YouTube Vimeo" | split: ' ' -%}
+            {%- if social_icons -%}
+              <ul class="list__social list--inline">
+                {%- for social in socials -%}
+                  {%- assign social_link = social | prepend: 'social_' | append: '_link' | downcase -%}
+                  {%- assign icon_link = social | prepend: 'icon-' | downcase -%}
+                  {%- if settings[social_link] != blank -%}
+                    <li class="social-icons__item">
+                      <a class="social-icons__link" href="{{ settings[social_link] | escape }}" aria-describedby="a11y-external-message">
+                        {%- include icon_link -%}
+                        <span class="icon__fallback-text">{{ social }}</span>
+                      </a>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            <p class="copyright" style="margin-top: 1rem;">&copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: routes.root_url }}. All rights reserved.</p>
+        </div> <!-- / footer__social-copyright -->
+
+
+    </div>
+</footer>
+
+
+
+{% schema %}
+{
+  "name": {
+    "en": "Footer",
+    "es": "Pie de página"
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "header",
+      "content": {
+        "en": "Payment methods",
+        "es": "Métodos de pago"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": {
+        "en": "Show payment icons",
+        "es": "Mostrar iconos de pago"
+      },
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": {
+        "en": "Menu",
+        "es": "Menú"
+      },
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "en": "Heading",
+            "es": "Título"
+          },
+          "default": {
+            "en": "Quick links",
+            "es": "Enlaces rápidos"
+          }
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": {
+            "en": "Menu",
+            "es": "Menú"
+          },
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": {
+        "en": "Text",
+        "es": "Texto"
+      },
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "en": "Heading",
+            "es": "Título"
+          },
+          "default": {
+            "en": "Talk about your business",
+            "es": "Habla sobre tu negocio"
+          }
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": {
+            "en": "Text",
+            "es": "Texto"
+          },
+          "default": {
+            "en": "<p>Share store details, promotions, or brand content with your customers.</p>",
+            "es": "<p>Comparte detalles de la tienda, promociones o contenido de la marca con tus clientes.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "limit": 1,
+      "name": {
+        "en": "Newsletter signup",
+        "es": "Suscripción al boletín"
+      },
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "en": "Heading",
+            "es": "Título"
+          },
+          "info": {
+            "en": "Subscribers will be added to your “accepts marketing” [customer list.](/admin/customers?query=&accepts_marketing=1)",
+            "es": "Se añadirá los suscriptores a tu [lista de clientes.](/admin/customers?query=&accepts_marketing=1) \"acepta marketing\"."
+          },
+          "default": {
+            "en": "Newsletter",
+            "es": "Boletín"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

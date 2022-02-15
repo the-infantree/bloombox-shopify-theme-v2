@@ -1,0 +1,42 @@
+<header class="collection-header">
+  {%- include 'hero-image', hero_image_fallback: 'Reviews2020_BloomBox_027.jpg' -%}
+</header>
+
+<div class="page__intro-container container container--wide">
+    <span class="collection__dog-ear" role="presentation"></span>
+    <div class="page__intro">
+
+        <h1>{{ page.title }}</h1>
+        {{ page.content }}
+
+    </div>
+</div>
+
+<div class="container--wide">
+    <ul class="list__reviews grid--3-col">
+
+        {% for reviewImg in page.metafields.customer_review.review_image %}
+        <li class="card__review">
+            <div class="review__img-wrapper">
+                <img src="{{ reviewImg }}" alt="" />
+            </div>
+            <div class="review__text">
+                <time>{{ page.metafields.customer_review.review_date[forloop.index0] | date: "%B %-d, %Y" }}</time>
+                <blockquote>
+                    {{ page.metafields.customer_review.review_quote[forloop.index0] }}
+                </blockquote>
+                <cite>{{ page.metafields.customer_review.review_author[forloop.index0] }}</cite>
+            </div>
+        </li>
+        {% endfor %}
+        
+    </ul>
+
+    <div class="text-center section--shorter">
+        {{ page.metafields.customer_review.customer_review_footer }}
+    </div>
+
+
+</div>
+
+{% section 'feature-columns-reviews' %}

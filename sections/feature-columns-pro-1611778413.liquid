@@ -1,0 +1,43 @@
+<section class="grid--3-col section__image-callouts">
+  {% for block in section.blocks %}
+  <div>
+      <a href="{{ block.settings.button_link }}" aria-label="Go to collection" class="image-callout__link">
+
+          {% if block.settings.image != blank %}
+            {% capture img_id %}TextColumnImage-{{ block.id }}{% endcapture %}
+            {% capture wrapper_id %}TextColumnImageWrapper-{{ block.id }}{% endcapture %}
+            {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            {% include 'image-style', image: block.settings.image, height: max_height, wrapper_id: wrapper_id, img_id: img_id %}
+            <div id="{{ wrapper_id }}" class="feature-row__image-wrapper">
+                <img id="{{ img_id }}"
+                     data-src="{{ img_url }}"
+                     data-widths="[180, 360, 540, 720, 900]"
+                     data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="{{ block.settings.image.alt | escape }}">
+            </div>
+              {% else %}
+                <p>
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </p>
+              {% endif %}
+            {% if block.settings.title != blank %}
+              <h3>{{ block.settings.title | escape }}</h3>
+            {% endif %}
+
+            {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+            <h3 class="h4 callout__link-tag">
+                <img src="{{- block.settings.icon | escape -}}" alt="" role="presentation" />
+                {{- block.settings.button_label | escape -}}
+            </h3>
+
+            {% endif %}
+
+        </a>
+    </div>
+    {% endfor %}
+</section>
+
+
+
+{% schema %}{"name":{"en":"Image Callout Trio","es":"Columnas de texto con imágenes"},"class":"index-section","blocks":[{"type":"text_block","name":{"en":"Column","es":"Columna"},"settings":[{"type":"image_picker","id":"image","label":{"en":"Image","es":"Imagen"}},{"type":"text","id":"icon","label":{"en":"Icon Image URL","es":"URL de la imagen del icono"}},{"type":"text","id":"button_label","label":{"en":"Button label","es":"Etiqueta de botón"}},{"type":"url","id":"button_link","label":{"en":"Button link","es":"Enlace de botón"}}]}],"default":{"blocks":[{"type":"text_block"},{"type":"text_block"},{"type":"text_block"}]}}{% endschema %}

@@ -1,0 +1,46 @@
+<header class="collection-header">
+  {%- include 'hero-image', hero_image_fallback: 'Natives_2020_BloomBox_Greenhouse_032.jpg' -%}
+</header>
+
+<div class="page__intro-container container container--wide">
+    <span class="collection__dog-ear" role="presentation"></span>
+    <div class="page__intro">
+
+        <h1>{{ page.title }}</h1>
+        {{ page.content }}
+
+    </div>
+
+    <div class="container--wide">
+
+        {% for imgLg in page.metafields.wide_column.large_image_selection %}
+        <!-- Img Left / Text Right -->
+        <div class="grid--40-60 {% cycle 'section--short vertical-align', 'col-reverse vertical-align section--tall' %}">
+            <div class="image__pattern-left">
+
+                <div class="page__how-it-works__icon">
+                    <img src="{{ page.metafields.wide_column.image_icon_selection[forloop.index0] }}" alt="" role="presentation" />
+                </div>
+                <img src="{{ imgLg }}" alt="" />
+
+            </div>
+            <div>
+                <div class="container--skinnier">
+                    {{ page.metafields.wide_column.column_main_content[forloop.index0] }}
+
+                    {% if page.metafields.wide_column.tip_headline[forloop.index0] %}
+                    <h6>
+                    {% if page.metafields.wide_column.include_flower_icon[forloop.index0] %}
+                    {% include 'icon-flowers' %}
+                    {% endif %}
+                    
+                    {{ page.metafields.wide_column.tip_headline[forloop.index0] }}</h6>
+                    {% endif; %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% section 'feature-columns-howitworks' %}

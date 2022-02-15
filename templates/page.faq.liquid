@@ -1,0 +1,220 @@
+<header class="collection-header">
+  {%- include 'hero-image', hero_image_fallback: 'FAQs2020_BloomBox_218.jpg' -%}
+</header>
+
+<div class="page__intro-container container container--wide">
+    <span class="collection__dog-ear" role="presentation"></span>
+    <div class="page__intro">
+
+        <h1>{{ page.title }}</h1>
+
+    </div>
+
+    <!-- Subnav Left / FAQs Right -->
+    <div class="grid--30-70 section--short">
+        <!-- Left column / Links -->
+        <div>
+
+            <nav id="jump-links" class="nav__jump-links">
+                <p class="visually-hidden">Jump to a topic</p>
+                <ul class="list__jump-links">
+                    <li>
+                        <a href="#about">About BloomBox</a>
+                    </li>
+                    <li>
+                        <a href="#order-changes">Order Changes</a>
+                    </li>
+                    <li>
+                        <a href="#delivery">Delivery</a>
+                    </li>
+                    <li>
+                        <a href="#rewards">Rewards</a>
+                    </li>
+                    <li>
+                        <a href="#accounts">Managing Your Account</a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+
+        <!-- Right Column / FAQs -->
+        <div>
+            <div class="faq__questions">
+
+                <section id="about">
+                    <h2 class="headline--tiny">
+                        <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-hand-selected.svg?v=1610158358" alt="" role="presentation" />
+                        General Information About BloomBox
+                    </h2>
+
+                    <ul class="accordion" data-aria-accordion data-multi data-transition data-default="none">
+                        {% for question in page.metafields.faq_general.accordion_headline %}
+                            <li>
+                                <h3 class="accordion__heading" data-aria-accordion-heading>
+                                    {{ question }}
+                                </h3>
+                                <div class="accordion__panel" data-aria-accordion-panel>
+                                    {{ page.metafields.faq_general.accordion_details[forloop.index0] | multi_line_text_field }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+
+
+                <section id="order-changes" class="section--shorter">
+                    <h2 class="headline--tiny">
+                        <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-kits.svg?v=1610158358" alt="" role="presentation" />
+                        Orders
+                    </h2>
+
+                    <ul class="accordion" data-aria-accordion data-multi data-transition data-default="none">
+                        {% comment %}
+                        <li>
+                            <h3 class="accordion__heading" data-aria-accordion-heading>
+                                Can I add on to an existing order?
+                        	</h3>
+                        	<p class="accordion__panel" data-aria-accordion-panel>
+                                Answer
+                        	</p>
+                        </li>
+                        {% endcomment %}
+
+                        {% for question in page.metafields.faq_order.accordion_headline %}
+                            <li>
+                                <h3 class="accordion__heading" data-aria-accordion-heading>
+                                    {{ question }}
+                                </h3>
+                                <div class="accordion__panel" data-aria-accordion-panel>
+                                    {{ page.metafields.faq_order.accordion_details[forloop.index0] | multi_line_text_field }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+
+
+                <section id="delivery">
+                    <h2 class="headline--tiny">
+                        <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-delivered.svg?v=1610158358" alt="" role="presentation" />
+                        Delivery
+                    </h2>
+
+                    <ul class="accordion" data-aria-accordion data-multi data-transition data-default="none">
+                        {% for question in page.metafields.faq_delivery.accordion_headline %}
+                            <li>
+                                <h3 class="accordion__heading" data-aria-accordion-heading>
+                                    {{ question }}
+                                </h3>
+                                <div class="accordion__panel" data-aria-accordion-panel>
+                                    {{ page.metafields.faq_delivery.accordion_details[forloop.index0] | multi_line_text_field }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+
+                {% comment %}
+                <section id="product-care" class="section--shorter">
+                    <h2 class="headline--tiny">
+                        <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-watering-can.svg?v=1610158358" alt="" role="presentation" />
+                        General plant care recommendations
+                    </h2>
+
+                    <ul class="accordion" data-aria-accordion data-multi data-transition data-default="none">
+                        <li>
+                            <h3 class="accordion__heading" data-aria-accordion-heading>
+                                When should I fertilize my plants?
+                        	</h3>
+                        	<p class="accordion__panel" data-aria-accordion-panel>
+                                Answer
+                        	</p>
+                        </li>
+                        <li>
+                            <h3 class="accordion__heading" data-aria-accordion-heading>
+                        		How do I arrange my DIY holiday kit?
+                        	</h3>
+                        	<p class="accordion__panel" data-aria-accordion-panel>
+
+                                This video takes you through step by step on how to arrange your holiday kit.
+                                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/UUniPfUlH20" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+                            </p>
+                        </li>
+                        <li>
+                            <h3 class="accordion__heading" data-aria-accordion-heading>
+                        		How do I care for my fresh winter green products?
+                        	</h3>
+                        	<p class="accordion__panel" data-aria-accordion-panel>
+                        		This video provides details on how to best care for your fresh holiday products.
+                                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/-2wmgJODrFo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                        </li>
+                    </ul>
+                </section>
+                {% endcomment %}
+
+
+                <section id="rewards">
+                    <h2 class="headline--tiny">
+                        <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-bloombucks.svg?v=1613060805" alt="" role="presentation" />
+                        BloomBucks & customer rewards
+                    </h2>
+
+                    <ul class="accordion" data-aria-accordion data-multi data-transition data-default="none">
+                        {% for question in page.metafields.faq_customer.accordion_headline %}
+                            <li>
+                                <h3 class="accordion__heading" data-aria-accordion-heading>
+                                    {{ question }}
+                                </h3>
+                                <div class="accordion__panel" data-aria-accordion-panel>
+                                    {{ page.metafields.faq_customer.accordion_details[forloop.index0] | multi_line_text_field }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+
+
+                <section id="accounts" class="section--shorter">
+                    <h2 class="headline--tiny">
+                        <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-accounts.svg?v=1612198398" alt="" role="presentation" />
+                        Managing your BloomBox account
+                    </h2>
+
+                    <ul class="accordion" data-aria-accordion data-multi data-transition data-default="none">
+                        {% for question in page.metafields.faq_account.accordion_headline %}
+                            <li>
+                                <h3 class="accordion__heading" data-aria-accordion-heading>
+                                    {{ question }}
+                                </h3>
+                                <div class="accordion__panel" data-aria-accordion-panel>
+                                    {{ page.metafields.faq_account.accordion_details[forloop.index0] | multi_line_text_field }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+
+            </div> <!-- / Container Skinny -->
+        </div> <!-- / Right Column -->
+    </div>
+</div>
+
+
+
+<!-- Contact Callout-->
+<section class="section__testimonials">
+    <div class="container--slim section--short bg--pink bg--pattern-bottom text-center">
+
+            <h2><span>We're Here to Help</span> Still Have Questions?</h2>
+            <p class="text-center"><a href="/pages/contact" class="btn--primary">Contact Us</a></p>
+
+    </div>
+</section>

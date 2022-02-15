@@ -1,0 +1,17 @@
+{% comment %} Blog post template {% endcomment %}
+<header class="collection-header">
+    {%- include 'blog-image', blog_image_fallback: 'Annuals_2020_BloomBox_Greenhouse_118.jpg' -%}
+    <!-- Hero Tab Overlay -->
+    <section class="collection__intro-container container">
+        <span class="collection__dog-ear" role="presentation"></span>
+        <div class="collection__intro"></div>
+    </section>
+    <!-- / Hero Tab Overlay -->
+</header>
+
+<article class="blog__article container--skinny section--short">
+
+  <h1>{{ article.title }}</h1>
+  {{ article.content }}
+
+</article>

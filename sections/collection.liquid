@@ -1,0 +1,101 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<section class="section__featured-products grid--40-60 no-gap">
+
+    <!--
+        Intro
+        Holidays: Change bg--green on the section__featured--intro container to bg--red
+    -->
+    <div class="section__featured--intro bg--green">
+        <div class="container section--tall">
+
+            <h2><span class="off-white">Featured</span> {{ section.settings.title | escape }}</h2>
+            {{ section.settings.text }}
+
+            {% if section.settings.show_view_all %}
+            <a href="{{ collection.url }}" class="btn--secondary reverse" aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
+                View All {{ section.settings.title | escape }}
+            </a>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Products -->
+    <div class="section__featured--products">
+        <div class="container--wide section--tall">
+
+            <ul class="list__related-products grid--3-col persistent-grid--md">
+                {% for product in collection.products limit: 4 %}
+                  <li>
+                    {% include 'product-card-grid' %}
+                  </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": {
+    "en": "Featured collection",
+    "es": "Colección destacada"
+  },
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "en": "Heading",
+        "es": "Título"
+      },
+      "default": {
+        "en": "Featured collection",
+        "es": "Colección destacada"
+      }
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": {
+        "en": "Text",
+        "es": "El escrito"
+      }
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": {
+        "en": "Collection",
+        "es": "Colección"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": {
+        "en": "Show 'View all' button",
+        "es": "Mostrar el botón 'Ver todo'"
+      },
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Featured collection",
+        "es": "Colección destacada"
+      },
+      "category": {
+        "en": "Collection",
+        "es": "Colección"
+      }
+    }
+  ]
+}
+{% endschema %}

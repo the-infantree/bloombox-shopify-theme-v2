@@ -1,0 +1,132 @@
+{%- for tag in collection.tags -%}
+{%- if featureTags contains tag -%}
+    {%- assign showFeatures = 'yes' -%}
+{%- endif -%}
+{%- if lightingTags contains tag -%}
+    {%- assign showLighting = 'yes' -%}
+{%- endif -%}
+{%- if sizeTags contains tag -%}
+    {%- assign showSize = 'yes' -%}
+{%- endif -%}
+{%- endfor -%}
+
+
+<ul class="filter-list">
+    <li class="filter-list__item">
+
+        <h3 class="js_toggle__button">
+        <button class="dropdown__button" type="button" aria-expanded="false">
+            Features {%- include 'icon-chevron-down' -%}
+        </button>
+        </h3>
+        <ul class="js_toggle__panel dropdown__panel" hidden >
+        {%- for tag in collection.all_tags -%}
+            {%- if tag contains 'Features|' -%}
+            {%- if current_tags contains tag -%}
+                {%- if collection.tags contains tag -%}
+                <li class="tag-{{ tag | handleize }}">{{ tag | remove: "Features|" | link_to_remove_tag: tag | replace: 'title=', 'class="tag-toggle" title=' }}</li>
+                {%- else -%}
+                <li class="tag-{{ tag | handleize }}"><span class="tag-toggle tag-toggle--disabled">{{ tag | remove: "Features|" }}</span></li>
+                {%- endif -%}
+            {%- else -%}
+                {%- if collection.tags contains tag -%}
+                <li class="tag-{{ tag | handleize }}">{{ tag | remove: "Features|" | link_to_add_tag: tag | replace: 'title=', 'class="tag-toggle" title=' }}</li>
+                {%- else -%}
+                <li class="tag-{{ tag | handleize }}"><span class="tag-toggle tag-toggle--disabled">{{ tag | remove: "Features|" }}</span></li>
+                {%- endif -%}
+            {%- endif -%}        
+            {%- endif -%}
+        {%- endfor -%}
+        </ul>     
+    </li>       
+
+    <li class="filter-list__item">
+        <h3 class="js_toggle__button">
+        <button class="dropdown__button" type="button" aria-expanded="false">
+            Lighting {%- include 'icon-chevron-down' -%}
+        </button>
+        </h3>
+        <ul class="js_toggle__panel dropdown__panel" hidden >
+        {%- for tag in collection.all_tags -%}
+            {%- if tag contains "Light Requirements|" -%}
+                {%- if current_tags contains tag -%}
+                    {%- if collection.tags contains tag -%}
+                        {%- if tag == 'Light Requirements|Full Sun' or tag == 'Light Requirements|Part Sun' or tag == 'Light Requirements|Part Shade' or tag == 'Light Requirements|Shade'  -%}
+                            <li class="tag-{{ tag | handleize }}">{{ tag | remove: "Light Requirements|" | link_to_remove_tag: tag | replace: 'title=', 'class="tag-toggle" title=' }}</li>
+                        {%- endif -%}
+                    {%- else -%}
+                        {%- if tag == 'Light Requirements|Full Sun' or tag == 'Light Requirements|Part Sun' or tag == 'Light Requirements|Part Shade' or tag == 'Light Requirements|Shade'  -%}
+                            <li class="tag-{{ tag | handleize }}"><span class="tag-toggle tag-toggle--disabled">{{ tag | remove: "Light Requirements|" }}</span></li>
+                        {%- endif -%}
+                    {%- endif -%}
+                {%- else -%}
+                    {%- if collection.tags contains tag -%}
+                        {%- if tag == 'Light Requirements|Full Sun' or tag == 'Light Requirements|Part Sun' or tag == 'Light Requirements|Part Shade' or tag == 'Light Requirements|Shade'  -%}
+                            <li class="tag-{{ tag | handleize }}">{{ tag | remove: "Light Requirements|" | link_to_add_tag: tag | replace: 'title=', 'class="tag-toggle" title=' }}</li>
+                        {%- endif -%}
+                    {%- else -%}
+                        {%- if tag == 'Light Requirements|Full Sun' or tag == 'Light Requirements|Part Sun' or tag == 'Light Requirements|Part Shade' or tag == 'Light Requirements|Shade'  -%}
+                            <li class="tag-{{ tag | handleize }}"><span class="tag-toggle tag-toggle--disabled">{{ tag | remove: "Light Requirements|" }}</span></li>
+                        {%- endif -%}
+                    {%- endif -%}
+                {%- endif -%}        
+            {%- endif -%}
+        {%- endfor -%}
+        </ul>     
+    </li>     
+
+    <li class="filter-list__item">
+        <h3 class="js_toggle__button">
+        <button class="dropdown__button" type="button" aria-expanded="false">
+            Size {%- include 'icon-chevron-down' -%}
+        </button>
+        </h3>
+        <ul class="js_toggle__panel dropdown__panel" hidden >
+        {%- for tag in collection.all_tags -%}
+            {%- if tag contains 'Size|' -%}
+            {%- if current_tags contains tag -%}
+                {%- if collection.tags contains tag -%}
+                <li class="tag-{{ tag | handleize }}">{{ tag | remove: "Size|" | link_to_remove_tag: tag | replace: 'title=', 'class="tag-toggle" title=' }}</li>
+                {%- else -%}
+                <li class="tag-{{ tag | handleize }}"><span class="tag-toggle tag-toggle--disabled">{{ tag | remove: "Size|" }}</span></li>
+                {%- endif -%}
+            {%- else -%}
+                {%- if collection.tags contains tag -%}
+                <li class="tag-{{ tag | handleize }}">{{ tag | remove: "Size|" | link_to_add_tag: tag | replace: 'title=', 'class="tag-toggle" title=' }}</li>
+                {%- else -%}
+                <li class="tag-{{ tag | handleize }}"><span class="tag-toggle tag-toggle--disabled">{{ tag | remove: "Size|" }}</span></li>
+                {%- endif -%}
+            {%- endif -%}        
+            {%- endif -%}
+        {%- endfor -%}
+        </ul>
+    </li>     
+
+
+    {%- unless collection.handle == 'natives' -%}
+
+    <li class="filter-list__item filter-list__item--native">
+    {%- for tag in collection.all_tags -%}
+    {%- if tag contains 'Native' -%}
+        <h3 class="filter-list__item">
+        {%- if current_tags contains tag -%}
+            {%- if collection.tags contains tag -%}
+            <li class="tag-{{ tag | handleize }}">{{ tag | link_to_remove_tag: tag | replace: 'title=', 'class="tag-toggle tag-toggle--large" title=' | replace: 'Native', 'Native Plants' }}</li>
+            {%- else -%}
+            <li class="tag-{{ tag | handleize }}"><span class="tag-toggle tag-toggle--large tag-toggle--disabled">{{ tag }} Plants</span></li>
+            {%- endif -%}
+        {%- else -%}
+            {%- if collection.tags contains tag -%}
+            <li class="tag-{{ tag | handleize }}">{{ tag | link_to_add_tag: tag | replace: 'title=', 'class="tag-toggle tag-toggle--large" title=' | replace: 'Native', 'Native Plants' }}</li>
+            {%- else -%}
+            <li class="tag-{{ tag | handleize }}"><span class="tag-toggle tag-toggle--large tag-toggle--disabled">{{ tag }} Plants</span></li>
+            {%- endif -%}
+        {%- endif -%}        
+        </h3>
+    {%- endif -%}
+    {%- endfor -%}
+    </li>
+
+    {%- endunless -%}
+
+</ul>

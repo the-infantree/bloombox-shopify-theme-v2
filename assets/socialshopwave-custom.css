@@ -1,0 +1,343 @@
+#ssw-reward-box .ssw-reward-box-title,
+div[data-target="#ssw-reward-box-earning-rules-wrapper"] {
+  font-size: 0 !important;
+}
+
+.ssw-reward-box-title::before {
+  content: 'Earn 1 point for every $1 spent, plus bonus points as you climb our VIP tiers!';
+  display: inline;
+  font-size: 15px;
+}
+
+div[data-target="#ssw-reward-box-earning-rules-wrapper"]::before {
+  content: 'Earn BloomBucks';
+  font-weight: bold;
+  font-family: 'Roboto',sans-serif;
+  font-size: 12px;
+}
+
+#ssw-fave-page-side-bar .share-faves::before {
+  content: "Get updates when your favorite products are back in stock by saving your wishlist";
+  margin-right: 20px;
+  font-size: 17px;
+}
+
+#ssw-fave-save-block {
+  position: relative;
+  top: 45px;
+  right: -16%;
+}
+
+.ssw-custom-block {
+  z-index: 10000;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: 40px;
+  background-color: #fff;
+}
+
+.ssw-custom-block p {
+  color: #358079;
+}
+
+.ssw-custom-block__create-btn,
+.ssw-custom-block__save-btn {
+  width: 80%;
+  padding: 10px 15px;
+  border: 0;
+  font-family: var(--font-stack-header);
+}
+
+.ssw-custom-block__create-btn {
+  text-transform: uppercase;
+  background-color: #358079;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.ssw-custom-block__save-btn {
+  border: none;
+  color: var(--color-brown);
+}
+
+@media all and (max-width: 768px) {
+  #ssw-fave-save-block {
+    top: 9px;
+    right: 0;
+  }
+}
+
+@media all and (max-width: 480px) {
+  #ssw-fave-page-side-bar .share-faves::before {
+    font-size: 12px;
+  }
+}
+
+/* Wishlist */
+#ssw-fave-side-button-wrapper {
+    z-index: 999 !important;
+    position: fixed;
+    top: initial !important;
+    bottom: 0;
+    right: 240px !important;
+}
+
+#ssw-fave-side-button {
+    transform: none !important;
+    -webkit-transform: none !important;
+}
+
+#ssw-fave-side-button>.ssw-fave-caption {
+    padding: 7px 7px 6px 35px;
+    border-radius: 0!important;
+    height: 49px !important;
+    display: flex !important;
+    padding-left: 54px !important;
+    box-shadow: none;
+}
+
+#ssw-fave-side-button i {
+    color: var(--color-pink) !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    width: 36px !important;
+    height: 36px !important;
+    left: 7px !important;
+    top: 7px !important;
+}
+
+.ssw-reward-tab {
+    background: white;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    z-index: 998 !important;
+}
+
+.ssw-reward-tab-closed {
+    padding: 7px 7px 6px !important;
+    flex-direction: row-reverse;
+}
+
+.ssw-reward-tab-closed.ssw-reward-tab-rounded {
+    border-radius: 0;
+}
+
+.ssw-reward-tab-ico {
+    margin-right: 7px;
+}
+
+.ssw-wrap-h3 .ssw-icon-heart {
+    color: var(--color-pink) !important;
+}
+
+.ssw-reward-tab-ico svg,
+.ssw-reward-tab-ico path {
+    fill: var(--color-pink) !important;
+}
+
+.ssw-reward-box-title {
+    font-size: var(--font-size---1) !important;
+    line-height: 1.4rem !important;
+}
+
+.ssw-reward-box-wrapper .ssw-reward-box-title {
+    line-height: 1rem !important;
+}
+
+.ssw-reward-quest-btn,
+.ssw-reward-btn,
+.ssw-reward-box-bottom .ssw-reward-box-signup-link {
+    border-radius: 0 !important;
+    font-family: var(--font-stack-header) !important;
+    font-size: 1.1rem !important;
+    line-height: 1.2rem !important;
+}
+
+.ssw-reward-box-quest-text {
+    font-family: var(--font-stack-header) !important;
+    font-size: var(--font-size--0) !important;
+    line-height: 1.1em !important;
+}
+
+.ssw-fave-item {
+    padding-bottom: 2rem;
+}
+
+.ssw-fave-item * {
+    cursor: pointer !important;
+}
+
+#ssw-fave-list-widget {
+    display: block;
+}
+
+@media only screen and (max-width: 480px) {
+    #ssw-fave-side-button-wrapper {
+        right: 150px !important;
+        height: 49px;
+    }
+
+    #ssw-fave-list-widget.ssw-left-top #ssw-fave-side-button>.ssw-fave-caption {
+        padding: 0.6em 29px 0.6em 21px !important;
+    }
+}
+
+@media only screen and (min-width: 680px) {
+    .ssw-reward-box-quest-text {
+        font-size: var(--font-size--2) !important;
+    }
+}
+
+.ssw-fave-side-bar-header-title,
+#ssw-fave-page-side-bar .ssw-h3 h2 {
+    font-family: var(--font-stack-header) !important;
+    font-weight: var(--font-weight-header) !important;
+    line-height: 1.2em !important;
+}
+
+.ssw-fave-side-bar-header-title {
+    font-size: 1.5rem !important;
+    font-size: var(--font-size--3) !important;
+    color: var(--color-dk-teal) !important;
+}
+
+#ssw-fave-page-side-bar .ssw-h3 h2 {
+    font-size: 2rem !important;
+    font-size: var(--font-size--6) !important;
+    color: var(--color-teal) !important;
+}
+
+#ssw-fave-page-side-bar #ssw-fave-page-side-bar-header .ssw-faves-share-bar,
+#ssw-fave-page-side-bar span.ssw-fave-page-side-bar-header-title-count,
+.ssw-wrap-h3 .ssw-count,
+#ssw-fave-side-bar-header .ssw-faves-share-bar {
+    display: none !important;
+}
+
+/* Wishlist Card */
+.ssw-fave-product-price {
+    font-size: var(--font-size--0) !important;
+}
+
+.ssw-fave-list-container {
+    padding-bottom: 0 !important;
+}
+
+.ssw-fave-item .ssw-fave-product-actions a,
+#ssw-fave-create-list {
+    border-radius: 0 !important;
+}
+
+#ssw-fave-create-list {
+    margin-bottom: 5px !important;
+}
+
+#ssw-fave-page-side-bar .ssw-fave-product-avatar {
+    background-size: cover !important;
+}
+
+#ssw-fave-page-side-bar .ssw-fave-product-info {
+    text-align: left !important;
+}
+
+#ssw-fave-page-side-bar .ssw-fave-product-title {
+    margin-bottom: 0 !important;
+    font-size: var(--font-size--0) !important;
+    color: var(--color--dk-teal) !important;
+}
+
+.ssw-fave-product-price {
+    font-weight: normal !important;
+    margin-top: 0 !important;
+}
+
+.ssw-fave-item .ssw-fave-product-actions a {
+    opacity: 1 !important;
+}
+
+#widget-fave-html>button {
+  color: var(--color-body-text);
+  padding: 0;
+  background-color: transparent;
+  font-family: var(--font-stack-body);
+  text-transform: none;
+  border: 0;
+  padding: .3rem 0;
+}
+
+#widget-fave-html>button:hover,
+#widget-fave-html>button:focus {
+  border: none;
+}
+
+.ssw-fave-btn-content {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  font-size: var(--font-size---2);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.ssw-fave-btn-content .ssw-icon-heart,
+.ssw-fave-btn-content .ssw-icon-heart-o {
+  font-size: var(--font-size--2);
+  margin: 0 0 0 4px !important;
+}
+
+.ssw-fave-btn-counter {
+    display: none;
+}
+
+.ssw-icon-heart-o:before {
+  margin: 0 !important;
+}
+
+.ssw-reward-page-btn {
+  border: none;
+  background: #368079;
+  line-height: 0;
+}
+
+.ssw-reward-earning-modal-body #ssw-reward-birthday-wrapper .ssw-reward-birthday .ssw-reward-birthday-field { /* INPUT */
+  border-radius: 0 25px 25px 0;
+}
+
+#pinterest {
+  margin: 0;
+}
+
+.ssw-fave-item {
+  overflow: visible;
+  position: unset;
+  z-index: unset !important;
+}
+
+@media only screen and (min-width: 476px) {
+  .ssw-fave-item__changelist.ssw-fave-item__changelist--page {
+    display: flex;
+    justify-content: space-around;
+  } 
+}
+
+@media only screen and (max-width: 475px) and (min-width: 419px) {
+  .ssw-fave-item__changelist.ssw-fave-item__changelist--page {
+    height: 67px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+  } 
+}
+
+@media only screen and (max-width: 419px) {
+  .ssw-fave-item__changelist.ssw-fave-item__changelist--page {
+    height: 67px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+  } 
+}

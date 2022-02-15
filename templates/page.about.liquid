@@ -1,0 +1,68 @@
+<div class="page__about">
+    <header class="collection-header">
+      {%- include 'hero-image', hero_image_fallback: 'Story2020_BloomBox_358.jpg' -%}
+    </header>
+
+    <div class="page__intro-container container container--wide">
+        <span class="collection__dog-ear" role="presentation"></span>
+        <div class="page__intro">
+
+            <h1>{{ page.title }}</h1>
+            <p class="text--intro">{{ page.content }}</p>
+
+        </div>
+    </div>
+
+    <div class="section--short">
+        <div class="container">
+            <!-- 2 columns -->
+            <div class="grid--2-col section--shorter vertical-align">
+                <div class="image__pattern-left">
+                    {% assign imageUrl = page.metafields.two_column_content.column_image_selection %}
+                    <img src="{{ imageUrl }}" alt="Bloombox team photo" />
+                </div>
+                <div>
+                    {{ page.metafields.two_column_content.column_main_content }}
+                </div>
+            </div>
+            <!-- / 2 columns -->
+        </div>
+
+        <div class="container--wide">
+            <blockquote class="blockquote--thriller">
+                <div class="blockquote__image">
+                    {% assign blockImage = page.metafields.blockquote.blockquote_image %}
+                    <img src="{{ blockImage }}" alt="Hand-selecting flowers from local greenhouse" />
+                </div>
+
+                {{ page.metafields.blockquote.blockquote_headline }}
+            </blockquote>
+        </div>
+
+        {% if page.metafields.accentuate.condensed_content_module %}
+        <div class="container--skinnier">
+            {{ page.metafields.accentuate.condensed_content_module }}
+        </div>
+        {% endif %}
+
+        {% if page.metafields.accentuate.condensed_content_med_module %}
+        <div class="container--skinny section--shorter text-center">
+
+            {{ page.metafields.accentuate.condensed_content_med_module }}
+
+            {% if page.metafields.accentuate.enable_flower_icon %}
+                {% include 'icon-flowers' %}
+            {% endif %}
+
+            {% if page.metafields.accentuate.image_display %}
+                {% assign moduleImg = page.metafields.accentuate.image_display %}
+                <img src="{{ moduleImg }}" alt="Chase & Dave Signatures" width="325" height="99" /><br />
+                <cite>{{ page.metafields.accentuate.content_cite }}</cite>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+{% section 'feature-columns-about' %}

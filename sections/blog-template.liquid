@@ -1,0 +1,186 @@
+{% paginate blog.articles by 12 %}
+
+<header class="collection-header">
+  {%- include 'hero-image', hero_image_fallback: 'Story2020_BloomBox_358.jpg' -%}
+</header>
+
+{% comment %} Blog landing template {% endcomment %}
+<header class="section-header">
+    <section class="collection__intro-container container">
+        <span class="collection__dog-ear" role="presentation"></span>
+        <div class="collection__intro"></div>
+    </section>
+</header>
+
+<div class="text-center">
+
+    <h1 style="width: 100%;"><span>Welcome to</span> The BloomBlog</h1>
+
+</div>
+
+<div class="container--wide section--short" style="padding-top: 1rem;">
+
+    {% if blog.tags.size > 0 %}
+      <div class="blog-filter">
+        <label class="blog-filter__label select-label" for="BlogTagFilter">{{ 'collections.filters.title_tags' | t }}</label>
+        <div class="select-group">
+          <select id="BlogTagFilter" aria-describedby="a11y-refresh-page-message a11y-selection-message" data-blog-tag-filter>
+            <option value="{{ blog.url }}">{{ 'blogs.article.all_topics' | t }}</option>
+            {% for tag in blog.all_tags %}
+              <option value="{{ blog.url }}/tagged/{{ tag | handleize }}" {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>
+            {% endfor %}
+          </select>
+          {% include 'icon-chevron-down' %}
+        </div>
+      </div>
+    {% endif %}
+
+    <ul class="blog-grid">
+      {% for article in blog.articles %}
+        <li class="article-listing">
+          <a href="{{ article.url }}" class="article__link">
+            {% if article.image %}
+              {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+              {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+              {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+              <div class="article__grid-image-wrapper">
+                  <img id="{{ img_id }}"
+                  width="600"
+                  height="600"
+                      class="grid-view-item__image lazyload"
+                      data-src="{{ img_url }}"
+                      srcset="{{ article.image | img_url: '200x233', crop: 'center' , format: 'pjpg' }} 200w,
+                      {{ article.image | img_url: '300x300', crop: 'center' , format: 'pjpg' }} 300w,
+                      {{ article.image | img_url: '300x300', crop: 'center' , scale: '2', format: 'pjpg' }} 300w"
+                      data-aspectratio="{{ preview_image.aspect_ratio }}"
+                      data-sizes="(min-width: 1440px) 325px, (min-width: 1150px) 25vw, (min-width: 900px) 33vw, (min-width: 375px) 50vw, 100vw"
+                      data-image>
+              </div>
+
+            {% endif %}
+            <div class="article-card__text">
+
+                <h2 class="article__title h4">
+                  {{ article.title | escape }}
+                </h2>
+
+                {% if article.excerpt.size > 0 %}
+                  <small>{{ article.excerpt | strip_html | truncate: 150 }}</small>
+                {% endif %}
+
+            </div>
+          </a>
+
+
+            {% if article.tags.size > 0 %}
+              <div class="article__tags">
+                <ul class="list--inline" aria-label="{{ 'blogs.article.tags' | t }}">
+                  {% for tag in article.tags %}
+                    <li>
+                      <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article__grid-tag">{{ tag }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+        </li>
+      {% endfor %}
+    </ul>
+
+</div>
+
+{%- if paginate.pages > 1 -%}
+  {% include 'pagination', paginate: paginate %}
+{%- endif -%}
+
+{% endpaginate %}
+
+
+
+{% schema %}
+{
+  "name": {
+    "cs": "Stránky blogu",
+    "da": "Blogsider",
+    "de": "Blogseiten",
+    "en": "Blog pages",
+    "es": "Páginas del blog",
+    "fi": "Blogisivut",
+    "fr": "Pages du blog",
+    "it": "Pagine del blog",
+    "ja": "ブログページ",
+    "ko": "블로그 페이지",
+    "nb": "Bloggsider",
+    "nl": "Blogpagina's",
+    "pl": "Strony blogu",
+    "pt-BR": "Páginas do blog",
+    "pt-PT": "Páginas do blogue",
+    "sv": "Bloggsidor",
+    "th": "หน้าบล็อก",
+    "tr": "Blog sayfaları",
+    "vi": "Trang blog",
+    "zh-CN": "博客页面",
+    "zh-TW": "部落格頁面"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": {
+        "cs": "Zobrazit autora",
+        "da": "Vis forfatter",
+        "de": "Autor anzeigen",
+        "en": "Show author",
+        "es": "Mostrar autor",
+        "fi": "Näytä tekijä",
+        "fr": "Afficher l'auteur",
+        "it": "Mostra autore",
+        "ja": "執筆者を表示する",
+        "ko": "작성자 표시",
+        "nb": "Vis forfatter",
+        "nl": "Auteur weergeven",
+        "pl": "Pokaż autora",
+        "pt-BR": "Exibir autor",
+        "pt-PT": "Mostrar autor",
+        "sv": "Visa författare",
+        "th": "แสดงผู้เขียน",
+        "tr": "Yazarı göster",
+        "vi": "Hiển thị tác giả",
+        "zh-CN": "显示作者",
+        "zh-TW": "顯示作者"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": {
+        "cs": "Zobrazit datum",
+        "da": "Vis dato",
+        "de": "Datum anzeigen",
+        "en": "Show date",
+        "es": "Mostrar fecha",
+        "fi": "Näytä päivämäärä",
+        "fr": "Afficher la date",
+        "it": "Mostra data",
+        "ja": "日付を表示する",
+        "ko": "날짜 표시",
+        "nb": "Vis dato",
+        "nl": "Datum weergeven",
+        "pl": "Pokaż datę",
+        "pt-BR": "Exibir data",
+        "pt-PT": "Mostrar data",
+        "sv": "Visa datum",
+        "th": "แสดงวันที่",
+        "tr": "Tarihi göster",
+        "vi": "Hiển thị ngày",
+        "zh-CN": "显示日期",
+        "zh-TW": "顯示日期"
+      },
+      "default": true
+    }
+  ]
+}
+{% endschema %}

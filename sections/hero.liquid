@@ -1,0 +1,214 @@
+<section data-section-id="{{ section.id }}" data-section-type="hero-section">
+
+    <!-- Hero BG Image -->
+    <div class="hero hero__home lazyload js"
+         {%- if section.settings.image -%}
+          {% unless section.settings.image.alt == blank %}
+          role="img"
+          aria-label="{{ section.settings.image.alt | escape }}"
+          data-alt="{{ section.settings.image.alt | escape }}"
+          {% endunless %}
+         data-bg="{{ section.settings.image | img_url: '300x300' }}"
+         data-bgset="{% include 'bgset', image: section.settings.image %}"
+         data-sizes="auto"
+         data-parent-fit="cover"
+         style="background-position: {{ section.settings.alignment }};"
+         {%- endif -%}>
+
+     <!--
+        Hero Content
+        Holiday Styles: add bg--red to hero__content div
+    -->
+     <div class="hero__content">
+        <div>
+
+            {%- if settings.open_store == true -%}
+
+                {%- if section.settings.title != blank -%}
+                    <h2 class="h1">{{ section.settings.title | escape }}</h2>
+                {%- endif -%}
+                {%- if section.settings.text != blank -%}
+                    <p>{{ section.settings.text }}</p>
+                {%- endif -%}
+
+            {%- endif -%}
+
+            {%- if settings.open_store == false -%}
+
+                <h2><span>Closed for the Season</span>We're Re-opening in</h2>
+                {%- include 'countdown-timer' -%}
+
+            {%- endif -%}
+
+        </div>
+
+        <!-- Quick Links -->
+        {%- if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank -%}
+        <div class="hero__content-buttons">
+
+            <!-- Button 1 -->
+            <a href="{{ section.settings.button_link_1 }}" class="btn--secondary">
+                {{- section.settings.button_label_1 | escape -}}
+            </a>
+
+            <!-- Button 2 -->
+            {%- if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank -%}
+                <a href="{{ section.settings.button_link_2 }}" class="btn--secondary">
+                    {{- section.settings.button_label_2 | escape -}}
+                </a>
+            {%- endif -%}
+
+
+            <!-- Button 3 -->
+            {%- if section.settings.button_label_3 != blank and section.settings.button_link_3 != blank -%}
+                <a href="{{ section.settings.button_link_3 }}" class="btn--secondary">
+                    {{- section.settings.button_label_3 | escape -}}
+                </a>
+            {%- endif -%}
+        </div>
+        {%- endif -%}
+      </div>
+  </div> <!-- End Hero Background -->
+    <!--<noscript>
+      <div class="hero"{% if section.settings.image %}{% unless section.settings.image.alt == blank %} role="img" aria-label="{{ section.settings.image.alt | escape }}"{% endunless %} style="background-image: url('{{ section.settings.image | img_url: '2048x' }}'); background-position: center {{ section.settings.alignment }};"{% endif %}></div>
+    </noscript>
+-->
+</section>
+
+
+
+{% schema %}
+{
+  "name": {
+    "en": "Image with text overlay",
+    "es": "Imagen con texto superpuesto"
+  },
+  "class": "index-section index-section--flush",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": {
+        "en": "Image",
+        "es": "Imagen"
+      }
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": {
+        "en": "Image alignment",
+        "es": "Alineación de imagen"
+      },
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": {
+            "en": "Top",
+            "es": "Superior"
+          }
+        },
+        {
+          "value": "center",
+          "label": {
+            "en": "Middle",
+            "es": "Centrada"
+          }
+        },
+        {
+          "value": "bottom",
+          "label": {
+            "en": "Bottom",
+            "es": "Inferior"
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "en": "Heading",
+        "es": "Título"
+      },
+      "default": {
+        "en": "Image with text overlay",
+        "es": "Imagen con texto superpuesto"
+      }
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": {
+        "en": "Text",
+        "es": "Texto"
+      },
+      "default": {
+        "en": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>",
+        "es": "<p>Usa el texto superpuesto para darles información útil a tus clientes sobre tu marca. Selecciona imágenes y textos que se relacionen con tu estilo e historia.</p>"
+      }
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": {
+        "en": "First Button label",
+        "es": "Etiqueta del primer botón"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": {
+        "en": "First Button link",
+        "es": "Enlace del primer botón"
+      }
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": {
+        "en": "Second Button label",
+        "es": "Etiqueta del segundo botón"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": {
+        "en": "Second Button link",
+        "es": "Enlace del segundo botón"
+      }
+    },
+    {
+      "type": "text",
+      "id": "button_label_3",
+      "label": {
+        "en": "Third Button label",
+        "es": "Etiqueta del tercer botón"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link_3",
+      "label": {
+        "en": "Third Button link",
+        "es": "Enlace del tercer botón"
+      }
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Image with text overlay",
+        "es": "Imagen con texto superpuesto"
+      },
+      "category": {
+        "en": "Image",
+        "es": "Imagen"
+      }
+    }
+  ]
+}
+{% endschema %}

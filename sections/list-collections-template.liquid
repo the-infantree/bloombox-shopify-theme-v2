@@ -1,0 +1,205 @@
+<header class="collection-header">
+    {%- assign is_filter_by_available = false -%}
+    {%- if section.settings.tags_enable and collection.all_tags.size > 0 -%}
+      {%- assign is_filter_by_available = true -%}
+    {%- endif -%}
+
+    <div class="hero">
+        <img
+            class="hero__image--img-tag"
+            alt="BloomBox employee picking up box of flowering plants"
+            data-src="{{ file_img_url }}"
+            srcset="
+            {{ 'Annuals_2020_BloomBox_Greenhouse_118.jpg' | file_img_url: '540x', format: 'jpg' }} 540w,
+            {{ 'Annuals_2020_BloomBox_Greenhouse_118.jpg' | file_img_url: '820x', format: 'jpg' }} 820w,
+            {{ 'Annuals_2020_BloomBox_Greenhouse_118.jpg' | file_img_url: '1200x', format: 'jpg' }} 1200w,
+            {{ 'Annuals_2020_BloomBox_Greenhouse_118.jpg' | file_img_url: '1600x', format: 'jpg' }} 1600w"
+            sizes="(min-width: 960px) 1200px, (min-width: 720px) 820px, (max-width: 500px) 540px, 100vw"
+            data-image>
+    </div>
+    <!-- / Collection Hero -->
+</header>
+
+
+    <!-- Collection Intro -->
+    <section class="collection__intro container section--short">
+        <div class="container grid--40-60">
+            <div>
+
+                <h1>Product Categories</h1>
+
+            </div>
+            <div>
+
+                <p>More than just plants, BloomBox also offers stylish planters, garden tools, quality soils and fertilizers to help your plants thrive, and <em>much</em> more!</p>
+
+            </div>
+        </div>
+    </section>
+    <!-- / Collection Intro -->
+
+  {%- assign blocks = section.blocks | sort: 'collection.all_products_count' -%}
+
+  <ul class="grid--4-col">
+    {% if section.settings.display_type == 'all' %}
+      {% case section.settings.sort %}
+        {% when 'products_high' or 'products_low' %}
+          {%- assign collections = collections | sort: 'all_products_count' -%}
+        {% when 'date' or 'date_reversed' %}
+          {%- assign collections = collections | sort: 'published_at' -%}
+      {% endcase %}
+      {% if section.settings.sort == 'products_low' or section.settings.sort == 'date' or section.settings.sort == 'alphabetical' %}
+        {% for collection in collections %}
+          <li class="collection-grid-item">
+            {% include 'collection-grid-item', collection: collection %}
+          </li>
+        {% endfor %}
+      {% else %}
+        {% for collection in collections reversed %}
+          <li class="collection-grid-item">
+            {% include 'collection-grid-item', collection: collection %}
+          </li>
+        {% endfor %}
+      {% endif %}
+    {% else %}
+      {% for block in section.blocks %}
+        <li class="collection-grid-item">
+          {%- assign collection = collections[block.settings.collection] -%}
+          {% include 'collection-grid-item', collection: collection %}
+        </li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+
+
+
+{% schema %}
+{
+  "name": {
+    "en": "Collections list page",
+    "es": "Lista de colecciones"
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": {
+        "en": "All of your collections are listed by default. To customize your list, choose 'Selected' and add collections.",
+        "es": "Todas tus colecciones están enlistadas por defecto. Para personalizar tu lista, elige 'Seleccionadas' y agrega colecciones."
+      }
+    },
+    {
+      "type": "radio",
+      "id": "display_type",
+      "label": {
+        "en": "Select collections to show",
+        "es": "Selecciona colecciones para mostrar"
+      },
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": {
+            "en": "All",
+            "es": "Todos"
+          }
+        },
+        {
+          "value": "selected",
+          "label": {
+            "en": "Selected",
+            "es": "Seleccionadas"
+          }
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "sort",
+      "label": {
+        "en": "Sort collections by:",
+        "es": "Ordenar colecciones por:"
+      },
+      "info": {
+        "en": "Sorting only applies when 'All' is selected",
+        "es": "La función ordenar solo se aplica cuando se selecciona \"Todas\""
+      },
+      "default": "alphabetical",
+      "options": [
+        {
+          "value": "products_high",
+          "label": {
+            "en": "Product count, high to low",
+            "es": "Recuento de productos, de mayor a menor"
+          }
+        },
+        {
+          "value": "products_low",
+          "label": {
+            "en": "Product count, low to high",
+            "es": "Recuento de productos, de menor a mayor"
+          }
+        },
+        {
+          "value": "alphabetical",
+          "label": {
+            "en": "Alphabetically, A-Z",
+            "es": "Alfabéticamente, A-Z"
+          }
+        },
+        {
+          "value": "alphabetical_reversed",
+          "label": {
+            "en": "Alphabetically, Z-A",
+            "es": "Alfabéticamente, Z-A"
+          }
+        },
+        {
+          "value": "date",
+          "label": {
+            "en": "Date, old to new",
+            "es": "Fecha: antiguo(a) a reciente"
+          }
+        },
+        {
+          "value": "date_reversed",
+          "label": {
+            "en": "Date, new to old",
+            "es": "Fecha: reciente a antiguo(a)"
+          }
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": {
+        "en": "Collections per row",
+        "es": "Colecciones por fila"
+      },
+      "default": 3,
+      "min": 2,
+      "max": 5,
+      "step": 1
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": {
+        "en": "Collection",
+        "es": "Colección"
+      },
+      "settings": [
+        {
+          "label": {
+            "en": "Collection",
+            "es": "Colección"
+          },
+          "id": "collection",
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

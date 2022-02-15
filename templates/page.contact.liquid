@@ -1,0 +1,18 @@
+<header class="collection-header">
+  {%- include 'hero-image', hero_image_fallback: 'Contact_2020_BloomBox_577.jpg' -%}
+</header>
+
+<div class="page__intro-container container container--wide">
+    <span class="collection__dog-ear" role="presentation"></span>
+    <div class="page__intro">
+
+        <h1>{{ page.title }}</h1>
+        <p class="text--intro">
+            {{ page.content }}
+        </p>
+
+    </div>
+</div>
+<div class="container--slim section--short">
+    {{ page.metafields.accentuate.contact_content }}
+</div>

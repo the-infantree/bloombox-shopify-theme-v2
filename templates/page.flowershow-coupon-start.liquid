@@ -1,0 +1,104 @@
+<header class="collection-header">
+  {%- include 'hero-image', hero_image_fallback: 'FAQs2020_BloomBox_218.jpg' -%}
+</header>
+
+<div class="page__intro-container container container--wide">
+    <span class="collection__dog-ear" role="presentation"></span>
+    <div class="page__intro">
+
+        <div style="max-width: 700px; margin: 0 auto;">
+
+            <h1>It was great to see you at the Philadelphia Flower Show!</h1>
+            <p>Please enter your zip code to see if we deliver to your area. If we do, we'll send you $10 off your order!</p>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="container--skinny section--tall" style="padding-top: 0;">
+    <div id="blb-zone-flower-show">
+      <form class="zip-form">
+        <input aria-label="Zip code" type="text" class="zip-form__input" name="zip" id="zip" maxLength="15" placeholder="Enter Delivery Zip Code Here" />
+        <button aria-label="Submit" class="zip-form__submit" type="submit">
+          <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/arrow-brown.svg?v=1611939333" alt="Submit" />
+        </button>
+      </form>
+
+      <!-- NOTE: Form errors get appended here by script as `p.zip-form__error` elements -->
+    </div>
+</div>
+
+
+
+<!-- Contact Callout-->
+<section class="section__testimonials">
+    <div class="container--slim section--short bg--pink bg--pattern-bottom text-center">
+
+        <h2>New to BloomBox?</h2>
+        <p class="text-center"><a href="/pages/how-it-works" class="btn--primary">See How We Work!</a></p>
+
+    </div>
+</section>
+
+
+<script>
+(function () {
+  /**
+   * Get flower show form container element
+   */
+  const getFormContainer = () => document.querySelector("#blb-zone-flower-show");
+
+  /**
+   * Remove form error
+   */
+  const removeFormError = () => {
+    getFormContainer().querySelectorAll(".zip-form__error").forEach((element) => {
+      element.remove();
+    });
+  };
+
+  /**
+   * Show form error
+   */
+  const showFormError = (msg) => {
+    removeFormError();
+    const errElement = document.createElement("p");
+    errElement.classList.add("zip-form__error");
+    errElement.textContent = msg;
+    getFormContainer().appendChild(errElement);
+  };
+
+  /**
+   * Handle submitted zip code form
+   */
+  const submitZip = (event) => {
+    event.preventDefault();
+    const zip = event.target.querySelector("input").value;
+
+    // Check for valid zip code
+    if (!blbZone.isValidZip(zip)) {
+      showFormError("Invalid zip code, please try again.");
+    } else {
+      // Store zip code in local storage in case we need it for later form entry?
+      blbZone.setZip(zip);
+
+      // Send user to new location depending on zone
+      if (blbZone.getZoneFromZip(zip)) {
+        window.location.href = "/pages/flower-show-coupon-form";
+      } else {
+        window.location.href = "/pages/flower-show-coupon-gift";
+      }
+    }
+  };
+
+  /**
+   * Initialize the form on load
+   */
+  const init = () => {
+    getFormContainer().querySelector("form").addEventListener("submit", submitZip);
+  };
+
+  init();
+})();
+</script>

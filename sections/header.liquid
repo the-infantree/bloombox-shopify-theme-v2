@@ -1,0 +1,305 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section" data-header-section>
+  {% if section.settings.message %}
+    {% if section.settings.home_page_only == false or request.page_type == 'index' %}
+
+      <div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement_bar_label' | t }}">
+          {% if settings.open_store == true %}
+            {%- unless section.settings.message_link == blank -%}
+              <a href="{{ section.settings.message_link }}" class="announcement-bar__link">
+            {%- endunless -%}
+                <p>{{ section.settings.message_text | escape }}</p>
+            {%- unless section.settings.message_link == blank -%}
+              </a>
+            {%- endunless -%}
+          {% else %}
+                <p>We're CLOSED for the season, but will be back in {%- include 'countdown-timer' -%}</p>
+          {% endif %}
+      </div>
+
+    {% endif %}
+  {% endif %}
+
+  <div class="nav__mobile-accounts">
+      {% if customer  %}
+      <h2 class="h6 nav__greeting">
+          Welcome back, {{ customer.first_name }}!
+      </h2>
+      {% endif %}
+
+      <div>
+          <button class="site-nav_delivery rbz-float-button" id="header_delivery_indicator">
+              <img src='https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-location.svg?v=1612384826' alt='' role='presentation' class='icon-location' />
+              Enter zip code
+          </button>
+          <a href="{{ routes.account_url }}" class="icon__label">My Account</a> | <a href="/pages/reward" class="icon__label">My Rewards</a>
+      </div>
+  </div>
+</div>
+
+  <header class="site-header" role="banner">
+
+    <!-- Logo & Commerce icons -->
+    <div class="container--wide site-header__top">
+
+
+            <!-- Logo -->
+            <a href="{{ routes.root_url }}" class="site-header__logo-image">
+              <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/logo-bloombox-teal.svg?v=1611937560" width="230" height="76" alt="BloomBox: Your Garden Delivered" />
+            </a>
+
+
+            <!-- Search -->
+            <div style="align-self: center;">
+                <form class="search hide-submit" action="/search">
+                    <input type="text" placeholder="Search" name="q" value="{{ search.terms | escape }}" />
+
+                    <label style="padding: 7px 10px;">
+                        {% include 'icon-search' %}
+                        <input type="submit" /></input>
+                    </label>
+                </form>
+            </div>
+
+            <!-- Mobile Search Icon -->
+          <button type="button" class="site-header__icon site-header__search-toggle js-drawer-open-top medium-up--hide" data-predictive-search-open-drawer>
+            <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-search.svg?v=1611785420" alt="" role="presentation" />
+            <span class="icon__label">Search</span>
+          </button>
+
+          {% include 'search-drawer' %}
+
+          <!-- Account Icon -->
+          <div class="icon-wrapper__account" style="align-self: center; text-align:center;">
+              <a href="{{ routes.account_url }}" class="site-header__icon site-header__account text-center">
+                <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-user.svg?v=1611785254" alt="" role="presentation" />
+                <span class="icon__label">{{ 'layout.customer.account' | t }}</span>
+              </a>
+          </div>
+          <!-- Account Icon -->
+
+
+          <!-- Cart Icon -->
+          <div class="icon-wrapper__cart" style="align-self: center; text-align:center;">
+              <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart">
+                <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-cart.svg?v=1611784725" alt="" role="presentation" />
+                <span class="icon__label">{{ 'layout.cart.title' | t }}</span>
+                <div id="CartCount" class="site-header__cart-count{% if cart.item_count == 0 %} hide{% endif %} critical-hidden" data-cart-count-bubble>
+                  <span data-cart-count>{{ cart.item_count }}</span>
+                  <span class="icon__fallback-text">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
+                </div>
+              </a>
+          </div>
+          <!-- / Cart Icon -->
+
+    </div>
+    <!-- / Logo & Commerce icons -->
+
+
+    <!-- MAIN NAV -->
+    <div class="site-header__main-nav">
+        <div class="container--wide" style="position:relative;">
+
+            <nav id="AccessibleNav" role="navigation">
+              {% include 'site-nav', linklist: section.settings.main_linklist %}
+              {% include 'site-nav', linklist: 'extended-mobile-menu' %}
+            </nav>
+
+            <!-- Location tag -->
+            <div class="text-right nav__customer-meta">
+
+                {% if customer  %}
+                <h2 class="h6 nav__greeting">
+                    Welcome back, {{ customer.first_name }}!
+                </h2>
+                {% endif %}
+
+                <button class="site-nav_delivery rbz-float-button" id="nav_delivery_indicator">
+                    <img src='https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-location.svg?v=1612384826' alt='' role='presentation' class='icon-location' />
+                    Enter zip code
+                </button>
+
+            </div>
+            <!-- / Location tag -->
+
+        </div>
+    </div>
+     <!-- / MAIN NAV -->
+    </header>
+</div>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+  {% endif %}
+  "sameAs": [
+    {{ settings.social_twitter_link | json }},
+    {{ settings.social_facebook_link | json }},
+    {{ settings.social_pinterest_link | json }},
+    {{ settings.social_instagram_link | json }},
+    {{ settings.social_tumblr_link | json }},
+    {{ settings.social_snapchat_link | json }},
+    {{ settings.social_youtube_link | json }},
+    {{ settings.social_vimeo_link | json }}
+  ],
+  "url": {{ shop.url | append: page.url | json }}
+}
+</script>
+
+{% if request.page_type == 'index' %}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": {
+    "en": "Header",
+    "es": "Encabezado"
+  },
+  "settings": [
+    {
+      "type": "radio",
+      "id": "align_logo",
+      "label": {
+        "en": "Logo alignment",
+        "es": "Alineación de logo"
+      },
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": {
+            "en": "Left",
+            "es": "Izquierda"
+          }
+        },
+        {
+          "value": "center",
+          "label": {
+            "en": "Centered",
+            "es": "Centrada"
+          }
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": {
+        "en": "Logo image",
+        "es": "Logo"
+      }
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": {
+        "en": "Custom logo width",
+        "es": "Ancho del logo personalizado"
+      },
+      "min": 50,
+      "max": 250,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "link_list",
+      "id": "main_linklist",
+      "label": {
+        "en": "Menu",
+        "es": "Menú"
+      },
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": {
+        "en": "Announcement bar",
+        "es": "Barra de anuncios"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "message",
+      "label": {
+        "en": "Show announcement",
+        "es": "Mostrar anuncio"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "home_page_only",
+      "label": {
+        "en": "Home page only",
+        "es": "Solo página de inicio"
+      },
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "message_text",
+      "label": {
+        "en": "Text",
+        "es": "Texto"
+      },
+      "default": {
+        "en": "Announce something here",
+        "es": "Anuncia algo aquí"
+      }
+    },
+    {
+      "type": "url",
+      "id": "message_link",
+      "label": {
+        "en": "Link",
+        "es": "Enlace"
+      },
+      "info": {
+        "en": "Optional",
+        "es": "Opcional"
+      }
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": {
+        "en": "Bar",
+        "es": "Barra"
+      },
+      "default": "#3a3a3a"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": {
+        "en": "Text",
+        "es": "Texto"
+      },
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

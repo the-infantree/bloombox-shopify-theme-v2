@@ -1,0 +1,47 @@
+{% comment %}
+    Renders a list of products from a collection
+
+    Accepts:
+    - collection: {Object} Collection Liquid object (required)
+
+    Usage:
+    {% include 'collection-grid-item', collection: collection %}
+{% endcomment %}
+{% if collection.image %}
+  {%- assign collection_image = collection.image -%}
+{% elsif collection.products.first and collection.products.first.media != empty %}
+  {%- assign collection_image = collection.products.first.featured_media.preview_image -%}
+{% else %}
+  {% assign collection_image = blank %}
+{% endif %}
+
+ <a href="{% if collection.products == empty %}#{% else %}{{ collection.url }}{% endif %}" class="collection-grid-item__link">
+    {% unless collection_image == blank %}
+      <div class="collection-grid-item__overlay box ratio-container lazyload js"
+        data-bgset="{% include 'bgset', image: collection_image %}"
+        data-sizes="auto"
+        data-parent-fit="cover"
+        data-image-loading-animation>
+      </div>
+      <noscript>
+        <div class="collection-grid-item__overlay" style="background-image: url('{{ collection_image | img_url: '900x900' }}')"></div>
+      </noscript>
+    {% else %}
+      {% if collection == empty %}
+        <div class="collection-grid-item__overlay">
+          {% capture current %}{% cycle 1, 2, 3 %}{% endcapture %}
+          {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% else %}
+        <div class="collection-grid-item__overlay" style="background-image: url('{{ collection_image | img_url: '900x900' }}')"></div>
+      {% endif %}
+    {% endunless %}
+
+    <h3 class="h4 callout__link-tag">
+        {% if collection.title == blank %}
+          {{ 'homepage.onboarding.collection_title' | t }}
+        {% else %}
+          {{ collection.title }}
+        {% endif %}
+    </h3>
+ </a>

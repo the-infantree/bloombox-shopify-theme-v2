@@ -1,0 +1,57 @@
+<header class="collection-header">
+    <div class="hero">
+
+        <img
+            class="hero__image--img-tag"
+            alt="{{ preview_image.alt }}"
+            data-src="{{ file_img_url }}"
+            srcset="
+            {{ 'Policies_2020_BloomBox_288.jpg' | file_img_url: '540x', format: 'jpg' }} 540w,
+            {{ 'Policies_2020_BloomBox_288.jpg' | file_img_url: '820x', format: 'jpg' }} 820w,
+            {{ 'Policies_2020_BloomBox_288.jpg' | file_img_url: '1200x', format: 'jpg' }} 1200w,
+            {{ 'Policies_2020_BloomBox_288.jpg' | file_img_url: '1600x', format: 'jpg' }} 1600w"
+            sizes="(min-width: 960px) 1200px, (min-width: 720px) 820px, (max-width: 500px) 540px, 100vw"
+            data-image>
+    </div>
+</header>
+
+<div class="page__intro-container container container--wide">
+    <span class="collection__dog-ear" role="presentation"></span>
+    <div class="page__intro">
+
+        <h1>{{ page.title }}</h1>
+
+    </div>
+
+    <div class="container--skinny">
+
+        <!-- Guarantee -->
+        <div class="text-center section--shorter" style="padding-top: 0;">
+
+            <h2 class="headline--tiny">
+                {% assign imgUrl = page.metafields.accentuate.page_icon_selection | file_url %}
+                <img src="{{ imgUrl }}" alt="" role="presentation" />
+                {{ page.metafields.accentuate.page_headline }}
+            </h2>
+            {{ page.metafields.accentuate.page_content }}
+
+        </div>
+
+        <!-- Policies -->
+        <ul class="accordion" data-aria-accordion data-multi data-transition data-default="none">
+            {% for headine in page.metafields.page_accordion.accordion_headline %}
+            <li>
+                <h3 class="accordion__heading" data-aria-accordion-heading>
+                    {{ headine }}
+                </h3>
+                <div class="accordion__panel" data-aria-accordion-panel>
+                    {{ page.metafields.page_accordion.accordion_content[forloop.index0] }}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        {{ page.metafields.accentuate.additional_content }}
+
+    </div>
+</div>

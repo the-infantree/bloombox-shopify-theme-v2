@@ -1,0 +1,89 @@
+<header class="collection-header">
+  {%- include 'hero-image', hero_image_fallback: 'hero-delivered-plants.jpg' -%}
+</header>
+
+<div class="page__intro-container container container--wide page__about">
+    <span class="collection__dog-ear" role="presentation"></span>
+    <div class="page__intro text-center">
+
+        {{ page.content }}
+
+    </div>
+</div>
+
+<section class="section--short">
+    <div class="container">
+        <!-- 2 columns -->
+        <div class="grid--2-col vertical-align">
+            <div>
+                {% assign imageUrl = page.metafields.two_column_content.column_image_selection %}
+                <img src="{{ imageUrl }}" alt="" />
+
+            </div>
+            <div>
+
+                {{ page.metafields.two_column_content.column_main_content }}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container--wide grid--4-col section--short text-center" style="padding-bottom:0;">
+        <div>
+            <h3 class="h4"><span class="h6 no-margin">{{ page.metafields.accentuate.column_headline_1 }}</h3>
+            {{ page.metafields.accentuate.column_content_1 }}
+
+        </div>
+        <div>
+
+            <h3 class="h4"><span class="h6 no-margin">{{ page.metafields.accentuate.column_headline_2 }}</h3>
+            {{ page.metafields.accentuate.column_content_2 }}
+
+        </div>
+        <div>
+
+            <h3 class="h4"><span class="h6 no-margin">{{ page.metafields.accentuate.column_headline_3 }}</h3>
+            {{ page.metafields.accentuate.column_content_3 }}
+
+        </div>
+        <div>
+
+            <h3 class="h4"><span class="h6 no-margin">{{ page.metafields.accentuate.column_headline_4 }}</h3>
+            {{ page.metafields.accentuate.column_content_4 }}
+        </div>
+    </div>
+    <!-- / 4 columns -->
+</section>
+
+<section class="section--short">
+    <div class="container">
+        <!-- 2 columns reverse -->
+        <div class="grid--40-60 col-reverse vertical-align">
+            <div>
+                {% assign imageUrl = page.metafields.two_column_content.column_image_selection_additio %}
+                <img src="{{ imageUrl }}" alt="" />
+            </div>
+            <div>
+                {{ page.metafields.two_column_content.column_main_content_addition }}
+            </div>
+        </div>
+        <!-- / 2 columns -->
+    </div>
+</section>
+
+<section class="bg--pink bg--pattern-top section--tall">
+    <div class="container grid--2-col text-center">
+        <div>
+            {{ page.metafields.accentuate.coupon_column_1 }}
+        </div>
+        <div>
+            {{ page.metafields.accentuate.coupon_column_2 }}
+        </div>
+    </div>
+
+    {% if page.metafields.accentuate.coupon_footer_area %}
+    <div class="container--skinny text-center section--short" style="padding-bottom:0;">
+        {{ page.metafields.accentuate.coupon_footer_area }}
+    </div>
+    {% endif %}
+</section>

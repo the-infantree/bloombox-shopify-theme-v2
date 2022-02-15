@@ -1,0 +1,87 @@
+{% comment %}
+    Renders a product card using "Grid" style
+    Accepts:
+    - max_height: {Number} Maximum height of the product's image (required)
+    - product: {Object} Product Liquid object (required)
+    - show_vendor: {Boolean} Show the product's vendor depending on the section setting (optional)
+
+    Usage:
+    {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+{% endcomment %}
+<div class="grid-view-item {% unless product.available %} item--sold-out{% endunless %} product-card" data-productid="{{product.id}}" data-variationid="{{product.selected_or_first_available_variant.id}}">
+  <a class="grid-view-item__link grid-view-item__image-container full-width-link" href="{{ product.url | within: collection }}">
+    <span class="visually-hidden">{{ product.title }}</span>
+  </a>
+
+  {% capture img_id %}ProductCardImage-{{ section.id }}-{{ product.id }}{% endcapture %}
+  {% capture wrapper_id %}ProductCardImageWrapper-{{ section.id }}-{{ product.id }}{% endcapture %}
+  {%- assign preview_image = product.featured_media.preview_image -%}
+  {%- assign img_url = preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+  {% comment %}
+  {% unless preview_image == blank %}
+    {% include 'image-style', image: preview_image, height: max_height, wrapper_id: wrapper_id, img_id: img_id %}
+  {% endunless %}
+  {% endcomment %}
+
+  <div class="product-card__image-with-placeholder-wrapper" data-image-loading-animation>
+    <div id="{{ wrapper_id }}" class="grid-view-item__image-wrapper product-card__image-wrapper js">
+      <img id="{{ img_id }}"
+      width="300"
+      height="350"
+          class="grid-view-item__image lazyload"
+          alt="{{ preview_image.alt }}"
+          data-src="{{ img_url }}"
+          srcset="{{ product.featured_image | img_url: '200x233', crop: 'center' , format: 'pjpg' }} 200w,
+          {{ product.featured_image | img_url: '300x350', crop: 'center' , format: 'pjpg' }} 300w,
+          {{ product.featured_image | img_url: '300x350', crop: 'center' , scale: '2', format: 'pjpg' }} 300w"
+          data-aspectratio="{{ preview_image.aspect_ratio }}"
+          data-sizes="(min-width: 1440px) 325px, (min-width: 1150px) 25vw, (min-width: 900px) 33vw, (min-width: 375px) 50vw, 100vw"
+          data-image>
+    </div>
+  </div>
+
+  <noscript>
+    {% capture image_size %}{{ max_height }}x{{ max_height }}{% endcapture %}
+    <img class="grid-view-item__image" src="{{ preview_image | img_url: image_size, scale: 2 }}" alt="{{ preview_image.alt }}" style="max-width: {{ max_height | times: preview_image.aspect_ratio }}px;">
+  </noscript>
+  <div class="grid-view-item__description">
+    <div class="grid-view-item__description-top">
+
+    <div class="grid-view-item__title product-card__title" aria-hidden="true">{{ product.title }}</div>
+
+    {% include 'product-price-listing', product: product, show_vendor: show_vendor %}
+
+      {% assign prod_variant_count = 0 %}
+
+      {% if product.available and product.variants.size > 1 %}
+      {% for option in product.options %}
+        {% if option contains 'Color' %}
+          {% for variant in product.variants %}
+            {% assign prod_variant_count = prod_variant_count | plus: 1 %}
+          {% endfor %}
+        {% else %}
+          <small hidden>No Color variants</small>
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      </div>
+
+      {% if prod_variant_count > 0 %}<small>{{ prod_variant_count }} Color Options</small>{% endif %}
+
+      {% if product.available %}
+        {% if product.has_only_default_variant %}
+          {% assign numLeft = product.variant.inventory_quantity %}
+        {% else %}
+          {% assign firstVariant = product.first_available_variant %}
+          {% assign numLeft = firstVariant.inventory_quantity %}
+        {% endif %}
+        {% if numLeft > 0 and numLeft <= 9 %}
+        <small class="badge__product-quantity">Only {{ numLeft }} left!</small>
+        {% endif %}
+      {% endif %}
+
+  </div>
+</div>

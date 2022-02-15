@@ -1,0 +1,297 @@
+<div id="blb-zone-modal" class="modal">
+  <div class="modal__body">
+    <h1>
+      <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/bloombox-logo-reverse.svg" alt="BloomBox" />
+    </h1>
+
+    <div class="modal__status modal__status--form" role="alertdialog">
+      <h2>
+        <span>BloomBox Hand-delivers</span>
+        Locally Grown Plants &amp; Gardening Supplies
+        <span>Directly to Your Door</span>
+      </h2>
+
+      <p>
+        Please enter your zip code to see if we hand-deliver to your home.
+      </p>
+
+      <form class="zip-form">
+        <input aria-label="Zip code" type="text" class="zip-form__input" name="zip" id="zip" maxLength="15" placeholder="Enter Delivery Zip Code Here" />
+        <button aria-label="Submit" class="zip-form__submit" type="submit">
+          <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/arrow-brown.svg?v=1611939333" alt="Submit" />
+        </button>
+      </form>
+    </div>
+
+    <div class="modal__status modal__status--inZone" role="alertdialog">
+      <p>Great news! We deliver to your area!</p>
+
+      <button class="modal__close">
+        Start Shopping
+        {% render 'icon-arrow-pink' %}
+      </button>
+    </div>
+
+    <div class="modal__status modal__status--outZone" role="alertdialog">
+      <h2>
+        <span>BloomBox Hand-delivers</span>
+        Locally Grown Plants &amp; Gardening Supplies
+        <span>Directly to Your Door</span>
+      </h2>
+
+      <p>
+        We’re not in your neighborhood yet, but we keep growing!
+        <a class="modal__reset" href="/pages/where-we-are#area-alerts">Add your zip code to our expansion list.</a>
+      </p>
+
+      <button class="modal__close">
+        Browse Only
+        {% render 'icon-arrow-pink' %}
+      </button>
+      <button class="modal__reset">Try a different delivery zip code</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/**
+ * BloomBox Zip Code Modal
+ * ==============
+ * Description: A modal to submit and store a user's zip code to customize their shopping experience
+ * Author: Zach Fedor
+ * Updated: 2021-05-26
+ */
+(function () {
+  /**
+   * Get zip code modal HTML Element
+   */
+  const getModal = () => document.querySelector("#blb-zone-modal");
+
+  /**
+   * Get delivery indicator HTML Elements
+   */
+  const getDeliveryIndicators = () =>
+    document.querySelectorAll(".site-nav_delivery");
+
+  /**
+   * Add message with zip code to delivery indicator HTML Elements
+   * @param {string} zip
+   */
+  const addZipToDeliveryIndicators = (zip) => {
+    // Don't do anything if zip is falsy, like null or empty string
+    if (!!zip) {
+      // Text to display depending on user's zone
+      const zipMessage = !blbZone.getZoneFromZip(zip)
+        ? `${zip} is outside our delivery area`
+        : `Delivering to: ${zip}`;
+
+      // Get all the delivery indicator buttons and loop through them
+      const elements = getDeliveryIndicators();
+      elements.forEach((element) => {
+        // Update their contents with icon and message
+        element.innerHTML = `
+          <img src="https://cdn.shopify.com/s/files/1/0457/4632/3611/files/icon-location.svg?v=1612384826" alt="" role="presentation" class="icon-location">
+          ${zipMessage}
+        `;
+      });
+      //Collection page values reset
+      setCookie('pagination_value1', 1, 30);
+      //setCookie('filter_fields1', '', 30);
+      setCookie('sort_field2', '', 30);
+      setCookie('sort_direction2', '', 30);
+    }
+  };
+
+  /**
+   * Remove zone class from HTML Body Element
+   */
+  const removeZoneFromBody = () => {
+    // Loop through all the classes
+    document.body.classList.forEach((className) => {
+      // If the class starts with "user--is-", remove it
+      if (/^user--is-/.test(className)) {
+        document.body.classList.remove(className);
+      }
+    });
+  };
+
+  /**
+   * Add zone class to HTML Body Element
+   * @param {string} [zone] - Zone to be appended to body class name
+   */
+  const addZoneToBody = (zone) => {
+    // In case the user is switching zones, remove the old one first
+    removeZoneFromBody();
+
+    // If zone is null or undefined, user isn't in delivery zone
+    if (!zone) {
+      zone = "none";
+    }
+
+    document.body.classList.add(`user--is-${zone}`);
+  };
+
+  /**
+   * Set the modal's status
+   * @param {("form"|"inZone"|"outZone")} status - The string to determine what the modal displays
+   */
+  const setModalStatus = (status) => {
+    const modal = getModal();
+
+    // Reset modal by hiding all modal states
+    modal.querySelectorAll(".modal__status").forEach((body) => {
+      body.style.display = "none";
+    });
+
+    // Show the given modal status, either "form", "inZone", or "outZone"
+    modal.querySelector(`.modal__status--${status}`).style.display = "block";
+  };
+
+  /**
+   * Remove form error
+   */
+  const removeFormError = () => {
+    getModal().querySelectorAll("#blb-zone-modal .zip-form__error").forEach((element) => {
+      element.remove();
+    });
+  };
+
+  /**
+   * Show form error
+   * @param {string} msg - Error message to display
+   */
+  const showFormError = (msg) => {
+    const modal = getModal();
+
+    // Remove previous errors, if any
+    removeFormError();
+
+    // Create and append error element
+    const errElement = document.createElement("p");
+    errElement.classList.add("zip-form__error");
+    errElement.textContent = msg;
+    modal.querySelector(".modal__status--form").appendChild(errElement);
+  };
+
+  /**
+   * Show the modal to enter new zip code
+   */
+  const showModal = () => {
+    const modal = getModal();
+
+    // Reset modal to display empty form and remove any errors
+    setModalStatus("form");
+    const zipInput = modal.querySelector("form input");
+    zipInput.value = "";
+    removeFormError();
+
+    // Remove class that hides modal
+    modal.classList.add("modal--is-active");
+
+    // And focus on input
+    zipInput.focus();
+  };
+
+  /**
+   * Close the modal
+   */
+  const closeModal = () => {
+    getModal().classList.remove("modal--is-active");
+  };
+
+  /**
+   * Handle submitted zip code form
+   * @param {Event} event
+   */
+  const submitZip = (event) => {
+    // Intercept default form action
+    event.preventDefault();
+
+    // Get zip from input element
+    const zip = event.target.querySelector("input").value;
+
+    // Check for validity
+    if (blbZone.isValidZip(zip)) {
+      // Zip is good, save to local storage and update delivery icon
+      blbZone.setZip(zip);
+
+      // Get delivery zone from zip code
+      const zone = blbZone.getZoneFromZip(zip);
+
+      // Show message in modal according to their zone
+      setModalStatus(!zone ? "outZone" : "inZone");
+
+      // If successful, start a timer of 3 seconds to close the modal
+      if (!!zone) {
+        setTimeout(closeModal, 3 * 1000);
+      }
+
+      // Setup store to reflect their zone
+      addZoneToBody(zone);
+      addZipToDeliveryIndicators(zip);
+    } else {
+      // Zip is not good, show error message to try agin
+      showFormError("Invalid zip code, please try again.");
+    }
+  };
+
+  /**
+   * Initialize the modal
+   */
+  const initModal = () => {
+    const modal = getModal();
+
+    // Add event handler to form
+    modal.querySelector("form").addEventListener("submit", submitZip);
+
+    // Add event handler to close buttons
+    modal.querySelectorAll(".modal__close").forEach((button) => {
+      button.addEventListener("click", closeModal);
+    });
+
+    // Add event handler to retry button
+    modal.querySelector("button.modal__reset").addEventListener("click", showModal);
+  };
+
+  /**
+   * Initialize the delivery indicators
+   */
+  const initDeliveryIndicator = () => {
+    // Add event listener to each button
+    getDeliveryIndicators().forEach((button) => {
+      button.addEventListener("click", showModal);
+    });
+  };
+
+  /**
+   * Start running the script on load
+   */
+  const init = () => {
+    // Check LocalStorage for user info
+    const zip = blbZone.getZip();
+
+    // Setup all event listeners for the modal and delivery indicator buttons
+    initModal();
+    initDeliveryIndicator();
+
+    // Get list of disabled pages from Theme Settings and convert to an array of pathnames
+    const disabledPages = {{settings.zip_check_disabled_pages | json}}.split("\n");
+    // Does the current location match one of these disabled pages?
+    const isDisabledPage = disabledPages.includes(window.location.pathname);
+
+    if (zip) {
+      // We have the zip, so setup the store to reflect their zone
+      addZoneToBody(blbZone.getZoneFromZip(zip));
+      addZipToDeliveryIndicators(zip);
+    } else if (!isDisabledPage) {
+      // We don't have a zip code, so as long as we are NOT on a disabled page,
+      // show the modal to submit it. If the user navigates to another page, this
+      // init function will re-run allowing them to still submit a zip once they
+      // reach a non-disabled page.
+      showModal();
+    }
+  };
+
+  init();
+})();
+</script>

@@ -1,0 +1,93 @@
+<section class="section__image-callouts section__collection-list">
+    <h2 class="visually-hidden">Featured Collections</h2>
+
+    <ul class="grid--3-col persistent-grid--md">
+      {% for block in section.blocks limit: section.blocks.size %}
+        <li class="collection-grid-item">
+          {%- assign collection = collections[block.settings.collection] -%}
+          {% include 'collection-grid-item', collection: collection %}
+        </li>
+      {% endfor %}
+    </ul>
+</section>
+
+
+
+{% schema %}
+{
+  "name": {
+    "en": "Collection list",
+    "es": "Lista de colecciones"
+  },
+  "class": "index-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "en": "Heading",
+        "es": "Título"
+      },
+      "default": {
+        "en": "Collection list",
+        "es": "Lista de colecciones"
+      }
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": {
+        "en": "Collections per row",
+        "es": "Colecciones por fila"
+      },
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "featured_collection",
+      "name": {
+        "en": "Collection",
+        "es": "Colección"
+      },
+      "settings": [
+        {
+          "label": {
+            "en": "Collection",
+            "es": "Colección"
+          },
+          "id": "collection",
+          "type": "collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Collection list",
+        "es": "Lista de colecciones"
+      },
+      "category": {
+        "en": "Collection",
+        "es": "Colección"
+      },
+      "blocks": [
+        {
+          "type": "featured_collection"
+        },
+        {
+          "type": "featured_collection"
+        },
+        {
+          "type": "featured_collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

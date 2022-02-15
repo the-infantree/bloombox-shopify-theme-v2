@@ -1,0 +1,83 @@
+{% comment %}
+    Renders a list of menu items
+    Accepts:
+    - linklist: {Object} Linklist Liquid object (required)
+    - wrapper_class: {String} CSS wrapper class for the navigation (optional)
+
+    Usage:
+    {% include 'site-nav', linklist: section.settings.main_linklist, wrapper_class: 'site-nav--centered' %}
+{% endcomment %}
+<ul class="site-nav" id="SiteNav">
+  {% for link in linklists[linklist].links %}
+    {%- assign child_list_handle = link.title | handleize -%}
+
+    {% comment %}
+      Check if third-level nav exists on each parent link.
+    {% endcomment %}
+    {%- assign three_level_nav = false -%}
+    {% if link.links != blank %}
+      {% if link.levels == 2 %}
+        {%- assign three_level_nav = true -%}
+      {% endif %}
+    {% endif %}
+
+    {% if link.links != blank %}
+      <li class="site-nav--has-dropdown" data-has-dropdowns>
+        <button type="button" class="site-nav__link--main" aria-expanded="false" aria-controls="SiteNavLabel-{{ child_list_handle }}">
+            {{ link.title | escape }} {% include 'icon-chevron-down' %}
+        </button>
+
+        <div class="site-nav__dropdown" id="SiteNavLabel-{{ child_list_handle }}">
+          {% if three_level_nav %}
+            <div class="site-nav__childlist">
+              <ul class="site-nav__childlist-grid">
+                {% if link.links != blank %}
+                  {% for childlink in link.links %}
+                    <li class="site-nav__childlist-item">
+                      <a href="{{ childlink.url }}" {% if childlink.current %} aria-current="page"{% endif %}>
+                        {{ childlink.title | escape }}
+                      </a>
+
+                      {% if childlink.links != blank %}
+                        <ul>
+                        {% for grandchildlink in childlink.links %}
+                          <li>
+                            <a href="{{ grandchildlink.url }}" {% if grandchildlink.current %} aria-current="page"{% endif %}>
+                              {{ grandchildlink.title | escape }}
+                            </a>
+                          </li>
+                        {% endfor %}
+                        </ul>
+                      {% endif %}
+
+                    </li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+            </div>
+
+          {% else %}
+            <ul>
+              {% for childlink in link.links %}
+                <li>
+                  <a href="{{ childlink.url }}" {% if childlink.current %} aria-current="page"{% endif %}>
+                    {{ childlink.title | escape }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </li>
+    {% else %}
+      <li {% if link.active %} class="site-nav--active"{% endif %}>
+        <a href="{{ link.url }}"
+          class="site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
+          {% if link.current %} aria-current="page"{% endif %}
+        >
+            {{ link.title | escape }}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
