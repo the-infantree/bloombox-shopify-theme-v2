@@ -63,7 +63,7 @@
                 <thead class="cart__row cart__row--heading">
                   <th scope="col">{{ 'cart.label.product' | t }}</th>
                   <th class="text-right" scope="col">{{ 'cart.label.price' | t }}</th>
-                  <th class="//text-right small--hide" scope="col">{{ 'cart.label.quantity' | t }}</th>
+                  <th class="small--hide" scope="col">{{ 'cart.label.quantity' | t }}</th>
                   <th class="text-right small--hide" scope="col">{{ 'cart.label.total' | t }}</th>
                 </thead>
                 <tbody data-cart-line-items>
@@ -76,7 +76,7 @@
                         {% assign promo_added = true %}
                     {% endif %}
 
-                    <tr class="cart__row" data-cart-item data-cart-item-key="{{ item.key }}" data-cart-item-url="{{ item.url }}" data-cart-item-title="{{ item.title }}" data-cart-item-index="{{ forloop.index }}" data-cart-item-quantity="{{ item.quantity }}" data-tomit-variant-id="{{item.variant_id}}" data-tomit-product-id="{{item.product_id}}">
+                    <tr class="cart__row" data-cart-item data-cart-item-key="{{ item.key }}" data-cart-item-url="{{ item.url }}" data-cart-item-title="{{ item.title }}" data-cart-item-index="{{ forloop.index }}" data-cart-item-quantity="{{ item.quantity }}" variant-id="{{item.variant_id}}" product-id="{{item.product_id}}">
                       <td class="cart__meta small--text-left" data-cart-table-cell>
                         <div class="cart__product-information">
                           <div class="cart__image-wrapper">
@@ -356,9 +356,9 @@
                   <div class="text-right small--text-center">
                     <div id="cartInventoryWarning" style="display: none">
                       <div class="well well--pink well--small well--inventory-warning">
-                        <h3 class="well__title">Uh oh! You have more items in your cart than we have in stock.</h3>
+                        <h3 class="well__title">We're sorry, we don't have that many in stock.</h3>
                         <div class="well__body">
-                          <p>Please adjust the quantities and update your cart <span class="text-no-wrap">to continue.</span></p>
+                          <p>Quantities have been adjusted to match current availability.</p>
                         </div>
                       </div>
                     </div>

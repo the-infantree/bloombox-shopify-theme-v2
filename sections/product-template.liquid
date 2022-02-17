@@ -307,15 +307,11 @@
         {% endfor %}
       </select>
 
-      {% unless product.selected_or_first_available_variant.inventory_management == null %}
-          <div id="inventoryLocationInformation"></div>
-      {% endunless %}
-
       <div id="inventoryOversellAlert" style="display: none;">
        <div class="well well--pink">
-          <h3 class="well__title">Uh oh! We don't have that many!</h3>
+          <h3 class="well__title">We're sorry, we don't have that many in stock.</h3>
           <div class="well__body">
-            <p>You can't add more than <span id="variantQuantityInStock"></span> of these to your cart.</p>
+            <p>Quantities have been adjusted to match current availability.</p>
           </div>
         </div>
       </div>
