@@ -55,6 +55,7 @@
     {%- endif -%}	
       <ul id="filter-list-custome" class="filter-list">
       </ul>
+      <div id="alphabet" class="alphabet-custom"></div>
       <div id="filter-bar-details-custom" class="filter-bar__details">
       </div>
 	{% comment %}
@@ -144,8 +145,9 @@
             <h2 class="h3">Sorry! We're still working on adding {{ collection.title }}.</h2>
             <p>Check back soon for new products or <a href="https://www.facebook.com/getblooming" target="_blank" title="open site in new tab">follow us on Facebook</a> or <a href="http://instagram.com/getblooming" target="_blank" title="open site in new tab">Instagram</a> to get updates and see what's new each week!</p>
 
-        </div>
+        </div>    
     {% endif %}	
+    <ul id="error-mes" style="display: none;">No Product available for this filter</ul>
     <ul id="list--inline-pagination" class="list--inline pagination"></ul>
     {% comment %}
     {%- if paginate.pages > 1 -%}
