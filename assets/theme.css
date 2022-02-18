@@ -8293,15 +8293,24 @@ thead.cart__row {
 #alphabet {
     padding: 1rem 0 0.75rem;
     border-top: 2px solid var(--color-lt-gray);
+    display: flex;
+    flex-wrap: wrap;
 }
 #alphabet .alphabet-label {
+    flex: 100% 0 0;
     font-size: var(--font-size---1);
     font-family: var(--font-stack-body);
     color: var(--color-gray);
     margin-bottom: 5px;
     text-transform: uppercase;
 }
+#alphabet .alphabet-list {
+    display: flex;
+    flex: 1;
+    padding: 0 40px;
+}
 #alphabet .alphabet-inner {
+    flex: 100% 0 0;
     font-size: 14px;
     font-family: var(--font-stack-header);
     cursor: pointer;
@@ -8312,6 +8321,10 @@ thead.cart__row {
     justify-content: center;
     border-radius: 30px;
     transition: 0.2s ease all;
+}
+#alphabet .slick-track {
+    font-size: 14px;
+    max-width: 66em;
 }
 #alphabet .alphabet-inner:hover {
     background: var(--color-lt-gray);
@@ -8324,8 +8337,10 @@ thead.cart__row {
 }
 #alphabet .slick-prev,
 #alphabet .slick-next {
+    position: absolute;
     height: 34px;
-    width: 34px;
+    width: 40px;
+    flex: 40px 0 0;
 }
 #alphabet div {
     display: inline;
@@ -8333,23 +8348,15 @@ thead.cart__row {
 #error-mes {
     text-align: center;
 }
-@media (max-width: 1250px) {
-    #alphabet div {
-        display: block;
+@media screen and (min-width: 1024px) {
+    #alphabet .alphabet-list {
+        padding: 0;
     }
-    .variable-width {
-        padding: 0 40px;
-    }
-    .slick-prev {
-        left: 0;
-    }
-    .slick-prev,
-    .slick-next {
-        height: 40px;
-        width: 40px;
+    #alphabet .slick-prev,
+    #alphabet .slick-next {
+        display: none;
     }
 }
-
 /******************************************************************************
 ***
 ***     ACCORDION
