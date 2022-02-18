@@ -8295,6 +8295,8 @@ thead.cart__row {
     border-top: 2px solid var(--color-lt-gray);
 }
 #alphabet .alphabet-inner {
+    font-size: 14px;
+    font-family: var(--font-stack-header);
     cursor: pointer;
     /* padding: 0 15px; */
     height: 40px;
