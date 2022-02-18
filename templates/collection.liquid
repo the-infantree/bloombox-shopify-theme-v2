@@ -24,7 +24,8 @@
         responsive: [
             {
                 breakpoint: 1024,
-                settings: "unslick",
+                // settings: "unslick",
+                arrows: false,
             },
         ],
     };
@@ -1953,14 +1954,25 @@
             document.getElementById("alphabet").innerHTML += alphabet;
 
             // Create a media condition that targets viewports at least 768px wide
-            //const mediaQuery = window.matchMedia("(max-width: 1250px)");
+            // const mediaQuery = window.matchMedia("(max-width: 1024px)");
             // Check if the media query is true
-            //if (mediaQuery.matches) {
+            // if (mediaQuery.matches) {
             // Then trigger an alert
             $(".variable-width").slick(slick_settings);
-            //} else {
+            // } else {
             //$('.variable-width').slick('unslick');
-            //}
+            // }
+
+            /* Do this every time window gets resized */
+            $(window).on("resize", function () {
+                /* If we are above mobile breakpoint unslick the slider */
+                if ($(window).width() > 1023) {
+                    return;
+                }
+                if (!slider.hasClass("slick-initialized")) {
+                    $(".variable-width").slick(slick_settings);
+                }
+            });
 
             //console.log(all_products_count);
             var product_count = '<span class="filter-bar__item-count"><span id="count_update">' + all_products_count + '</span> products</span><ul id="filter__current-tags" class="filter__current-tags"></ul>';
