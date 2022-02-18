@@ -8363,6 +8363,11 @@ thead.cart__row {
         padding: 0;
         flex: 1;
     }
+    #alphabet .alphabet-inner {
+        font-size: 13px;
+        height: 30px;
+        width: 30px;
+    }
     #alphabet .slick-prev,
     #alphabet .slick-next {
         display: none !important;
