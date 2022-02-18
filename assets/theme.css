@@ -8306,7 +8306,7 @@ thead.cart__row {
 }
 #alphabet .alphabet-list {
     flex: 100% 0 0;
-    display: flex;
+    display: inline-flex;
     flex: 1;
     padding: 0 40px;
 }
@@ -8323,8 +8323,6 @@ thead.cart__row {
     transition: 0.2s ease all;
 }
 #alphabet .slick-track {
-    font-size: 14px;
-    max-width: 66em;
 }
 #alphabet .alphabet-inner:hover {
     background: var(--color-lt-gray);
@@ -8341,6 +8339,11 @@ thead.cart__row {
     height: 34px;
     width: 40px;
     flex: 40px 0 0;
+    left: 0;
+}
+#alphabet .slick-next {
+    left: auto;
+    right: 0;
 }
 #alphabet div {
     display: inline;
