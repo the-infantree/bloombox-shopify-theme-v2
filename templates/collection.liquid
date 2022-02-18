@@ -1609,13 +1609,13 @@
                         for (var i = 0; i < response.filters.Native.length; i++) {
                             var label = response.filters.Native[i].label;
                             if (final_tags.indexOf(label) !== -1) {
-                                filter_child_list_1 = '<a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle tag-toggle--large" title="Remove ' + response.filters.Native[i].label + '">' + response.filters.Native[i].label + "</a>";
+                                filter_child_list_1 = '<a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle" title="Remove ' + response.filters.Native[i].label + '">' + response.filters.Native[i].label + "</a>";
                             } else {
-                                filter_child_list_1 = '<li class="tag-"><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle tag-toggle--large" title="' + response.filters.Native[i].label + '">' + response.filters.Native[i].label + "</a></li>";
+                                filter_child_list_1 = '<li class="tag-"><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle" title="' + response.filters.Native[i].label + '">' + response.filters.Native[i].label + "</a></li>";
                             }
                             filter_child_list = filter_child_list + filter_child_list_1;
                         }
-                        var filter_list = '<li class="filter-list__item filter-list__item--native"><h3 class="filter-list__item">' + filter_child_list + "</h3></li>";
+                        var filter_list = '<li class="filter-list__item filter-list__item--native"><h3 class="filter-list__item">Native</h3><ul id="filter-child-list-native" class="js_toggle__panel dropdown__panel" hidden="">' + filter_child_list + "</ul></li>";
 
                         document.getElementById("filter-list-custom").innerHTML += filter_list;
                     }
