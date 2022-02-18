@@ -8338,13 +8338,16 @@ thead.cart__row {
 #alphabet .slick-next {
     position: absolute;
     height: 34px;
-    width: 40px;
-    flex: 40px 0 0;
+    width: 34px;
+    flex: 34px 0 0;
     left: 0;
+    margin-left: -10px;
 }
 #alphabet .slick-next {
     left: auto;
     right: 0;
+    margin-left: 0;
+    margin-right: -10px;
 }
 #error-mes {
     text-align: center;
