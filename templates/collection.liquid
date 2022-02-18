@@ -334,10 +334,10 @@
                             } else {
                                 var atr_title = response.filters.Size[i].label;
                             }
-                            filter_child_list_1 = '<ul><li><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle tag-toggle--large" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li>";
                         } else {
                             //console.log('false');
-                            filter_child_list_1 = '<ul><li><span class="tag-toggle tag-toggle--large tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><span class="tag-toggle tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li>";
                         }
                         filter_child_list = filter_child_list + filter_child_list_1;
                     }
@@ -632,10 +632,10 @@
                             } else {
                                 var atr_title = response.filters.Size[i].label;
                             }
-                            filter_child_list_1 = '<ul><li><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle tag-toggle--large" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li>";
                         } else {
                             //console.log('false');
-                            filter_child_list_1 = '<ul><li><span class="tag-toggle tag-toggle--large tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><span class="tag-toggle tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li>";
                         }
                         filter_child_list = filter_child_list + filter_child_list_1;
                     }
@@ -925,10 +925,10 @@
                             } else {
                                 var atr_title = response.filters.Size[i].label;
                             }
-                            filter_child_list_1 = '<ul><li><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle tag-toggle--large" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li>";
                         } else {
                             //console.log('false');
-                            filter_child_list_1 = '<ul><li><span class="tag-toggle tag-toggle--large tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><span class="tag-toggle tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li>";
                         }
                         filter_child_list = filter_child_list + filter_child_list_1;
                     }
@@ -1182,10 +1182,10 @@
                             } else {
                                 var atr_title = response.filters.Size[i].label;
                             }
-                            filter_child_list_1 = '<ul><li><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle tag-toggle--large" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li>";
                         } else {
                             //console.log('false');
-                            filter_child_list_1 = '<ul><li><span class="tag-toggle tag-toggle--large tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><span class="tag-toggle tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li>";
                         }
                         filter_child_list = filter_child_list + filter_child_list_1;
                     }
@@ -1377,10 +1377,10 @@
                             } else {
                                 var atr_title = response.filters.Size[i].label;
                             }
-                            filter_child_list_1 = '<ul><li><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle tag-toggle--large" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle" title="' + atr_title + '">' + response.filters.Native[i].label + "</a></li>";
                         } else {
                             //console.log('false');
-                            filter_child_list_1 = '<ul><li><span class="tag-toggle tag-toggle--large tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li></ul>";
+                            filter_child_list_1 = '<li class="tag-"><span class="tag-toggle tag-toggle--disabled">' + response.filters.Native[i].label + "</span></li>";
                         }
                         filter_child_list = filter_child_list + filter_child_list_1;
                     }
@@ -1872,10 +1872,10 @@
                         var filter_child_list = "";
                         var filter_child_list_1 = "";
                         for (var i = 0; i < response.filters.Native.length; i++) {
-                            filter_child_list_1 = '<ul><li><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle tag-toggle--large" title="' + response.filters.Native[i].label + '">' + response.filters.Native[i].label + "</a></li></ul";
+                            filter_child_list_1 = '<li class="tag-"><a href="javascript:void(0)" onclick="pop(this)" class="tag-toggle" title="' + response.filters.Native[i].label + '">' + response.filters.Native[i].label + "</a></li>";
                             filter_child_list = filter_child_list + filter_child_list_1;
                         }
-                        var filter_list = '<li class="filter-list__item filter-list__item--native" id="filter-child-list-native"><h3 class="filter-list__item">' + filter_child_list + "</h3></li>";
+                        var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Native<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-native" class="js_toggle__panel dropdown__panel" hidden="">' + filter_child_list + "</ul></li>";
 
                         document.getElementById("filter-list-custom").innerHTML += filter_list;
                     }
