@@ -8298,16 +8298,17 @@ thead.cart__row {
 }
 #alphabet .alphabet-label {
     flex: 100% 0 0;
-    font-size: var(--font-size---1);
+    font-size: var(--font-size---2);
     font-family: var(--font-stack-body);
     color: var(--color-gray);
     margin-bottom: 5px;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 #alphabet .alphabet-list {
     flex: 100% 0 0;
-    display: inline-flex;
-    flex: 1;
+    width: 100%;
+    display: inline;
     padding: 0 40px;
 }
 #alphabet .alphabet-inner {
@@ -8352,12 +8353,19 @@ thead.cart__row {
     text-align: center;
 }
 @media screen and (min-width: 1024px) {
+    #alphabet {
+        flex-wrap: nowrap;
+    }
+    #alphabet .alphabet-label {
+        flex: 1;
+    }
     #alphabet .alphabet-list {
         padding: 0;
+        flex: 1;
     }
     #alphabet .slick-prev,
     #alphabet .slick-next {
-        display: none;
+        display: none !important;
     }
 }
 /******************************************************************************
