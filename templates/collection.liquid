@@ -20,6 +20,13 @@
         swipe: true,
         swipeToSlide: true,
         accessibility: true,
+        mobileFirst: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: "unslick",
+            },
+        ],
     };
 
     //   // Set a Cookie
@@ -1946,14 +1953,14 @@
             document.getElementById("alphabet").innerHTML += alphabet;
 
             // Create a media condition that targets viewports at least 768px wide
-            const mediaQuery = window.matchMedia("(max-width: 1250px)");
+            //const mediaQuery = window.matchMedia("(max-width: 1250px)");
             // Check if the media query is true
-            if (mediaQuery.matches) {
-                // Then trigger an alert
-                $(".variable-width").slick(slick_settings);
-            } else {
-                //$('.variable-width').slick('unslick');
-            }
+            //if (mediaQuery.matches) {
+            // Then trigger an alert
+            $(".variable-width").slick(slick_settings);
+            //} else {
+            //$('.variable-width').slick('unslick');
+            //}
 
             //console.log(all_products_count);
             var product_count = '<span class="filter-bar__item-count"><span id="count_update">' + all_products_count + '</span> products</span><ul id="filter__current-tags" class="filter__current-tags"></ul>';
