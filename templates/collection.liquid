@@ -89,7 +89,7 @@
     document.onclick = getAlert;
     document.body.click();
     
-    var ignoreClickOnMeElement = document.getElementById('filter-list-custome');
+    var ignoreClickOnMeElement = document.getElementById('filter-list-custom');
 
     document.addEventListener('click', function(event) {
       var isClickInsideElement = ignoreClickOnMeElement.contains(event.target);
@@ -1588,7 +1588,7 @@
           }
           var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Features<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-features" class="js_toggle__panel dropdown__panel" hidden="">'+ filter_child_list +'</ul></li>';
 			
-          document.getElementById("filter-list-custome").innerHTML += filter_list;
+          document.getElementById("filter-list-custom").innerHTML += filter_list;
         } 
         
         var dropdown_leight = response.filters.Light_Requirements;
@@ -1606,7 +1606,7 @@
           filter_child_list = filter_child_list + filter_child_list_1;
         }
         var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Light<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-light" class="js_toggle__panel dropdown__panel" hidden="">'+ filter_child_list +'</ul></li>';		
-        document.getElementById("filter-list-custome").innerHTML += filter_list;
+        document.getElementById("filter-list-custom").innerHTML += filter_list;
         }
         var dropdown_leight = response.filters.Size;
         if (dropdown_leight !== undefined) {
@@ -1624,7 +1624,7 @@
           }
           var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Size<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-size" class="js_toggle__panel dropdown__panel" hidden="">'+ filter_child_list +'</ul></li>';
 
-          document.getElementById("filter-list-custome").innerHTML += filter_list;
+          document.getElementById("filter-list-custom").innerHTML += filter_list;
         }
         var dropdown_leight = response.filters.Native;
         if (dropdown_leight !== undefined) {
@@ -1641,7 +1641,7 @@
         }
         var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Native<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-native" class="js_toggle__panel dropdown__panel" hidden="">'+ filter_child_list +'</ul></li>';
 
-        document.getElementById("filter-list-custome").innerHTML += filter_list;
+        document.getElementById("filter-list-custom").innerHTML += filter_list;
         }        
         //Product listing
         var badges = '';
@@ -1872,7 +1872,7 @@
             }
             var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Features<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-features" class="js_toggle__panel dropdown__panel" hidden="">'+ filter_child_list +'</ul></li>';
 
-            document.getElementById("filter-list-custome").innerHTML += filter_list;
+            document.getElementById("filter-list-custom").innerHTML += filter_list;
           } 
 
           var dropdown_leight = response.filters.Light_Requirements;
@@ -1885,7 +1885,7 @@
               filter_child_list = filter_child_list + filter_child_list_1;
             }
             var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Light<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-light" class="js_toggle__panel dropdown__panel" hidden="">'+ filter_child_list +'</ul></li>';		
-            document.getElementById("filter-list-custome").innerHTML += filter_list;
+            document.getElementById("filter-list-custom").innerHTML += filter_list;
           }
           var dropdown_leight = response.filters.Size;
           if (dropdown_leight !== undefined) {
@@ -1898,7 +1898,7 @@
             }
             var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Size<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-size" class="js_toggle__panel dropdown__panel" hidden="">'+ filter_child_list +'</ul></li>';
 
-            document.getElementById("filter-list-custome").innerHTML += filter_list;
+            document.getElementById("filter-list-custom").innerHTML += filter_list;
           }
           var dropdown_leight = response.filters.Native;
           if (dropdown_leight !== undefined) {
@@ -1910,7 +1910,7 @@
             }
             var filter_list = '<li class="filter-list__item"><h3 class="js_toggle__button"><button class="dropdown__button" type="button" aria-expanded="false">Native<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-down" viewBox="0 0 9 9"><path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z" fill="#fff"></path></svg></button></h3><ul id="filter-child-list-native" class="js_toggle__panel dropdown__panel" hidden="">'+ filter_child_list +'</ul></li>';
 
-            document.getElementById("filter-list-custome").innerHTML += filter_list;
+            document.getElementById("filter-list-custom").innerHTML += filter_list;
           }        
           //Product listing
           var badges = '';
@@ -2039,7 +2039,7 @@
   .product-card__image-with-placeholder-wrapper{
     padding-top: 100%;
   }
-  #filter-list-custome .dropdown__button{
+  #filter-list-custom .dropdown__button{
     text-transform: capitalize;
   }
   #loader {
