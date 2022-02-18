@@ -8294,9 +8294,10 @@ thead.cart__row {
     padding: 1rem 0;
     border-top: 2px solid var(--color-lt-gray);
 }
-#alphabet alphabet-label {
+#alphabet .alphabet-label {
     font-size: var(--font-size---1);
     font-family: var(--font-stack-body);
+    color: var(--color-gray);
 }
 #alphabet .alphabet-inner {
     font-size: 14px;
@@ -8307,16 +8308,16 @@ thead.cart__row {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border-radius: 30px;
     transition: 0.2s ease all;
 }
 #alphabet .alphabet-inner:hover {
-    background: var(--color-gray);
+    background: var(--color-lt-gray);
 }
 
 #alphabet .alphabet-inner.active {
     font-weight: bold;
     background: var(--color-teal);
-    border-radius: 30px;
     color: #fff;
 }
 #alphabet .slick-prev,
