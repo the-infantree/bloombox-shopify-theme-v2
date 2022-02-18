@@ -8291,13 +8291,15 @@ thead.cart__row {
     transform: translate(-50%, -50%);
 }
 #alphabet {
-    padding: 1rem 0;
+    padding: 1rem 0 0.75rem;
     border-top: 2px solid var(--color-lt-gray);
 }
 #alphabet .alphabet-label {
     font-size: var(--font-size---1);
     font-family: var(--font-stack-body);
     color: var(--color-gray);
+    margin-bottom: 5px;
+    text-transform: uppercase;
 }
 #alphabet .alphabet-inner {
     font-size: 14px;
