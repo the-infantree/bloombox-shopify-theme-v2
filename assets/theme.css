@@ -8314,6 +8314,7 @@ thead.cart__row {
 #alphabet .alphabet-inner {
     font-size: 14px;
     font-family: var(--font-stack-header);
+    color: var(--color-gray);
     cursor: pointer;
     height: 34px;
     width: 34px;
@@ -8321,7 +8322,6 @@ thead.cart__row {
     align-items: center;
     justify-content: center;
     border-radius: 30px;
-    transition: 0.2s ease all;
 }
 #alphabet .slick-track {
 }
