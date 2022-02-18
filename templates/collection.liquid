@@ -8,6 +8,19 @@
     var pagination_limit = 24;
     var pagination_current = "";
     var all_products_count = "";
+    var slick_settings = {
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 10,
+        slidesToScroll: 3,
+        centerMode: false,
+        variableWidth: true,
+        swipe: true,
+        accessibility: true,
+        draggable: true,
+        swipeToSlide: true,
+    };
 
     //   // Set a Cookie
     function setCookie(cName, cValue, expDays) {
@@ -1697,14 +1710,7 @@
             // Check if the media query is true
             if (mediaQuery.matches) {
                 // Then trigger an alert
-                $(".variable-width").slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 1,
-                    centerMode: false,
-                    variableWidth: true,
-                });
+                $(".variable-width").slick(slick_settings);
             } else {
                 //$('.variable-width').slick('unslick');
             }
@@ -1944,19 +1950,7 @@
             // Check if the media query is true
             if (mediaQuery.matches) {
                 // Then trigger an alert
-                $(".variable-width").slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 10,
-                    slidesToScroll: 3,
-                    centerMode: false,
-                    variableWidth: true,
-                    swipe: true,
-                    accessibility: true,
-                    draggable: true,
-                    swipeToSlide: true,
-                });
+                $(".variable-width").slick(slick_settings);
             } else {
                 //$('.variable-width').slick('unslick');
             }
