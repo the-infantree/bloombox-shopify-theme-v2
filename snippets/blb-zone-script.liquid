@@ -94,6 +94,7 @@
           ${zipMessage}
         `;
       });
+      //alert('1');
       //Collection page values reset
       setCookie('pagination_value1', 1, 30);
       //setCookie('filter_fields1', '', 30);
@@ -198,6 +199,10 @@
    */
   const closeModal = () => {
     getModal().classList.remove("modal--is-active");
+    var collection_handle = '{{ collection.handle }}'
+    if(collection_handle){
+     location.reload();
+    }
   };
 
   /**
@@ -247,7 +252,7 @@
 
     // Add event handler to close buttons
     modal.querySelectorAll(".modal__close").forEach((button) => {
-      button.addEventListener("click", closeModal);
+      button.addEventListener("click", closeModal);      
     });
 
     // Add event handler to retry button

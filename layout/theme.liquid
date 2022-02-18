@@ -301,6 +301,9 @@
     {% unless the_snippet_content contains 'Liquid error' %}
         {{ the_snippet_content }}
     {% endunless %}
+  <div id="loader" style="display: none;">
+    <img src="{{ 'ajax-loader.gif'| asset_url }}">
+  </div>
 
   <script type="text/javascript">
 
