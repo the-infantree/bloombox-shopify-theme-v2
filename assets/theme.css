@@ -8346,9 +8346,6 @@ thead.cart__row {
     left: auto;
     right: 0;
 }
-#alphabet div {
-    display: inline;
-}
 #error-mes {
     text-align: center;
 }
@@ -8360,10 +8357,15 @@ thead.cart__row {
     }
     #alphabet .alphabet-label {
         flex: 9em 0 0;
+        margin-bottom: -1px;
+        margin-right: 10px;
     }
     #alphabet .alphabet-list {
         padding: 0;
         flex: 80% 1 1;
+    }
+    #alphabet .slick-track {
+        transform: none !important;
     }
     #alphabet .alphabet-inner {
         font-size: 13px;
