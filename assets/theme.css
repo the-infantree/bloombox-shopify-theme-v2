@@ -8355,13 +8355,15 @@ thead.cart__row {
 @media screen and (min-width: 1024px) {
     #alphabet {
         flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
     }
     #alphabet .alphabet-label {
-        flex: 1;
+        flex: 9em 0 0;
     }
     #alphabet .alphabet-list {
         padding: 0;
-        flex: 1;
+        flex: 80% 1 1;
     }
     #alphabet .alphabet-inner {
         font-size: 13px;
