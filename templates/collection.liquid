@@ -21,13 +21,6 @@
         swipeToSlide: true,
         accessibility: true,
         mobileFirst: true,
-        responsive: [
-            {
-                breakpoint: 1024,
-                // settings: "unslick",
-                arrows: false,
-            },
-        ],
     };
 
     //   // Set a Cookie
@@ -1962,17 +1955,6 @@
             // } else {
             //$('.variable-width').slick('unslick');
             // }
-
-            /* Do this every time window gets resized */
-            $(window).on("resize", function () {
-                /* If we are above mobile breakpoint unslick the slider */
-                if ($(window).width() > 1023) {
-                    return;
-                }
-                if (!slider.hasClass("slick-initialized")) {
-                    $(".variable-width").slick(slick_settings);
-                }
-            });
 
             //console.log(all_products_count);
             var product_count = '<span class="filter-bar__item-count"><span id="count_update">' + all_products_count + '</span> products</span><ul id="filter__current-tags" class="filter__current-tags"></ul>';
