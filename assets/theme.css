@@ -8305,12 +8305,12 @@ thead.cart__row {
     text-transform: uppercase;
 }
 #alphabet .alphabet-list {
+    flex: 100% 0 0;
     display: flex;
     flex: 1;
     padding: 0 40px;
 }
 #alphabet .alphabet-inner {
-    flex: 100% 0 0;
     font-size: 14px;
     font-family: var(--font-stack-header);
     cursor: pointer;
