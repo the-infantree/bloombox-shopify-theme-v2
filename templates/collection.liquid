@@ -8,6 +8,18 @@
     var pagination_limit = 24;
     var pagination_current = "";
     var all_products_count = "";
+    var slick_settings = {
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        centerMode: false,
+        variableWidth: true,
+        swipe: true,
+        swipeToSlide: true,
+        accessibility: true,
+    };
 
     //   // Set a Cookie
     function setCookie(cName, cValue, expDays) {
@@ -431,7 +443,7 @@
             }
         }
         document.getElementById("alphabet").innerHTML = "";
-        var alphabet = '<div><b>FILTER BY LETTER: </b></div><div class="variable-width">' + alphabet_html + "</div>";
+        var alphabet = '<h3 class="alphabet-label">Filter by letter</h3><div class="alphabet-list variable-width">' + alphabet_html + "</div>";
         document.getElementById("alphabet").innerHTML += alphabet;
         let alphabet1 = getCookie("alphabet");
         const ul = document.getElementById("alphabet");
@@ -1707,7 +1719,7 @@
             });
             console.log(alphabet_html);
             //sort by
-            var alphabet = '<div><b>FILTER BY LETTER: </b></div><div class="variable-width">' + alphabet_html + "</div>";
+            var alphabet = '<h3 class="alphabet-label">Filter by letter</h3><div class="alphabet-list variable-width">' + alphabet_html + "</div>";
             document.getElementById("alphabet").innerHTML += alphabet;
             let alphabet1 = getCookie("alphabet");
             const ul = document.getElementById("alphabet");
@@ -1732,15 +1744,7 @@
             // Check if the media query is true
             if (mediaQuery.matches) {
                 // Then trigger an alert
-                $(".variable-width").slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 5,
-                    slidesToScroll: 5,
-                    centerMode: false,
-                    variableWidth: true,
-                });
+                $(".alphabet-list").slick(slick_settings);
             } else {
                 //$('.variable-width').slick('unslick');
             }
@@ -1988,7 +1992,7 @@
             });
 
             //sort by
-            var alphabet = '<div><b>FILTER BY LETTER: </b></div><div class="variable-width">' + alphabet_html + "</div>";
+            var alphabet = '<h3 class="alphabet-label">Filter by letter</h3><div class="alphabet-list variable-width">' + alphabet_html + "</div>";
             document.getElementById("alphabet").innerHTML += alphabet;
 
             // Create a media condition that targets viewports at least 768px wide
@@ -1996,15 +2000,7 @@
             // Check if the media query is true
             if (mediaQuery.matches) {
                 // Then trigger an alert
-                $(".variable-width").slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 5,
-                    slidesToScroll: 5,
-                    centerMode: false,
-                    variableWidth: true,
-                });
+                $(".alphabet-list").slick(slick_settings);
             } else {
                 //$('.variable-width').slick('unslick');
             }
@@ -2041,81 +2037,3 @@
     document.getElementById("error-mes").style.display = "none";
     document.getElementById("loader").style.display = "block";
 </script>
-
-<style>
-    #Collection {
-        min-height: 30vw;
-    }
-    .product-card__image-with-placeholder-wrapper {
-        padding-top: 100%;
-    }
-    #filter-list-custome .dropdown__button {
-        text-transform: capitalize;
-    }
-    #loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 999999;
-        background-color: rgba(0, 0, 0, 0.6);
-        bottom: 0;
-        right: 0;
-        /*     height: 100vh; */
-    }
-    #loader img {
-        position: fixed;
-        top: 50vh;
-        left: 50vw;
-        transform: translate(-50%, -50%);
-    }
-    #alphabet {
-        padding: 1rem 0;
-        border-top: 2px solid var(--color-lt-gray);
-    }
-    #alphabet .alphabet-inner {
-        cursor: pointer;
-        /* padding: 0 15px; */
-        height: 40px;
-        width: 40px;
-        display: inline-block;
-        text-align: center;
-        vertical-align: middle;
-        line-height: 41px;
-        text-transform: capitalize;
-        font-weight: bold;
-        color: var(--color-dk-teal);
-    }
-    #alphabet .alphabet-inner.false {
-        cursor: no-drop;
-        font-weight: normal;
-        color: var(--color-gray);
-    }
-    #alphabet .alphabet-inner.active {
-        font-weight: bold;
-        background: var(--color-teal);
-        border-radius: 30px;
-        color: #fff;
-    }
-    #alphabet div {
-        display: inline;
-    }
-    #error-mes {
-        text-align: center;
-    }
-    @media (max-width: 1250px) {
-        #alphabet div {
-            display: block;
-        }
-        .variable-width {
-            padding: 0 40px;
-        }
-        .slick-prev {
-            left: 0;
-        }
-        .slick-prev,
-        .slick-next {
-            height: 40px;
-            width: 40px;
-        }
-    }
-</style>
