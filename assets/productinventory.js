@@ -85,7 +85,7 @@ function checkavailablity(variation_value)
                 if(locationvar[locvariable]['qty'] < 10){document.querySelectorAll(".qtyerrorapi")[0].innerHTML=`<span class="qtynotice">Only ${locationvar[locvariable]['qty']} Left.</span>`;}
               	document.querySelectorAll(".product-form__row")[0].style.display = "block";
                 document.querySelectorAll(".alert--coming-soon")[0].style.display = "none";
-                var variantQty = document.createTextNode("This just got added");
+                let variantQty = document.createTextNode("This just got added");
                 document.querySelector("#product__variant-qty").innerHTML = variantQty + " Available";
                 document.querySelector("#product__variant-qty").style.display = "block";
 
