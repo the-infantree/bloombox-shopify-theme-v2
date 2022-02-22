@@ -11485,6 +11485,7 @@ time {
     white-space: nowrap;
 }
 
-.api_inventorymsg {
+.api_inventorymsg,
+#product__variant-qty {
     font-size: 14px;
 }
