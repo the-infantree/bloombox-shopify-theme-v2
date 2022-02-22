@@ -9423,6 +9423,13 @@ thead.cart__row {
     opacity: 0.8;
 }
 
+.product-card__image-wrapper img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
 .product-card:hover .product-card__title,
 .product-card:focus-within .product-card__title {
     border-bottom-color: var(--color-text);
