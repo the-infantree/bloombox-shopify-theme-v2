@@ -4316,6 +4316,9 @@ input .product-form__controls-group,
 .product-form__row {
     margin-top: 2rem;
 }
+.product-form__row[style="display: block"] {
+    display: flex !important;
+}
 
 .product-form__controls-group--quantity .product-form__item {
     flex: 1;
