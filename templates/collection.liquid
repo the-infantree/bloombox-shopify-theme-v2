@@ -12,6 +12,18 @@
   var pagination_limit = 24;
   var pagination_current = '';
   var all_products_count = '';
+  var slick_settings = {
+    dots: false,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    centerMode: false,
+    variableWidth: true,
+    swipe: true,
+    swipeToSlide: true,
+    accessibility: true,
+  };
   
 //   // Set a Cookie
   function setCookie(cName, cValue, expDays) {
@@ -444,7 +456,7 @@
       }
     }
     document.getElementById("alphabet").innerHTML = '';    
-    var alphabet = '<div><b>FILTER BY LETTER: </b></div><div class="variable-width">'+ alphabet_html +'</div>'
+    var alphabet = '<h3 class="alphabet-label">Filter by letter</h3><div class="alphabet-list variable-width">'+ alphabet_html +'</div>'
       document.getElementById("alphabet").innerHTML += alphabet;
       let alphabet1 = getCookie("alphabet");
       const ul = document.getElementById('alphabet');
@@ -1745,7 +1757,7 @@
     });                      
       console.log(alphabet_html);
     //sort by      
-      var alphabet = '<div><b>FILTER BY LETTER: </b></div><div class="variable-width">'+ alphabet_html +'</div>'
+      var alphabet = '<h3 class="alphabet-label">Filter by letter</h3><div class="alphabet-list variable-width">'+ alphabet_html +'</div>'
       document.getElementById("alphabet").innerHTML += alphabet;
       let alphabet1 = getCookie("alphabet");
       const ul = document.getElementById('alphabet');
@@ -2030,26 +2042,18 @@
       });
 
       //sort by      
-      var alphabet = '<div><b>FILTER BY LETTER: </b></div><div class="variable-width">'+ alphabet_html +'</div>'
+      var alphabet = '<h3 class="alphabet-label">Filter by letter</h3><div class="alphabet-list variable-width">'+ alphabet_html +'</div>'
       document.getElementById("alphabet").innerHTML += alphabet;
       
       // Create a media condition that targets viewports at least 768px wide
       const mediaQuery = window.matchMedia('(max-width: 1250px)')
       // Check if the media query is true
-      if (mediaQuery.matches) {
+      // if (mediaQuery.matches) {
         // Then trigger an alert
-        $('.variable-width').slick({
-          dots: false,
-          infinite: false,
-          speed: 300,
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          centerMode: false,
-          variableWidth: true
-        });
-      }else{
+        $('.variable-width').slick(slick_settings);
+      // }else{
         //$('.variable-width').slick('unslick');
-      }
+      // }
       
       
       //console.log(all_products_count);
