@@ -1,432 +1,374 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="{{ settings.color_button }}">
-  <meta name="apple-itunes-app" content="app-id=1579702224, app-argument={{ canonical_url }}">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="theme-color" content="{{ settings.color_button }}" />
+        <meta name="apple-itunes-app" content="app-id=1579702224, app-argument={{ canonical_url }}" />
 
-  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
-  <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+        <link rel="preconnect" href="https://cdn.shopify.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.shopify.com" crossorigin />
+        <link rel="preconnect" href="https://monorail-edge.shopifysvc.com" />
 
-  {%- assign header_font = settings.type_header_font -%}
-  {%- assign base_font = settings.type_base_font -%}
-  {%- assign base_font_bolder = base_font | font_modify: 'weight', 'bolder' -%}
-  {%- assign base_font_bold = base_font | font_modify: 'weight', 'bold' -%}
-  {%- assign base_font_italic = base_font | font_modify: 'style', 'italic' -%}
-  {%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
+        {%- assign header_font = settings.type_header_font -%} {%- assign base_font = settings.type_base_font -%} {%- assign base_font_bolder = base_font | font_modify: 'weight', 'bolder' -%} {%- assign base_font_bold = base_font | font_modify: 'weight', 'bold' -%} {%- assign base_font_italic = base_font | font_modify: 'style', 'italic' -%} {%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
 
-  <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
-  <link rel="preload" as="font" href="{{ header_font | font_url }}" type="font/woff2" crossorigin>
-  <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
-  <link rel="preload" as="font" href="{{ base_font_bold | font_url }}" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
-  <link rel="preload" href="{{ 'lazysizes.js' | asset_url }}" as="script">
+        <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style" />
+        <link rel="preload" as="font" href="{{ header_font | font_url }}" type="font/woff2" crossorigin />
+        <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin />
+        <link rel="preload" as="font" href="{{ base_font_bold | font_url }}" type="font/woff2" crossorigin />
+        <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script" />
+        <link rel="preload" href="{{ 'lazysizes.js' | asset_url }}" as="script" />
 
-  {%- if canonical_url != blank  -%}
-    <link rel="canonical" href="{{ canonical_url }}">
-  {%- endif -%}
+        {%- if canonical_url != blank -%}
+        <link rel="canonical" href="{{ canonical_url }}" />
+        {%- endif -%} {%- if settings.favicon != blank -%}
+        <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+        {%- endif -%} {%- capture seo_title -%} {%- if request.page_type == 'search' and search.performed == true -%}
+        {{
+            "general.search.heading" | t: count:search.results_count
+        }}:
+        {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+        {%- else -%}
+        {{
+            page_title
+        }}
+        {%- endif -%} {%- if current_tags -%} {%- assign meta_tags = current_tags | join: ', ' -%} &ndash;
+        {{ 'general.meta.tags' | t: tags: meta_tags -}}
+        {%- endif -%} {%- if current_page != 1 -%} &ndash;
+        {{
+            "general.meta.page" | t: page:current_page
+        }}
+        {%- endif -%} {%- assign escaped_page_title = page_title | escape -%} {%- unless escaped_page_title contains shop.name -%} &ndash;
+        {{
+            shop.name
+        }}
+        {%- endunless -%} {%- endcapture -%}
+        <title>{{ seo_title | strip }}</title>
 
-  {%- if settings.favicon != blank -%}
-    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
-  {%- endif -%}
+        {%- if page_description -%}
+        <meta name="description" content="{{ page_description | escape }}" />
+        {%- endif -%} {% include 'social-meta-tags' %} {% include 'css-variables' %}
 
-  {%- capture seo_title -%}
-    {%- if request.page_type == 'search' and search.performed == true -%}
-      {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
-    {%- else -%}
-      {{ page_title }}
-    {%- endif -%}
-    {%- if current_tags -%}
-      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
-    {%- endif -%}
-    {%- if current_page != 1 -%}
-      &ndash; {{ 'general.meta.page' | t: page: current_page }}
-    {%- endif -%}
-    {%- assign escaped_page_title = page_title | escape -%}
-    {%- unless escaped_page_title contains shop.name -%}
-      &ndash; {{ shop.name }}
-    {%- endunless -%}
-  {%- endcapture -%}
-  <title>{{ seo_title | strip }}</title>
+        <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" type="text/css" />
+        <link rel="stylesheet" href="{{ 'theme-booster.css' | asset_url }}" type="text/css" />
+        <style>
+            {{ header_font | font_face: font_display: 'swap' }}
+            {{ base_font | font_face: font_display: 'swap' }}
+            {{ base_font_bold | font_face: font_display: 'swap' }}
+            {{ base_font_bolder | font_face: font_display: 'swap' }}
+            {{ base_font_italic | font_face: font_display: 'swap' }}
+            {{ base_font_bold_italic | font_face: font_display: 'swap' }}
+        </style>
 
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
-  {%- endif -%}
+        <script>
+            var theme = {
+              breakpoints: {
+                medium: 750,
+                large: 990,
+                widescreen: 1400
+              },
+              strings: {
+                addToCart: {{ 'products.product.add_to_cart' | t | json }},
+                soldOut: {{ 'products.product.sold_out' | t | json }},
+                unavailable: {{ 'products.product.unavailable' | t | json }},
+                regularPrice: {{ 'products.product.regular_price' | t | json }},
+                salePrice: {{ 'products.product.sale_price' | t | json }},
+                sale: {{ 'products.product.on_sale' | t | json }},
+                fromLowestPrice: {{ 'products.product.from_lowest_price_html' | t: lowest_price: '[price]' | json }},
+                vendor: {{'products.product.vendor' | t | json }},
+                showMore: {{ 'general.filters.show_more' | t | json }},
+                showLess: {{ 'general.filters.show_less' | t | json }},
+                searchFor: {{ 'general.search.search_for' | t | json }},
+                addressError: {{ 'sections.map.address_error' | t | json }},
+                addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
+                addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
+                authError: {{ 'sections.map.auth_error_html' | t | json }},
+                newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
+                external: {{ 'general.accessibility.link_messages.external' | t | json }},
+                newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }},
+                removeLabel: {{ 'cart.label.remove' | t: product: '[product]' | json }},
+                update: {{ 'cart.label.update' | t | json }},
+                quantity: {{ 'cart.label.quantity' | t | json }},
+                discountedTotal: {{ 'cart.label.discounted_total' | t | json }},
+                regularTotal: {{ 'cart.label.regular_total' | t | json }},
+                priceColumn: {{ 'cart.label.price_column' | t | json }},
+                quantityMinimumMessage: {{ 'products.product.quantity_minimum_message' | t | json }},
+                cartError: {{ 'cart.general.cart_error' | t | json }},
+                removedItemMessage: {{ 'cart.general.removed_item_html' | t: quantity: '[quantity]', link: '[link]' | json }},
+                unitPrice: {{ 'products.product.unit_price_label' | t | json }},
+                unitPriceSeparator: {{ 'general.accessibility.unit_price_separator' | t | json }},
+                oneCartCount: {{ 'cart.popup.cart_count' | t: count: 1 | json }},
+                otherCartCount: {{ 'cart.popup.cart_count' | t: count: '[count]' | json }},
+                quantityLabel: {{ 'cart.popup.quantity_label' | t: quantity_count: '[count]' | json }},
+                products: {{ 'general.search.products' | t | json }},
+                loading: {{ 'general.search.loading' | t | json }},
+                number_of_results: {{ 'general.search.number_of_results' | t: result_number: '[result_number]', results_count: '[results_count]' | json }},
+                number_of_results_found: {{ 'general.search.number_of_results_found' | t: results_count: '[results_count]' | json }},
+                one_result_found: {{ 'general.search.one_result_found' | t | json }}
+              },
+              moneyFormat: {{ shop.money_format | json }},
+              moneyFormatWithCurrency: {{ shop.money_with_currency_format | json }},
+              settings: {
+                predictiveSearchEnabled: {{ settings.predictive_search_enabled | json }},
+                predictiveSearchShowPrice: {{ settings.predictive_search_show_price | json }},
+                predictiveSearchShowVendor: {{ settings.predictive_search_show_vendor | json }}
+              },
+              stylesheet: "{{ 'theme.css' | asset_url }}"
+            }
 
-  {% include 'social-meta-tags' %}
-  {% include 'css-variables' %}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
 
+        {%- if request.page_type contains 'customers/' -%}
+        <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+        {%- endif -%}
 
-  <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" type="text/css">
-  <link rel="stylesheet" href="{{ 'theme-booster.css' | asset_url }}" type="text/css">
-  <style>
-    {{ header_font | font_face: font_display: 'swap' }}
-    {{ base_font | font_face: font_display: 'swap' }}
-    {{ base_font_bold | font_face: font_display: 'swap' }}
-    {{ base_font_bolder | font_face: font_display: 'swap' }}
-    {{ base_font_italic | font_face: font_display: 'swap' }}
-    {{ base_font_bold_italic | font_face: font_display: 'swap' }}
-  </style>
+        <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
-  <script>
-    var theme = {
-      breakpoints: {
-        medium: 750,
-        large: 990,
-        widescreen: 1400
-      },
-      strings: {
-        addToCart: {{ 'products.product.add_to_cart' | t | json }},
-        soldOut: {{ 'products.product.sold_out' | t | json }},
-        unavailable: {{ 'products.product.unavailable' | t | json }},
-        regularPrice: {{ 'products.product.regular_price' | t | json }},
-        salePrice: {{ 'products.product.sale_price' | t | json }},
-        sale: {{ 'products.product.on_sale' | t | json }},
-        fromLowestPrice: {{ 'products.product.from_lowest_price_html' | t: lowest_price: '[price]' | json }},
-        vendor: {{'products.product.vendor' | t | json }},
-        showMore: {{ 'general.filters.show_more' | t | json }},
-        showLess: {{ 'general.filters.show_less' | t | json }},
-        searchFor: {{ 'general.search.search_for' | t | json }},
-        addressError: {{ 'sections.map.address_error' | t | json }},
-        addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
-        addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
-        authError: {{ 'sections.map.auth_error_html' | t | json }},
-        newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
-        external: {{ 'general.accessibility.link_messages.external' | t | json }},
-        newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }},
-        removeLabel: {{ 'cart.label.remove' | t: product: '[product]' | json }},
-        update: {{ 'cart.label.update' | t | json }},
-        quantity: {{ 'cart.label.quantity' | t | json }},
-        discountedTotal: {{ 'cart.label.discounted_total' | t | json }},
-        regularTotal: {{ 'cart.label.regular_total' | t | json }},
-        priceColumn: {{ 'cart.label.price_column' | t | json }},
-        quantityMinimumMessage: {{ 'products.product.quantity_minimum_message' | t | json }},
-        cartError: {{ 'cart.general.cart_error' | t | json }},
-        removedItemMessage: {{ 'cart.general.removed_item_html' | t: quantity: '[quantity]', link: '[link]' | json }},
-        unitPrice: {{ 'products.product.unit_price_label' | t | json }},
-        unitPriceSeparator: {{ 'general.accessibility.unit_price_separator' | t | json }},
-        oneCartCount: {{ 'cart.popup.cart_count' | t: count: 1 | json }},
-        otherCartCount: {{ 'cart.popup.cart_count' | t: count: '[count]' | json }},
-        quantityLabel: {{ 'cart.popup.quantity_label' | t: quantity_count: '[count]' | json }},
-        products: {{ 'general.search.products' | t | json }},
-        loading: {{ 'general.search.loading' | t | json }},
-        number_of_results: {{ 'general.search.number_of_results' | t: result_number: '[result_number]', results_count: '[results_count]' | json }},
-        number_of_results_found: {{ 'general.search.number_of_results_found' | t: results_count: '[results_count]' | json }},
-        one_result_found: {{ 'general.search.one_result_found' | t | json }}
-      },
-      moneyFormat: {{ shop.money_format | json }},
-      moneyFormatWithCurrency: {{ shop.money_with_currency_format | json }},
-      settings: {
-        predictiveSearchEnabled: {{ settings.predictive_search_enabled | json }},
-        predictiveSearchShowPrice: {{ settings.predictive_search_show_price | json }},
-        predictiveSearchShowVendor: {{ settings.predictive_search_show_vendor | json }}
-      },
-      stylesheet: "{{ 'theme.css' | asset_url }}"
-    }
+        <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
 
-    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-  </script>
+        <script type="text/javascript">
+            if (window.MSInputMethodContext && document.documentMode) {
+                var scripts = document.getElementsByTagName("script")[0];
+                var polyfill = document.createElement("script");
+                polyfill.defer = true;
+                polyfill.src = "{{ 'ie11CustomProperties.min.js' | asset_url }}";
 
-  {%- if request.page_type contains 'customers/' -%}
-    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
-  {%- endif -%}
+                scripts.parentNode.insertBefore(polyfill, scripts);
+            }
+        </script>
 
-  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+        <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0073/7110.js" async="async"></script>
 
-  <script src="{{ 'product-variant-availability.js' | asset_url }}"></script>
+        <!-- Facebook Pixel Code -->
+        <script>
+            !(function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = "2.0";
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+            fbq("init", "243068326493819");
+            fbq("track", "PageView");
+        </script>
+        <noscript><img height="1" width="1" style="display: none" src="https://www.facebook.com/tr?id=243068326493819&ev=PageView&noscript=1" /></noscript>
+        <!-- End Facebook Pixel Code -->
 
-  <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
+        {{
+            content_for_header
+        }}
 
+        <script>
+            /**
+             * BloomBox Zip Code Zone Utilities
+             * ==============
+             * Description: A custom script to request zip codes then display zoned products accordingly.
+             * Author: Zach Fedor
+             * Updated: 2021-05-26
+             */
+            (function () {
+              // LocalStorage keys
+              const BLB_ZIP_KEY = "blb_zip";
 
-  <script type="text/javascript">
-    if (window.MSInputMethodContext && document.documentMode) {
-      var scripts = document.getElementsByTagName('script')[0];
-      var polyfill = document.createElement("script");
-      polyfill.defer = true;
-      polyfill.src = "{{ 'ie11CustomProperties.min.js' | asset_url }}";
+              /**
+               * Get user's zip code from LocalStorage
+               *
+               * Like cookies, LocalStorage uses key=value pairs where both the key and value must be strings. You can access
+               * the value for a given key by using the `getItem(key)` method. See below for setting this value.
+               * Source: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#example
+               */
+              const getZip = () => localStorage.getItem(BLB_ZIP_KEY);
 
-      scripts.parentNode.insertBefore(polyfill, scripts);
-    }
-  </script>
+              /**
+               * Set user's zip code in LocalStorage
+               *
+               * Use the LocalStorage `setItem(key, value)` method to store the string value for the given key. If
+               * value isn't a string, it will be converted into one. Because of this, I'm checking to see if zip
+               * is null or undefined and setting an empty string instead of converting null or undefined to strings.
+               *
+               * @param {string} [zip] - Optional zip code string
+               */
+              const setZip = (zip) => localStorage.setItem(BLB_ZIP_KEY, zip || "");
 
-    <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0073/7110.js" async="async" ></script>
+              /**
+               * Remove user's zip code from LocalStorage
+               */
+              const removeZip = () => localStorage.removeItem(BLB_ZIP_KEY);
 
+              /**
+               * Remove zone class from HTML Body Element
+               */
+              const removeZoneFromBody = () => {
+                // Loop through all the classes
+                document.body.classList.forEach((className) => {
+                  // If the class starts with "user--is-", remove it
+                  if (/^user--is-/.test(className)) {
+                    document.body.classList.remove(className);
+                  }
+                });
+              };
 
-    <!-- Facebook Pixel Code -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '243068326493819');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=243068326493819&ev=PageView&noscript=1" /></noscript>
-    <!-- End Facebook Pixel Code -->
+              /**
+               * Check if a zip code is valid
+               * @param {string} zip - String of 5 digit zip code, anything else returns `false`
+               * @returns {boolean}
+               */
+              const isValidZip = (zip) => /(^\d{5}$)/.test(zip);
 
-  {{ content_for_header }}
+              /**
+               * Get the zone from a zip code
+               * @param {string} zip - User entered zip code
+               * @return {?string} - A zone string, like 'pa', or null if it isn't an included zone
+               */
+              const getZoneFromZip = (zip) => {
+                // Build array of zip codes per delivery zone
+                const zoneZips = {
+                  pa: {{ collections["pa"].metafields.accentuate.zip_codes.zipcodes | json }},
+                  md: {{ collections["md"].metafields.accentuate.zip_codes.zipcodes | json }},
+                };
 
-  <script>
-  /**
-   * BloomBox Zip Code Zone Utilities
-   * ==============
-   * Description: A custom script to request zip codes then display zoned products accordingly.
-   * Author: Zach Fedor
-   * Updated: 2021-05-26
-   */
-  (function () {
-    // LocalStorage keys
-    const BLB_ZIP_KEY = "blb_zip";
+                // Cycle through each zone to look at array of zip codes
+                for (let [zone, zips] of Object.entries(zoneZips)) {
+                  // If array of zip codes includes the user entered zip code
+                  if (zips.includes(zip)) {
+                    // ...then return the associated zone
+                    return zone;
+                  }
+                }
 
-    /**
-     * Get user's zip code from LocalStorage
-     *
-     * Like cookies, LocalStorage uses key=value pairs where both the key and value must be strings. You can access
-     * the value for a given key by using the `getItem(key)` method. See below for setting this value.
-     * Source: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#example
-     */
-    const getZip = () => localStorage.getItem(BLB_ZIP_KEY);
+                // If we haven't returned yet, zip code is not in a delivery zone
+                return null;
+              };
 
-    /**
-     * Set user's zip code in LocalStorage
-     *
-     * Use the LocalStorage `setItem(key, value)` method to store the string value for the given key. If
-     * value isn't a string, it will be converted into one. Because of this, I'm checking to see if zip
-     * is null or undefined and setting an empty string instead of converting null or undefined to strings.
-     *
-     * @param {string} [zip] - Optional zip code string
-     */
-    const setZip = (zip) => localStorage.setItem(BLB_ZIP_KEY, zip || "");
+              /**
+               * Expose functions within a namespace for use in related scripts
+               */
+              window.blbZone = {
+                getZip,
+                setZip,
+                removeZip,
+                isValidZip,
+                getZoneFromZip,
+              };
+            })();
+        </script>
+    </head>
+    {% comment %} Logic to add product zone info as body class {% endcomment %} {%- assign product_is_pa = false -%} {%- assign product_is_md = false -%} {%- for collection in product.collections -%} {%- if collection.handle == 'pa' -%} {%- assign product_is_pa = true -%} {%- endif -%} {%- if collection.handle == 'md' -%} {%- assign product_is_md = true -%} {%- endif -%} {%- endfor -%} {%- if template.name == "product" -%} {%- if product_is_pa == true and product_is_md == true -%} {%- assign productZoneClass = 'product--is-pa-md' -%} {%- elsif product_is_pa == true -%} {%- assign productZoneClass = 'product--is-pa' -%} {%- elsif product_is_md == true -%} {%- assign productZoneClass = 'product--is-md' -%} {%- endif -%} {%- endif -%} {%- unless product.available -%} {%- assign productSoldOut = ' product--sold-out' -%} {%- endunless -%}
 
-    /**
-     * Remove user's zip code from LocalStorage
-     */
-    const removeZip = () => localStorage.removeItem(BLB_ZIP_KEY);
-
-    /**
-     * Remove zone class from HTML Body Element
-     */
-    const removeZoneFromBody = () => {
-      // Loop through all the classes
-      document.body.classList.forEach((className) => {
-        // If the class starts with "user--is-", remove it
-        if (/^user--is-/.test(className)) {
-          document.body.classList.remove(className);
-        }
-      });
-    };
-
-    /**
-     * Check if a zip code is valid
-     * @param {string} zip - String of 5 digit zip code, anything else returns `false`
-     * @returns {boolean}
-     */
-    const isValidZip = (zip) => /(^\d{5}$)/.test(zip);
-
-    /**
-     * Get the zone from a zip code
-     * @param {string} zip - User entered zip code
-     * @return {?string} - A zone string, like 'pa', or null if it isn't an included zone
-     */
-    const getZoneFromZip = (zip) => {
-      // Build array of zip codes per delivery zone
-      const zoneZips = {
-        pa: {{ collections["pa"].metafields.accentuate.zip_codes.zipcodes | json }},
-        md: {{ collections["md"].metafields.accentuate.zip_codes.zipcodes | json }},
-      };
-
-      // Cycle through each zone to look at array of zip codes
-      for (let [zone, zips] of Object.entries(zoneZips)) {
-        // If array of zip codes includes the user entered zip code
-        if (zips.includes(zip)) {
-          // ...then return the associated zone
-          return zone;
-        }
-      }
-
-      // If we haven't returned yet, zip code is not in a delivery zone
-      return null;
-    };
-
-    /**
-     * Expose functions within a namespace for use in related scripts
-     */
-    window.blbZone = {
-      getZip,
-      setZip,
-      removeZip,
-      isValidZip,
-      getZoneFromZip,
-    };
-  })();
-  </script>
-
-</head>
-  {% comment %}
-  Logic to add product zone info as body class
-  {% endcomment %}
-  {%- assign product_is_pa = false -%}
-  {%- assign product_is_md = false -%}
-  {%- for collection in product.collections -%}
-    {%- if collection.handle == 'pa' -%}
-      {%- assign product_is_pa = true -%}
-    {%- endif -%}
-    {%- if collection.handle == 'md' -%}
-      {%- assign product_is_md = true -%}
-    {%- endif -%}
-  {%- endfor -%}
-  {%- if template.name == "product" -%}
-    {%- if product_is_pa == true and product_is_md == true -%}
-      {%- assign productZoneClass = 'product--is-pa-md' -%}
-    {%- elsif product_is_pa == true -%}
-        {%- assign productZoneClass = 'product--is-pa' -%}
-    {%- elsif product_is_md == true -%}
-        {%- assign productZoneClass = 'product--is-md' -%}
-    {%- endif -%}
-  {%- endif -%}
-
-  {%- unless product.available -%}
-    {%- assign productSoldOut = ' product--sold-out' -%}
-  {%- endunless -%}
-
-<body class="template-{{ request.page_type | handle }} {{ productZoneClass }}{{ productSoldOut }} {%- if product.id -%}product-{{ product.id }} {%- endif -%}{%- if settings.open_store == false -%} store-closed{%- endif -%}{%- if product.metafields.accentuate.hide_zip_code_popup -%} hide-zipcode-popup{% endif %}">
-  {% capture the_snippet_content %}{% render 'socialshopwave-helper' %}{% endcapture %}
-    {% unless the_snippet_content contains 'Liquid error' %}
+    <body class="template-{{ request.page_type | handle }} {{ productZoneClass }}{{ productSoldOut }} {%- if product.id -%}product-{{ product.id }} {%- endif -%}{%- if settings.open_store == false -%} store-closed{%- endif -%}{%- if product.metafields.accentuate.hide_zip_code_popup -%} hide-zipcode-popup{% endif %}">
+        {% capture the_snippet_content %}{% render 'socialshopwave-helper' %}{% endcapture %} {% unless the_snippet_content contains 'Liquid error' %}
         {{ the_snippet_content }}
-    {% endunless %}
-  <div id="loader" style="display: none;">
-    <img src="{{ 'ajax-loader.gif'| asset_url }}">
-  </div>
+        {% endunless %}
+        <div id="loader" style="display: none">
+            <img src="{{ 'ajax-loader.gif' | asset_url }}" />
+        </div>
 
-  <script type="text/javascript">
+        <script type="text/javascript">
+            function getCookieCustom(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+            }
+            var lang = getCookieCustom("ssw_referrer_guest_notify_translate_key");
+            if (typeof lang !== "undefined") {
+                document.cookie = "ssw_referrer_guest_notify_translate_key_1=" + lang;
+                if (typeof getCookieCustom("rbz-zipcode") === "undefined") {
+                    var style = document.createElement("style");
+                    style.innerHTML = "#login_modal, .ssw-modal-backdrop.ssw-fade.ssw-in, .ssw-modal-dialog {" + "display: none!important;" + "}";
+                    document.body.appendChild(style);
+                }
+            } else {
+                var lang = getCookieCustom("ssw_referrer_guest_notify_translate_key_1");
+                if (typeof lang !== "undefined") {
+                    document.cookie = "ssw_referrer_guest_notify_translate_key=" + lang;
+                    document.cookie = "ssw_referrer_guest_notify_translate_key_1" + "=" + ";path=/" + ";domain=https://getblooming.com" + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+                }
+            }
+        </script>
 
-    function getCookieCustom(name) {
-      var value = "; " + document.cookie;
-      var parts = value.split("; " + name + "=");
-      if (parts.length == 2) return parts.pop().split(";").shift();
-    }
-    var lang = getCookieCustom('ssw_referrer_guest_notify_translate_key');
-    if (typeof lang  !== 'undefined') {
-      document.cookie = "ssw_referrer_guest_notify_translate_key_1=" + lang;
-      if (typeof getCookieCustom('rbz-zipcode') === 'undefined') {
-        var style = document.createElement('style');
-        style.innerHTML =
-          '#login_modal, .ssw-modal-backdrop.ssw-fade.ssw-in, .ssw-modal-dialog {' +
-          'display: none!important;' +
-          '}';
-        document.body.appendChild(style);
-      }
-    } else {
-    	var lang = getCookieCustom('ssw_referrer_guest_notify_translate_key_1');
-      	if (typeof lang  !== 'undefined') {
-        	document.cookie = "ssw_referrer_guest_notify_translate_key=" + lang;
-            document.cookie = "ssw_referrer_guest_notify_translate_key_1" + "=" +
-              ";path=/" +
-              ";domain=https://getblooming.com" +
-              ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
-        }
-    }
-  </script>
+        <button id="btn--back" title="return to previous page">Back</button>
+        <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ "general.accessibility.skip_to_content" | t }}</a>
 
-  <button id="btn--back" title="return to previous page">Back</button>
-  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+        {%- if settings.enable_ajax -%} {% include 'cart-popup' %} {%- endif -%}
 
-  {%- if settings.enable_ajax -%}
-    {% include 'cart-popup' %}
-  {%- endif -%}
+        <aside id="promo-wrapper" class="modal__promo" style="display: none">
+            <div id="app-promo" class="text-center">
+                <!-- App coupon will display here -->
+            </div>
+        </aside>
 
-  <aside id="promo-wrapper" class="modal__promo" style="display:none">
-      <div id="app-promo" class="text-center">
-          <!-- App coupon will display here -->
-      </div>
-  </aside>
+        {% section 'header' %}
 
-  {% section 'header' %}
-
-  <div class="page-container drawer-page-content" id="PageContainer">
-
-    <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
-
-
-        {% if page.url == '/pages/reward' %}
-            <div class="container section--short" style="padding-bottom: 2rem;">
-
-                {% if customer  %}
+        <div class="page-container drawer-page-content" id="PageContainer">
+            <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+                {% if page.url == '/pages/reward' %}
+                <div class="container section--short" style="padding-bottom: 2rem">
+                    {% if customer %}
 
                     <h1>Welcome back, {{ customer.first_name }}!</h1>
                     <p>Here's a look at all your rewards and benefits. If you have any questions, don't hesitate to <a href="/pages/contact">reach out</a> or <a href="/pages/frequently-asked-questions">check our FAQs</a>!</p>
 
-                {% else %}
+                    {% else %}
 
                     <h1>Hello there, stranger!</h1>
-                    <p>
-                        Welcome to the rewards hub! It looks like you aren't logged in or need to create a new account. Say "hello," and see how you can start saving with each BloomBox purchase!
-                    </p>
+                    <p>Welcome to the rewards hub! It looks like you aren't logged in or need to create a new account. Say "hello," and see how you can start saving with each BloomBox purchase!</p>
                     <a href="#" onclick="event.preventDefault()" class="btn--secondary" data-toggle="ssw-modal" data-target="#signup_modal">Start Earning & Saving</a>
 
+                    {% endif %}
+                </div>
                 {% endif %}
+
+                {{ content_for_layout }}
+            </main>
+
+            {% section 'footer' %}
+
+            <div class="footer__toolbar-background"></div>
+
+            <div id="slideshow-info" class="visually-hidden" aria-hidden="true">
+                {{- 'sections.slideshow.navigation_instructions' | t -}}
             </div>
+        </div>
+
+        <ul hidden>
+            <li id="a11y-refresh-page-message">{{ "general.accessibility.refresh_page" | t }}</li>
+            <li id="a11y-selection-message">{{ "general.accessibility.selection_help" | t }}</li>
+        </ul>
+
+        {% render 'blb-zone-script' %} {% unless customer %}
+        <script>
+            if (typeof sswRun == "function") {
+                sswRun(function () {
+                    var intervalID = setInterval(function () {
+                        if (ssw("#ssw-fave-lists-wrapper").length) {
+                            ssw("#ssw-fave-lists-wrapper").append('<div class="ssw-custom-block"><p>Create an account to save your wishlist and start earning BloomBucks!</p><button class="ssw-custom-block__create-btn">Create Account</button><button class="ssw-custom-block__save-btn">Save my wishlist</button></div>');
+                            ssw(".ssw-custom-block__create-btn").on("click", function () {
+                                ssw("#ssw-fave-list-widget .ssw-fave-close").click();
+                                ssw("#signup_modal").sswModal();
+                            });
+                            ssw(".ssw-custom-block__save-btn").on("click", function () {
+                                ssw("#ssw-fave-list-widget .ssw-fave-close").click();
+                                ssw("#ssw-wishlist-save").sswModal();
+                            });
+                            clearInterval(intervalID);
+                        }
+                    }, 1000);
+                });
+            }
+        </script>
+        {% endunless %} {% if template == 'page.faq' or 'page.policies' or 'page.locations' %}
+        <script src="{{ 'accordion.js' | asset_url }}"></script>
         {% endif %}
-
-        {{ content_for_layout }}
-
-
-    </main>
-
-    {% section 'footer' %}
-
-    <div class="footer__toolbar-background"></div>
-
-    <div id="slideshow-info" class="visually-hidden" aria-hidden="true">
-      {{- 'sections.slideshow.navigation_instructions' | t -}}
-    </div>
-
-  </div>
-
-  <ul hidden>
-    <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
-    <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>
-  </ul>
-
-
-  {% render 'blb-zone-script' %}
-
-  {% unless customer %}
-  <script>
-    if(typeof sswRun == 'function') {
-      sswRun(function() {
-        var intervalID = setInterval(function() {
-          if(ssw('#ssw-fave-lists-wrapper').length) {
-            ssw('#ssw-fave-lists-wrapper').append('<div class="ssw-custom-block"><p>Create an account to save your wishlist and start earning BloomBucks!</p><button class="ssw-custom-block__create-btn">Create Account</button><button class="ssw-custom-block__save-btn">Save my wishlist</button></div>')
-            ssw('.ssw-custom-block__create-btn').on('click', function() {
-              ssw('#ssw-fave-list-widget .ssw-fave-close').click()
-              ssw('#signup_modal').sswModal();
-            })
-            ssw('.ssw-custom-block__save-btn').on('click', function() {
-              ssw('#ssw-fave-list-widget .ssw-fave-close').click()
-              ssw('#ssw-wishlist-save').sswModal();
-            })
-            clearInterval(intervalID);
-          }
-        }, 1000)
-        })
-    }
-  </script>
-  {% endunless %}
-
-
-  {% if template == 'page.faq' or 'page.policies' or 'page.locations'  %}
-    <script src="{{ 'accordion.js' | asset_url }}"></script>
-  {% endif %}
-
-  
-</body>
-
+    </body>
 </html>
