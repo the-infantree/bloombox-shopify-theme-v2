@@ -8271,7 +8271,7 @@ thead.cart__row {
 .product-card__image-with-placeholder-wrapper {
     padding-top: 100%;
 }
-#filter-list-custom .dropdown__button {
+#filter-list-custome .dropdown__button {
     text-transform: capitalize;
 }
 #loader {
@@ -8322,6 +8322,9 @@ thead.cart__row {
     align-items: center;
     justify-content: center;
     border-radius: 30px;
+}
+#alphabet .alphabet-inner.false {
+    display: none;
 }
 #alphabet .slick-track {
 }
