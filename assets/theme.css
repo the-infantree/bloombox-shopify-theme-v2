@@ -4904,6 +4904,7 @@ input .product-form__controls-group,
     position: relative;
     margin: 0;
     background: var(--color-off-white);
+    border-bottom: 2px solid var(--color-off-white);
 }
 
 .collection__intro > * {
