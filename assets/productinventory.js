@@ -85,7 +85,7 @@ function checkavailablity(variation_value)
                 if(locationvar[locvariable]['qty'] < 10){document.querySelectorAll(".qtyerrorapi")[0].innerHTML=`<span class="qtynotice">Only ${locationvar[locvariable]['qty']} Left.</span>`;}
               	document.querySelectorAll(".product-form__row")[0].style.display = "block";
                 document.querySelectorAll(".alert--coming-soon")[0].style.display = "none";
-                document.querySelector("#product__variant-qty span").innerHtml = locationvar[locvariable]["qty"];
+                document.querySelector("#product__variant-qty span").textContent += locationvar[locvariable]["qty"];
                 document.querySelector("#product__variant-qty").style.display = "block";
 
               }
