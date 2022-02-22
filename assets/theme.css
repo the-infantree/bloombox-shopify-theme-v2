@@ -8315,6 +8315,7 @@ thead.cart__row {
     font-size: 14px;
     font-family: var(--font-stack-header);
     color: var(--color-gray);
+    text-transform: uppercase;
     cursor: pointer;
     height: 34px;
     width: 34px;
