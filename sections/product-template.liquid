@@ -337,15 +337,6 @@
         <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
       </div>
 
-      <div id="inventoryOversellAlert" style="display: none;">
-       <div class="well well--pink">
-          <h3 class="well__title">We're sorry! We don't have that many in stock.</h3>
-          <div class="well__body">
-            <p>The quantity has been updated to match availability.</p>
-          </div>
-        </div>
-      </div>
-
       <div class="product-form__controls-group product-form__controls-group--submit">
         <div class="product-form__item product-form__item--submit
           {%- if section.settings.enable_payment_button %} product-form__item--payment-button {%- endif -%}
@@ -377,6 +368,14 @@
     </div>
     {% endform %}
 
+    <div id="inventoryOversellAlert" style="display: none;">
+      <div class="well well--pink">
+        <h3 class="well__title">We're sorry! We don't have that many in stock.</h3>
+        <div class="well__body">
+          <p>The quantity has been updated to match availability.</p>
+        </div>
+      </div>
+    </div>
 
     {%- include 'free-shipping-notice' -%}
   </div>

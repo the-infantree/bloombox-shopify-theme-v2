@@ -4304,9 +4304,10 @@ input .product-form__controls-group,
 .shopify-payment-button .shopify-payment-button__button--unbranded {
     display: block;
     width: 100%;
+    font-size: 1.1rem;
     line-height: 1.4;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     white-space: normal;
     margin-top: 0;
     margin-bottom: 10px;
@@ -11489,8 +11490,9 @@ time {
     font-size: 14px;
 }
 #product__variant-qty {
-    font-size: 14px;
-    color: green;
+    font-size: 13px;
+    text-transform: lowercase;
+    color: var(--color-blb-green);
     flex: 100% 0 0;
     margin: 3px 0 0 0;
 }
