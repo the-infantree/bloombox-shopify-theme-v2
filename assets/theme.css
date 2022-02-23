@@ -4355,6 +4355,7 @@ input .product-form__controls-group,
 
     .product-form__cart-submit {
         max-width: 28ch;
+        margin-left: auto;
     }
 
     .product-form__error-message-wrapper {
