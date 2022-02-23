@@ -4340,6 +4340,8 @@ input .product-form__controls-group,
     .product-form__controls-group--submit {
         flex: 1;
         justify-content: flex-end;
+        justify-self: flex-end;
+        margin-left: auto;
     }
 
     .product-form__item--submit {
@@ -4355,7 +4357,6 @@ input .product-form__controls-group,
 
     .product-form__cart-submit {
         max-width: 28ch;
-        margin-left: auto;
     }
 
     .product-form__error-message-wrapper {
