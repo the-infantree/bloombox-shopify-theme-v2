@@ -98,8 +98,8 @@ for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 
   cartItems[i].oninput = function (event) {
-      // var inputMax = event.target.max;
-      // var inputValue = Number(event.target.value);
+      var inputMax = event.target.max;
+      var inputValue = Number(event.target.value);
       document.querySelector("#inventoryOversellAlert").style.display = "none";
     	console.log("c");
 
