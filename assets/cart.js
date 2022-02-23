@@ -105,12 +105,14 @@ for (var i = 0; i < cartItems.length; i++) {
       var inputMax = event.target.max;
       var inputValue = Number(event.target.value);
       oversellAlert.style.display = "none";
+    	console.log("c");
 
 
       if (inputValue > inputMax) {
         setTimeout(() => {
           event.target.value = event.target.max;    
-          oversellAlert.style.display = "block";    
+          oversellAlert.style.display = "block";  
+    	console.log("d");  
         }, 250);
       }
   };
@@ -127,9 +129,11 @@ if (cartItem == e.target) {
     var inputMax = e.target.max;
     var inputValue = Number(e.target.value);
       oversellAlert.style.display = "none";
+    	console.log("a");
 	if (inputValue > inputMax) {
       e.target.value = e.target.max;  
           oversellAlert.style.display = "block";  
+    	console.log("b");
    
     }
   }, 250);
