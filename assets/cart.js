@@ -93,8 +93,7 @@ setTimeout(function(){
 
 
 var oversellAlert = document.querySelector("#inventoryOversellAlert");
-var closeButton = oversellAlert.querySelector(".well__close");
-closeButton.onclick = function () {
+document.querySelector("#inventoryOversellAlert .well__close").onclick = function () {
     oversellAlert.style.display = "none";
 };
 
@@ -112,12 +111,12 @@ for (var i = 0; i < cartItems.length; i++) {
         setTimeout(() => {
           event.target.value = event.target.max;    
           oversellAlert.style.display = "block";    
-        }, 500);
+        }, 250);
       }
   };
 }
 
-document.addEventListener("change", function(e) {
+document.addEventListener("input", function(e) {
 var cartItems = document.querySelectorAll(".cart__qty-input");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
@@ -127,11 +126,13 @@ if (cartItem == e.target) {
   cartapicall();
     var inputMax = e.target.max;
     var inputValue = Number(e.target.value);
+      oversellAlert.style.display = "none";
 	if (inputValue > inputMax) {
-      e.target.value = e.target.max;
+      e.target.value = e.target.max;  
+          oversellAlert.style.display = "block";  
    
     }
-  }, 500);
+  }, 250);
 
     }
  
