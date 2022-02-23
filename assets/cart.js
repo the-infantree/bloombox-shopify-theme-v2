@@ -92,10 +92,6 @@ setTimeout(function(){
   }
 
 
-var oversellAlert = document.querySelector("#inventoryOversellAlert");
-document.querySelector("#inventoryOversellAlert .well__close").onclick = function () {
-    oversellAlert.style.display = "none";
-};
 
 // var cartItems = document.querySelectorAll(".cart__qty-input");
 // for (var i = 0; i < cartItems.length; i++) {
@@ -129,11 +125,11 @@ if (cartItem == e.target) {
     var inputMax = e.target.max;
     var inputValue = Number(e.target.value);
     	console.log("a");
-      oversellAlert.style.display = "none";
+      document.querySelector("#inventoryOversellAlert").style.display = "none";
 	if (inputValue > inputMax) {
     	console.log("b");
       e.target.value = e.target.max;  
-      oversellAlert.style.display = "block";  
+      document.querySelector("#inventoryOversellAlert").style.display = "block";  
    
     }
   }, 250);
@@ -144,3 +140,6 @@ if (cartItem == e.target) {
 
 });
 
+document.querySelector("#inventoryOversellAlert .well__close").onclick = function () {
+    document.querySelector("#inventoryOversellAlert").style.display = "none";
+};
