@@ -121,19 +121,18 @@ for (var i = 0; i < cartItems.length; i++) {
 if (cartItem == e.target) {
     	// console.log('call');   
   setTimeout(function(){
-  cartapicall();
+    console.log(cartItems[i]);
+    cartapicall();
     var inputMax = e.target.max;
     var inputValue = Number(e.target.value);
       document.querySelector("#inventoryOversellAlert").style.display = "none";
-	if (inputValue > inputMax) {
-      e.target.value = e.target.max;  
-      document.querySelector("#inventoryOversellAlert").style.display = "block";  
-   
-    }
-  }, 250);
-
-    }
- 
+      if (inputValue > inputMax) {    
+        console.log(cartItems[i] + ' oversold');
+        e.target.value = e.target.max;  
+        document.querySelector("#inventoryOversellAlert").style.display = "block";  
+      }
+    }, 250);
+  }
 }
 
 });
