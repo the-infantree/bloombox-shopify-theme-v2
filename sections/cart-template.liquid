@@ -87,7 +87,6 @@
                               <a href="{{ item.url }}" class="cart__product-title" data-cart-item-title>
                                 {{ item.product.title }}
                               </a>
-                              <span class="api_inventorymsg" style="color:red"></span>
                             </div>
 
                             {%- assign variant_options = 'template ' | split: ' ' -%}
@@ -143,6 +142,7 @@
                                 </li>
                               {%- endfor -%}
                             </ul>
+                            <span class="api_inventorymsg" style="color:red"></span>
 
 
                             {%- assign itemDiscounts = 'template ' | split: ' ' -%}
