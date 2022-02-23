@@ -157,7 +157,7 @@ for (var i = 0; i < cartItems.length; i++) {
         setTimeout(() => {
           event.target.value = event.target.max;
           oversellAlert.style.display = "block";
-        }, 500);
+        }, 250);
       }
   };
 }
