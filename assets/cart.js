@@ -119,15 +119,13 @@ var cartItems = document.querySelectorAll(".cart__qty-input");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 if (cartItem == e.target) {
-    	console.log('call');   
+    	// console.log('call');   
   setTimeout(function(){
   cartapicall();
     var inputMax = e.target.max;
     var inputValue = Number(e.target.value);
-    	console.log("a");
       document.querySelector("#inventoryOversellAlert").style.display = "none";
 	if (inputValue > inputMax) {
-    	console.log("b");
       e.target.value = e.target.max;  
       document.querySelector("#inventoryOversellAlert").style.display = "block";  
    
