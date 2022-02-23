@@ -93,26 +93,26 @@ setTimeout(function(){
 
 
 
-// var cartItems = document.querySelectorAll(".cart__qty-input");
-// for (var i = 0; i < cartItems.length; i++) {
-//   var cartItem = cartItems[i];
+var cartItems = document.querySelectorAll(".cart__qty-input");
+for (var i = 0; i < cartItems.length; i++) {
+  var cartItem = cartItems[i];
 
-//   cartItems[i].oninput = function (event) {
-//       var inputMax = event.target.max;
-//       var inputValue = Number(event.target.value);
-//       oversellAlert.style.display = "none";
-//     	console.log("c");
+  cartItems[i].oninput = function (event) {
+      // var inputMax = event.target.max;
+      // var inputValue = Number(event.target.value);
+      document.querySelector("#inventoryOversellAlert").style.display = "none";
+    	console.log("c");
 
 
-//       if (inputValue > inputMax) {
-//         setTimeout(() => {
-//           event.target.value = event.target.max;    
-//           oversellAlert.style.display = "block";  
-//           console.log("d");  
-//         }, 250);
-//       }
-//   };
-// }
+      if (inputValue > inputMax) {
+        setTimeout(() => {
+          // event.target.value = event.target.max;    
+        document.querySelector("#inventoryOversellAlert").style.display = "block";  
+          console.log("d");  
+        }, 250);
+      }
+  };
+}
 
 document.addEventListener("input", function(e) {
 var cartItems = document.querySelectorAll(".cart__qty-input");
@@ -125,11 +125,11 @@ if (cartItem == e.target) {
     var inputMax = e.target.max;
     var inputValue = Number(e.target.value);
     console.log(inputValue);
-      document.querySelector("#inventoryOversellAlert").style.display = "none";
+      // document.querySelector("#inventoryOversellAlert").style.display = "none";
       if (inputValue > inputMax) {    
         console.log(inputValue);
         e.target.value = e.target.max;  
-        document.querySelector("#inventoryOversellAlert").style.display = "block";  
+        // document.querySelector("#inventoryOversellAlert").style.display = "block";  
       }
     }, 250);
   }
