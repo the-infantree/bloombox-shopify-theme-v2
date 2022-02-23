@@ -4,6 +4,7 @@
 
 {% section 'collection-template' %}
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -241,7 +242,7 @@
         }else{
           document.getElementById("error-mes").style.display = "none";
         }
-        console.log(response);
+//         console.log(response);
         document.getElementById("count_update").innerHTML = '';
         all_products_count = response.total_records;
         document.getElementById("count_update").innerHTML += all_products_count;
@@ -315,6 +316,19 @@
           }
           document.getElementById("filter-child-list-size").innerHTML += filter_child_list;
         }
+        
+         var tags_list= '';
+        var final_tags1 = '';
+        for (var i = 0; i < response.products.length; i++) {
+           var tags_list = response.products[i].tags.toString();
+          var final_tags1 = final_tags1 + tags_list;                    
+        }
+        if (dropdown_leight !== undefined) {
+          final_tags1 = final_tags1;
+        }else{
+          final_tags1 = '';
+        }
+        //console.log(final_tags1);
         var dropdown_leight = response.filters.Native;
         if (dropdown_leight !== undefined) {
           document.getElementById("filter-child-list-native").innerHTML = '';
@@ -322,7 +336,7 @@
           var filter_child_list_1 = '';
           //for (var i = 0; i < response.filters.Native.length; i++) {
             //console.log(i);
-            if(response.filters.Native.status === true){
+            if(final_tags1.indexOf('Native') !== -1){
               var substring =  response.filters.Native.label;
               if(final_tags.indexOf(substring) !== -1){
                 var atr_title = 'Remove ' + response.filters.Native.label;
@@ -355,8 +369,8 @@
         }
         //Product listing
         document.getElementById("product-grid-custom").innerHTML = '';
-        var badges = '';
-        for (var i = 0; i < response.products.length; i++) {
+        var badges = '';       
+        for (var i = 0; i < response.products.length; i++) {                     
           var prod_id = response.products[i].product_id;
           var prod_url = response.products[i].handle;
           var prod_title = response.products[i].title;
@@ -542,7 +556,7 @@
     }else{
       var sort_direction = '';
     }
-    let pagination_value = getCookie("pagination_value1");
+    let pagination_value = 1;
     
     $.ajax({
       type: "POST",
@@ -799,7 +813,7 @@
           }else{
             var prev_html = '<li class="paginate__prev"> <a href="javascript:void(0)" data-next-page="'+ prev_page +'" onclick="paginate(this)" class="btn btn--tertiary btn--narrow"> <span class="icon__fallback-text">Previous page</span> </a> </li>'
             }
-        var pagination_text = ''+ prev_html +'<li class="pagination__text">Page '+ pagination_value1 +' of '+ rountup1 +'</li>'+ next_html +''
+        var pagination_text = ''+ prev_html +'<li class="pagination__text">Page '+ pagination_value +' of '+ rountup1 +'</li>'+ next_html +''
         document.getElementById("list--inline-pagination").innerHTML += pagination_text;
       }else{
         document.getElementById("list--inline-pagination").innerHTML = '';
@@ -1111,7 +1125,7 @@
       var final_tags = '';
     }
     let selected_alphabet = getCookie("alphabet");
-    
+    setCookie('pagination_value1', 1, 30);    
     $.ajax({
       type: "POST",
       url: 'https://getblooming.mobikasa.net/api/collectionsproducts?page='+ pagination_value +'',
@@ -1129,7 +1143,7 @@
         }else{
           document.getElementById("error-mes").style.display = "none";
         }
-//         console.log(response);
+        console.log(response);
         all_products_count = response.total_records;
         //Features Filter Dropdown
         var dropdown_leight = response.filters.Features;
@@ -1289,7 +1303,27 @@
         }
         document.getElementById("loader").style.display = "none";
       }
-    });	
+    });
+    
+    if(all_products_count > pagination_limit){      
+      document.getElementById("list--inline-pagination").innerHTML = '';
+      var rountup = all_products_count / pagination_limit;
+      var rountup1 = Math.ceil(rountup);
+      var prev_page = parseInt(pagination_value) - 1;
+      var next_page = parseInt(pagination_value) + 1;    
+      if(pagination_value == rountup1){
+        var next_html = '<li class="paginate__next" aria-hidden="true"> <button class="btn btn--tertiary btn--narrow" disabled=""> <span class="icon__fallback-text">Next page</span> </button> </li>'
+        }else{
+          var next_html = '<li class="paginate__next"> <a href="javascript:void(0)" data-next-page="'+ next_page +'" onclick="paginate(this)" class="btn btn--tertiary btn--narrow"> <span class="icon__fallback-text">Next page</span> </a> </li>'
+          }
+      if(pagination_value == 1){
+        var prev_html = '<li class="paginate__prev" aria-hidden="true"> <button class="btn btn--tertiary btn--narrow" disabled=""> <span class="icon__fallback-text">Previous page</span> </button> </li>'
+        }else{
+          var prev_html = '<li class="paginate__prev"> <a href="javascript:void(0)" data-next-page="'+ prev_page +'" onclick="paginate(this)" class="btn btn--tertiary btn--narrow"> <span class="icon__fallback-text">Previous page</span> </a> </li>'
+          }
+      var pagination_text = ''+ prev_html +'<li class="pagination__text">Page '+ pagination_value1 +' of '+ rountup1 +'</li>'+ next_html +''
+      document.getElementById("list--inline-pagination").innerHTML += pagination_text;
+    }
   }
   
   //pagination
@@ -1589,7 +1623,7 @@
           document.getElementById("loader").style.display = "none";
           document.getElementById("error-mes").style.display = "block";          
         }else{
-          document.getElementById("error-mes").style.display = "block";          
+          document.getElementById("error-mes").style.display = "none";          
         }
         console.log(response);
         all_products_count = response.total_records;
@@ -2056,7 +2090,7 @@
       var product_count = '<span class="filter-bar__item-count"><span id="count_update">'+ all_products_count +'</span> products</span><ul id="filter__current-tags" class="filter__current-tags"></ul>'
       document.getElementById("filter-bar-details-custom").innerHTML += product_count;
 
-      var sort_by = '<div id="sort-by" class="sort-by"> <label class="sort-by__label" for="SortBy">Sort by</label> <select class="sort-by__select" name="SortBy" onchange="sortby(this)" id="SortBy"> <option value="manual">Featured</option> <option data-sort-direction="asc" value="title">Alphabetically, A-Z</option> <option data-sort-direction="desc" value="title">Alphabetically, Z-A</option> <option data-sort-direction="desc" value="price">Price, low to high</option> <option data-sort-direction="asc" value="price">Price, high to low</option> <option data-sort-direction="asc" value="shopify_published_at">Date, old to new</option> <option data-sort-direction="desc" value="shopify_published_at">Date, new to old</option> </select></div>'
+      var sort_by = '<div id="sort-by" class="sort-by"> <label class="sort-by__label" for="SortBy">Sort by</label> <select class="sort-by__select" name="SortBy" onchange="sortby(this)" id="SortBy"> <option value="manual">Featured</option> <option data-sort-direction="asc" value="title">Alphabetically, A-Z</option> <option data-sort-direction="desc" value="title">Alphabetically, Z-A</option> <option data-sort-direction="asc" value="price">Price, low to high</option> <option data-sort-direction="desc" value="price">Price, high to low</option> <option data-sort-direction="asc" value="shopify_published_at">Date, old to new</option> <option data-sort-direction="desc" value="shopify_published_at">Date, new to old</option> </select></div>'
       document.getElementById("filter-bar-details-custom").innerHTML += sort_by;
 
       if(all_products_count > pagination_limit){        

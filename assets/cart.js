@@ -43,6 +43,10 @@ async function inventorystatusapi()
 
 
 setTimeout(function(){
+  cartapicall();
+  }, 500);
+  function cartapicall()
+  {
   if(document.querySelectorAll(".cart__product-table tbody tr").length > 0)
   {
   inventorystatusapi().then(data => {
@@ -85,7 +89,8 @@ setTimeout(function(){
     //console.log(data);
   });
   }
-}, 1000);
+  }
+
 
 
 var cartItems = document.querySelectorAll(".cart__qty-input");
@@ -103,4 +108,25 @@ for (var i = 0; i < cartItems.length; i++) {
   };
 }
 
+document.addEventListener("change", function(e) {
+var cartItems = document.querySelectorAll(".cart__qty-input");
+for (var i = 0; i < cartItems.length; i++) {
+  var cartItem = cartItems[i];
+if (cartItem == e.target) {
+    	console.log('call');   
+  setTimeout(function(){
+  cartapicall();
+    var inputMax = e.target.max;
+    var inputValue = Number(e.target.value);
+	if (inputValue > inputMax) {
+      e.target.value = e.target.max;
+   
+    }
+  }, 500);
+
+    }
+ 
+}
+
+});
 
