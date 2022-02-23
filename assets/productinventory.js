@@ -146,11 +146,11 @@ for (var i = 0; i < cartItems.length; i++) {
   cartItems[i].oninput = function (event) {
       var inputMax = event.target.max;
       var inputValue = Number(event.target.value);
-      console.log("value changed");
 
       if (inputValue > inputMax) {
-          console.log("value is larger than available");
+        setTimeout(() => {
           event.target.value = event.target.max;
+        }, 500);
       }
   };
 }
