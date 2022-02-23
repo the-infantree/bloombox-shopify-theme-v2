@@ -4316,6 +4316,7 @@ input .product-form__controls-group,
 
 .product-form__row {
     margin-top: 2rem;
+    justify-content: space-between;
 }
 .product-form__row[style*="block"] {
     display: flex !important;
@@ -4340,8 +4341,6 @@ input .product-form__controls-group,
     .product-form__controls-group--submit {
         flex: 1;
         justify-content: flex-end;
-        justify-self: flex-end;
-        margin-left: auto;
     }
 
     .product-form__item--submit {
