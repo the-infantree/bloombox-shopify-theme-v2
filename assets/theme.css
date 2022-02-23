@@ -5189,6 +5189,7 @@ input .product-form__controls-group,
 
 .product-details {
     padding: 0;
+    margin-top: 0;
     font-size: calc(((var(--font-size-base) - 2) / (var(--font-size-base))) * 1em);
 }
 .product-details li:empty {
@@ -5203,7 +5204,7 @@ input .product-form__controls-group,
 }
 
 .product-details__item--variant-option:not(.hide) + .product-details__item--property {
-    margin-top: 0.8rem;
+    margin-top: 0;
 }
 
 .product-details__item-label {
@@ -6295,7 +6296,6 @@ thead.cart__row {
 }
 
 .product-details {
-    margin-top: 0.25rem;
     font-size: calc(((var(--font-size-base) - 2) / (var(--font-size-base))) * 1em);
 }
 
