@@ -75,10 +75,10 @@ setTimeout(function(){
               if(variables[location_id]['qty'] < 10)
               {
              	
-                product_card[i].querySelectorAll(".api_inventorymsg")[0].innerHTML = `<br/> Only ${variables[location_id]['qty']} Left`; 
+                product_card[i].querySelectorAll(".api_inventorymsg")[0].innerHTML = `Only ${variables[location_id]['qty']} Left`; 
               	
               }else{
-               product_card[i].querySelectorAll(".api_inventorymsg")[0].innerHTML = `<br/>  ${variables[location_id]['qty']} Available`;
+               product_card[i].querySelectorAll(".api_inventorymsg")[0].innerHTML = `${variables[location_id]['qty']} Available`;
                  product_card[i].querySelectorAll(".api_inventorymsg")[0].style.color = 'green';
               }
 			product_card[i].querySelectorAll(".cart__qty-input")[1].setAttribute("max",variables[location_id]['qty'] );

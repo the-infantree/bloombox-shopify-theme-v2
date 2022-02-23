@@ -5188,10 +5188,12 @@ input .product-form__controls-group,
 }
 
 .product-details {
-    padding: calc((5 / (var(--font-size-base))) * 1em) 0 0;
+    padding: 0;
     font-size: calc(((var(--font-size-base) - 2) / (var(--font-size-base))) * 1em);
 }
-
+.product-details li:empty {
+    display: none;
+}
 .product-details.hide + .cart__remove {
     margin-top: 0;
 }
