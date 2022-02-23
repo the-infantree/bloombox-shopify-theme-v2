@@ -11514,7 +11514,7 @@ time {
 }
 #product__variant-qty {
     font-size: 13px;
-    text-transform: lowercase;
+    text-transform: capitalize;
     color: var(--color-blb-green);
     flex: 100% 0 0;
     margin: 3px 0 0 0;
