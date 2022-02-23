@@ -5367,7 +5367,7 @@ thead.cart__row {
 .user--is-pa.product--is-md .free-shipping-notice,
 .user--is-md.product--is-pa .free-shipping-notice,
 .user--is-none .alert--coming-soon,
-.product--sold-out:not(.template-cart) .free-shipping-notice,
+.template-product.product--sold-out .free-shipping-notice,
 .store-closed.product-5706070327451 .alert--coming-soon {
     display: none;
 }
@@ -10972,7 +10972,7 @@ Staging: [data-loc='60945596601']
     display: none;
 }
 
-.user--is-none #inventoryLocationInformation {
+.template-product.user--is-none #inventoryLocationInformation {
     display: none !important;
     visibility: hidden;
     position: absolute;
@@ -10984,9 +10984,9 @@ Staging: [data-loc='60945596601']
 #inventoryOversellAlert .well {
     margin-bottom: 0;
 }
-.user--is-pa.variant--sold-out-pa #inventoryOversellAlert,
-.user--is-md.variant--sold-out-md #inventoryOversellAlert,
-.product--sold-out #inventoryOversellAlert {
+.template-product.user--is-pa.variant--sold-out-pa #inventoryOversellAlert,
+.template-product.user--is-md.variant--sold-out-md #inventoryOversellAlert,
+.template-product.product--sold-out #inventoryOversellAlert {
     display: none !important;
 }
 .product-page__title {
