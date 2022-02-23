@@ -97,14 +97,13 @@ var cartItems = document.querySelectorAll(".cart__qty-input");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 
-  cartItems[i].onblur = function (event) {
-  
-    var inputMax = event.target.max;
-    var inputValue = Number(event.target.value);
+  cartItems[i].onchange = function (event) {
+      var inputMax = event.target.max;
+      var inputValue = Number(event.target.value);
 
-    if (inputValue > inputMax) {
-      event.target.value = event.target.max;
-         }
+      if (inputValue > inputMax) {
+          event.target.value = event.target.max;
+      }
   };
 }
 

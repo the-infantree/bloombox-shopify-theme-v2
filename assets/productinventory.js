@@ -143,7 +143,7 @@ var cartItems = document.querySelectorAll(".product-form__input--quantity");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 
-  cartItems[i].onblur = function (event) {
+  cartItems[i].onchange = function (event) {
  
     var inputMax = event.target.max;
     var inputValue = Number(event.target.value);
