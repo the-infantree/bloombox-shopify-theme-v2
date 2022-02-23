@@ -143,15 +143,14 @@ var cartItems = document.querySelectorAll(".product-form__input--quantity");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 
-  cartItems[i].onchange = function (event) {
- 
-    var inputMax = event.target.max;
-    var inputValue = Number(event.target.value);
-    console.log('value changed');
+  cartItems[i].oninput = function (event) {
+      var inputMax = event.target.max;
+      var inputValue = Number(event.target.value);
+      console.log("value changed");
 
-    if (inputValue > inputMax) {
-    console.log("value is larger than available");
-      event.target.value = event.target.max;
-         }
+      if (inputValue > inputMax) {
+          console.log("value is larger than available");
+          event.target.value = event.target.max;
+      }
   };
 }

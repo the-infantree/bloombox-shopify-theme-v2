@@ -97,7 +97,7 @@ var cartItems = document.querySelectorAll(".cart__qty-input");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 
-  cartItems[i].onchange = function (event) {
+  cartItems[i].oninput = function (event) {
       var inputMax = event.target.max;
       var inputValue = Number(event.target.value);
 
