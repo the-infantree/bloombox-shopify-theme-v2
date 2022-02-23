@@ -11117,9 +11117,14 @@ Staging: [data-loc='60945596601']
     height: 2rem;
     border-radius: 50%;
     appearance: none;
+    font-size: 14px;
     -webkit-appearance: none;
     border: 0;
     background-color: transparent;
+    color: #951b10;
+}
+.well__close:hover {
+    color: #460600;
 }
 #multipleLocationWarning {
     display: inline-block !important;
