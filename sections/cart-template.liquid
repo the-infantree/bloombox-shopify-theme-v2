@@ -364,14 +364,6 @@
                 {%- endif -%}
 
                   <div class="text-right small--text-center">
-                    <div id="cartInventoryWarning" style="display: none;">
-                      <div class="well well--pink well--small well--inventory-warning" style="margin: -1rem 0 1rem 0;">
-                        <h3 class="well__title">Uh oh! You have more items in your cart than we have in stock.</h3>
-                        <div class="well__body">
-                          <p>Please adjust the quantities and update your cart <span class="text-no-wrap">to continue.</span></p>
-                        </div>
-                      </div>
-                    </div>
 
                     {%- assign cartDiscounts = 'template ' | split: ' ' -%}
                     {%- if cart.cart_level_discount_applications.size > 0 -%}
