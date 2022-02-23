@@ -4158,6 +4158,8 @@ input .product-form__controls-group,
 
 .product-form__controls-group--submit {
     margin-top: 0px;
+    display: flex;
+    align-items: flex-end;
 }
 
 .product-form__controls-group ~ .product-form__controls-group--submit {
@@ -4310,7 +4312,7 @@ input .product-form__controls-group,
     padding-right: 10px;
     white-space: normal;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     min-height: 44px;
 }
 
@@ -11103,6 +11105,21 @@ Staging: [data-loc='60945596601']
 }
 .well__body p:last-child {
     margin: 0;
+}
+.well__close {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    background-color: transparent;
 }
 #multipleLocationWarning {
     display: inline-block !important;

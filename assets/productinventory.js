@@ -139,10 +139,14 @@ checkavailablity(variation_value);
 
 }
  
+var oversellAlert = document.querySelector("#inventoryOversellAlert");
+var closeButton = oversellAlert.querySelector(".well__close");
+closeButton.onclick = function () {
+    oversellAlert.style.display = "none";
+}
 var cartItems = document.querySelectorAll(".product-form__input--quantity");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
-  var oversellAlert = document.querySelector("#inventoryOversellAlert");
 
   cartItems[i].oninput = function (event) {
       var inputMax = event.target.max;
