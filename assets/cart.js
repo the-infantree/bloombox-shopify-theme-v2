@@ -102,7 +102,9 @@ for (var i = 0; i < cartItems.length; i++) {
       var inputValue = Number(event.target.value);
 
       if (inputValue > inputMax) {
-          event.target.value = event.target.max;
+        setTimeout(() => {
+          event.target.value = event.target.max;        
+        }, 500);
       }
   };
 }
