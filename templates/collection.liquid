@@ -392,7 +392,8 @@
           var prod_regular_price = response.products[i].price;
           var prod_compare_at_price = response.products[i].compare_at_price;
           var prod_inventory = response.products[i].total_qty;
-          var prod_incoming_inventory= response.products[i].total_incoming_qty;          
+          var prod_incoming_inventory= response.products[i].total_incoming_qty;
+          var prod_varitaion = response.products[i].total_options;
           
                           
           if(prod_inventory <= 0){          
@@ -433,10 +434,15 @@
         if(prod_from_price){
           var price_dom ='<dl class="price price--listing price--sold-out "> <div class="price__regular"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <span class="price-item price-item--regular">from $'+ prod_from_price +'</span> </dd> </div><div class="price__sale"> <dt> <span class="visually-hidden visually-hidden--inline">Sale price</span> </dt> <dd> <span class="price-item price-item--sale">from $'+ prod_from_price +'</span> </dd> <div class="price__compare"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <s class="price-item price-item--regular"> </s> </dd> </div></div><div class="price__unit"> <dt> <span class="visually-hidden visually-hidden--inline">Unit price</span> </dt> <dd class="price-unit-price"><span></span><span aria-hidden="true">/</span><span class="visually-hidden">per&nbsp;</span><span></span></dd> </div>'+ badges +'</dl>'
           }
-                    
-
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div></div></div></li>'
-
+        var prod_varitaion_html = "";
+        if(prod_varitaion > 1)
+       {
+       	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
+       }
+		console.log(prod_varitaion);
+          console.log(prod_varitaion_html);
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
+			
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
         }
@@ -699,8 +705,8 @@
           var prod_compare_at_price = response.products[i].compare_at_price;
           var prod_inventory = response.products[i].total_qty;
           var prod_incoming_inventory= response.products[i].total_incoming_qty;          
-          
-                          
+          var prod_varitaion = response.products[i].total_options;
+                     
           if(prod_inventory <= 0){          
           var badges = '<div class="price__badges price__badges--listing"> <span class="price__badge price__badge--sale" aria-hidden="true"> Sale </span> <span class="price__badge price__badge--sold-out"> <span>Sold Out</span> </span> </div>'          
           }
@@ -739,9 +745,13 @@
         if(prod_from_price){
           var price_dom ='<dl class="price price--listing price--sold-out "> <div class="price__regular"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <span class="price-item price-item--regular">from $'+ prod_from_price +'</span> </dd> </div><div class="price__sale"> <dt> <span class="visually-hidden visually-hidden--inline">Sale price</span> </dt> <dd> <span class="price-item price-item--sale">from $'+ prod_from_price +'</span> </dd> <div class="price__compare"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <s class="price-item price-item--regular"> </s> </dd> </div></div><div class="price__unit"> <dt> <span class="visually-hidden visually-hidden--inline">Unit price</span> </dt> <dd class="price-unit-price"><span></span><span aria-hidden="true">/</span><span class="visually-hidden">per&nbsp;</span><span></span></dd> </div>'+ badges +'</dl>'
           }
-                    
+            var prod_varitaion_html = "";
+        if(prod_varitaion > 1)
+       {
+       	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
+       }        
 
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div></div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
 
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
@@ -1000,7 +1010,7 @@
           var prod_compare_at_price = response.products[i].compare_at_price;
           var prod_inventory = response.products[i].total_qty;
           var prod_incoming_inventory= response.products[i].total_incoming_qty;          
-          
+          var prod_varitaion = response.products[i].total_options;
                           
           if(prod_inventory <= 0){          
           var badges = '<div class="price__badges price__badges--listing"> <span class="price__badge price__badge--sale" aria-hidden="true"> Sale </span> <span class="price__badge price__badge--sold-out"> <span>Sold Out</span> </span> </div>'          
@@ -1040,9 +1050,13 @@
         if(prod_from_price){
           var price_dom ='<dl class="price price--listing price--sold-out "> <div class="price__regular"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <span class="price-item price-item--regular">from $'+ prod_from_price +'</span> </dd> </div><div class="price__sale"> <dt> <span class="visually-hidden visually-hidden--inline">Sale price</span> </dt> <dd> <span class="price-item price-item--sale">from $'+ prod_from_price +'</span> </dd> <div class="price__compare"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <s class="price-item price-item--regular"> </s> </dd> </div></div><div class="price__unit"> <dt> <span class="visually-hidden visually-hidden--inline">Unit price</span> </dt> <dd class="price-unit-price"><span></span><span aria-hidden="true">/</span><span class="visually-hidden">per&nbsp;</span><span></span></dd> </div>'+ badges +'</dl>'
           }
-                    
+            var prod_varitaion_html = "";
+        if(prod_varitaion > 1)
+       {
+       	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
+       }       
 
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div></div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
 
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
@@ -1155,7 +1169,7 @@
         }else{
           document.getElementById("error-mes").style.display = "none";
         }
-        console.log(response);
+        //console.log(response);
         all_products_count = response.total_records;
         //Features Filter Dropdown
         var dropdown_leight = response.filters.Features;
@@ -1264,7 +1278,7 @@
           var prod_compare_at_price = response.products[i].compare_at_price;
           var prod_inventory = response.products[i].total_qty;
           var prod_incoming_inventory= response.products[i].total_incoming_qty;
-          
+          var prod_varitaion = response.products[i].total_options;
           
           if(prod_inventory <= 0){
           var badges = '<div class="price__badges price__badges--listing"> <span class="price__badge price__badge--sale" aria-hidden="true"> Sale </span> <span class="price__badge price__badge--sold-out"> <span>Sold Out</span> </span> </div>'          
@@ -1306,9 +1320,13 @@
           var price_dom ='<dl class="price price--listing price--sold-out "> <div class="price__regular"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <span class="price-item price-item--regular">from $'+ prod_from_price +'</span> </dd> </div><div class="price__sale"> <dt> <span class="visually-hidden visually-hidden--inline">Sale price</span> </dt> <dd> <span class="price-item price-item--sale">from $'+ prod_from_price +'</span> </dd> <div class="price__compare"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <s class="price-item price-item--regular"> </s> </dd> </div></div><div class="price__unit"> <dt> <span class="visually-hidden visually-hidden--inline">Unit price</span> </dt> <dd class="price-unit-price"><span></span><span aria-hidden="true">/</span><span class="visually-hidden">per&nbsp;</span><span></span></dd> </div>'+ badges +'</dl>'
           }
           
-          
+       var prod_varitaion_html = "";
+        if(prod_varitaion > 1)
+       {
+       	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
+       }
 
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div></div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
 
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
@@ -1484,7 +1502,7 @@
           var prod_compare_at_price = response.products[i].compare_at_price;
           var prod_inventory = response.products[i].total_qty;
           var prod_incoming_inventory= response.products[i].total_incoming_qty;
-          
+          var prod_varitaion = response.products[i].total_options;
           
                           
           if(prod_inventory <= 0){          
@@ -1525,8 +1543,14 @@
         if(prod_from_price){
           var price_dom ='<dl class="price price--listing price--sold-out "> <div class="price__regular"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <span class="price-item price-item--regular">from $'+ prod_from_price +'</span> </dd> </div><div class="price__sale"> <dt> <span class="visually-hidden visually-hidden--inline">Sale price</span> </dt> <dd> <span class="price-item price-item--sale">from $'+ prod_from_price +'</span> </dd> <div class="price__compare"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <s class="price-item price-item--regular"> </s> </dd> </div></div><div class="price__unit"> <dt> <span class="visually-hidden visually-hidden--inline">Unit price</span> </dt> <dd class="price-unit-price"><span></span><span aria-hidden="true">/</span><span class="visually-hidden">per&nbsp;</span><span></span></dd> </div>'+ badges +'</dl>'
           }
-
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div></div></div></li>'
+			
+            var prod_varitaion_html = "";
+        if(prod_varitaion > 1)
+       {
+       	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
+       }
+          
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
 
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
@@ -1637,7 +1661,7 @@
         }else{
           document.getElementById("error-mes").style.display = "none";          
         }
-        console.log(response);
+       // console.log(response);
         all_products_count = response.total_records;
         //Features Filter Dropdown        
         var dropdown_leight = response.filters.Features;        
@@ -1723,12 +1747,13 @@
           }
           alphabet_html1 = '<span class="alphabet-inner '+ i +' '+ status +'" '+ clicl_event +'>'+ label +'</span>'
           alphabet_html = alphabet_html + alphabet_html1;
+          //console.log(alphabet_html);
         }        
         
         //Product listing
         var badges = '';
         for (var i = 0; i < response.products.length; i++) {
-//           console.log(i);
+           //console.log(response.products);
           var prod_id = response.products[i].product_id;
           var prod_url = response.products[i].handle;
           var prod_title = response.products[i].title;          
@@ -1739,7 +1764,7 @@
           var prod_compare_at_price = response.products[i].compare_at_price;
           var prod_inventory = response.products[i].total_qty;
           var prod_incoming_inventory= response.products[i].total_incoming_qty;
-          
+          var prod_varitaion = response.products[i].total_options;
 		          
           if(prod_inventory <= 0){          
           var badges = '<div class="price__badges price__badges--listing"> <span class="price__badge price__badge--sale" aria-hidden="true"> Sale </span> <span class="price__badge price__badge--sold-out"> <span>Sold Out</span> </span> </div>'          
@@ -1779,8 +1804,13 @@
         if(prod_from_price){
           var price_dom ='<dl class="price price--listing price--sold-out "> <div class="price__regular"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <span class="price-item price-item--regular">from $'+ prod_from_price +'</span> </dd> </div><div class="price__sale"> <dt> <span class="visually-hidden visually-hidden--inline">Sale price</span> </dt> <dd> <span class="price-item price-item--sale">from $'+ prod_from_price +'</span> </dd> <div class="price__compare"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <s class="price-item price-item--regular"> </s> </dd> </div></div><div class="price__unit"> <dt> <span class="visually-hidden visually-hidden--inline">Unit price</span> </dt> <dd class="price-unit-price"><span></span><span aria-hidden="true">/</span><span class="visually-hidden">per&nbsp;</span><span></span></dd> </div>'+ badges +'</dl>'
           }
-
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div></div></div></li>'
+		 
+          var prod_varitaion_html = "";
+        if(prod_varitaion > 1)
+       {
+       	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
+       }
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+ prod_varitaion_html +'</div></div></li>'
 
         document.getElementById("product-grid-custom").innerHTML += product_list;                    
 
@@ -1789,7 +1819,7 @@
         //alert();
       }
     });                      
-      console.log(alphabet_html);
+     // console.log(alphabet_html);
     //sort by      
       var alphabet = '<h3 class="alphabet-label">Filter by letter</h3><div class="alphabet-list variable-width">'+ alphabet_html +'</div>'
       document.getElementById("alphabet").innerHTML += alphabet;
@@ -2025,7 +2055,7 @@
             var prod_compare_at_price = response.products[i].compare_at_price;
             var prod_inventory = response.products[i].total_qty;
             var prod_incoming_inventory= response.products[i].total_incoming_qty;
-
+			var prod_varitaion = response.products[i].total_options;
 
             if(prod_inventory <= 0){              
               var badges = '<div class="price__badges price__badges--listing"> <span class="price__badge price__badge--sale" aria-hidden="true"> Sale </span> <span class="price__badge price__badge--sold-out"> <span>Sold Out</span> </span> </div>'          
@@ -2066,8 +2096,12 @@
             if(prod_from_price){
               var price_dom ='<dl class="price price--listing price--sold-out "> <div class="price__regular"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <span class="price-item price-item--regular">from $'+ prod_from_price +'</span> </dd> </div><div class="price__sale"> <dt> <span class="visually-hidden visually-hidden--inline">Sale price</span> </dt> <dd> <span class="price-item price-item--sale">from $'+ prod_from_price +'</span> </dd> <div class="price__compare"> <dt> <span class="visually-hidden visually-hidden--inline">Regular price</span> </dt> <dd> <s class="price-item price-item--regular"> </s> </dd> </div></div><div class="price__unit"> <dt> <span class="visually-hidden visually-hidden--inline">Unit price</span> </dt> <dd class="price-unit-price"><span></span><span aria-hidden="true">/</span><span class="visually-hidden">per&nbsp;</span><span></span></dd> </div>'+ badges +'</dl>'
               }
-
-            var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div></div></div></li>'
+  var prod_varitaion_html = "";
+        if(prod_varitaion > 1)
+       {
+       	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
+       }
+            var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description fffff"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
 
             document.getElementById("product-grid-custom").innerHTML += product_list;                    
 
