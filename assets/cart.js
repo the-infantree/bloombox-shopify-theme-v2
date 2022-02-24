@@ -75,10 +75,10 @@ setTimeout(function(){
               if(variables[location_id]['qty'] < 10)
               {
              	
-                product_card[i].querySelectorAll(".api_inventorymsg")[0].innerHTML = `<br/> Only ${variables[location_id]['qty']} Left`; 
+                product_card[i].querySelectorAll(".api_inventorymsg")[0].innerHTML = `Only ${variables[location_id]['qty']} Left`; 
               	
               }else{
-               product_card[i].querySelectorAll(".api_inventorymsg")[0].innerHTML = `<br/>  ${variables[location_id]['qty']} Available`;
+               product_card[i].querySelectorAll(".api_inventorymsg")[0].innerHTML = `${variables[location_id]['qty']} Available`;
                  product_card[i].querySelectorAll(".api_inventorymsg")[0].style.color = 'green';
               }
 			product_card[i].querySelectorAll(".cart__qty-input")[1].setAttribute("max",variables[location_id]['qty'] );
@@ -97,36 +97,46 @@ var cartItems = document.querySelectorAll(".cart__qty-input");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 
-  cartItems[i].onblur = function (event) {
-  
-    var inputMax = event.target.max;
-    var inputValue = Number(event.target.value);
+  cartItems[i].oninput = function (event) {
+      var inputMax = event.target.max;
+      var inputValue = Number(event.target.value);
+      document.querySelector("#inventoryOversellAlert").style.display = "none";
+    	console.log("c");
 
-    if (inputValue > inputMax) {
-      event.target.value = event.target.max;
-         }
+
+      if (inputValue > inputMax) {
+        setTimeout(() => {
+          // event.target.value = event.target.max;    
+        document.querySelector("#inventoryOversellAlert").style.display = "block";  
+          console.log("d");  
+        }, 250);
+      }
   };
 }
 
-document.addEventListener("change", function(e) {
+document.addEventListener("input", function(e) {
 var cartItems = document.querySelectorAll(".cart__qty-input");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 if (cartItem == e.target) {
-    	console.log('call');   
+    	// console.log('call');   
   setTimeout(function(){
-  cartapicall();
+    cartapicall();
     var inputMax = e.target.max;
     var inputValue = Number(e.target.value);
-	if (inputValue > inputMax) {
-      e.target.value = e.target.max;
-   
-    }
-  }, 500);
-
-    }
- 
+    console.log(inputValue);
+      // document.querySelector("#inventoryOversellAlert").style.display = "none";
+      if (inputValue > inputMax) {    
+        console.log(inputValue);
+        e.target.value = e.target.max;  
+        // document.querySelector("#inventoryOversellAlert").style.display = "block";  
+      }
+    }, 250);
+  }
 }
 
 });
 
+document.querySelector("#inventoryOversellAlert .well__close").onclick = function () {
+    document.querySelector("#inventoryOversellAlert").style.display = "none";
+};

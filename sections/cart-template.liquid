@@ -87,7 +87,6 @@
                               <a href="{{ item.url }}" class="cart__product-title" data-cart-item-title>
                                 {{ item.product.title }}
                               </a>
-                              <span class="api_inventorymsg" style="color:red"></span>
                             </div>
 
                             {%- assign variant_options = 'template ' | split: ' ' -%}
@@ -143,6 +142,7 @@
                                 </li>
                               {%- endfor -%}
                             </ul>
+                            <span class="api_inventorymsg" style="color:red"></span>
 
 
                             {%- assign itemDiscounts = 'template ' | split: ' ' -%}
@@ -335,6 +335,16 @@
               {%- endif -%}
           </div>
 
+          <div id="inventoryOversellAlert" style="display: none;">
+            <div class="well well--pink" style="margin: -1rem 0 1rem 0;">
+              <h3 class="well__title">We're sorry! We don't have that many in stock.</h3>
+              <div class="well__body">
+                <p>Your quantity has been updated to match availability.</p>
+              </div>
+              <button class="well__close" aria-label="Dismiss notification">&#10005;</button>
+            </div>
+          </div>
+
           {%- unless section.settings.cart_ajax_enable -%}
           <div class="update-cart">
             <button type="submit" name="Refresh Cart" class="cart__update btn btn--small" href="{{ cart }}" data-cart-submit>
@@ -354,14 +364,6 @@
                 {%- endif -%}
 
                   <div class="text-right small--text-center">
-                    <div id="cartInventoryWarning" style="display: none">
-                      <div class="well well--pink well--small well--inventory-warning">
-                        <h3 class="well__title">Uh oh! You have more items in your cart than we have in stock.</h3>
-                        <div class="well__body">
-                          <p>Please adjust the quantities and update your cart <span class="text-no-wrap">to continue.</span></p>
-                        </div>
-                      </div>
-                    </div>
 
                     {%- assign cartDiscounts = 'template ' | split: ' ' -%}
                     {%- if cart.cart_level_discount_applications.size > 0 -%}

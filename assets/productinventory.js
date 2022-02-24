@@ -66,8 +66,9 @@ function checkavailablity(variation_value)
               console.log('variation qty',locationvar[locvariable]['qty']);
               if(locationvar[locvariable]['qty'] < 1)
               {
-                document.querySelectorAll(".product-form__row")[0].style.display = "none";
-                
+                document.querySelectorAll(".product-form__row")[0].style.display = "none";                            
+                document.querySelector("#product__variant-qty").style.display = "none";
+
                  if(locationvar[locvariable]['incoming_qty'] > 0)
                 {
 					
@@ -84,7 +85,10 @@ function checkavailablity(variation_value)
                 if(locationvar[locvariable]['qty'] < 10){document.querySelectorAll(".qtyerrorapi")[0].innerHTML=`<span class="qtynotice">Only ${locationvar[locvariable]['qty']} Left.</span>`;}
               	document.querySelectorAll(".product-form__row")[0].style.display = "block";
                 document.querySelectorAll(".alert--coming-soon")[0].style.display = "none";
-                
+                var variantQty = locationvar[locvariable]["qty"];
+                document.querySelector("#product__variant-qty").innerHTML = variantQty + " Available";
+                document.querySelector("#product__variant-qty").style.display = "block";
+
               }
             }
 
@@ -135,17 +139,25 @@ checkavailablity(variation_value);
 
 }
  
+var oversellAlert = document.querySelector("#inventoryOversellAlert");
+var closeButton = oversellAlert.querySelector(".well__close");
+closeButton.onclick = function () {
+    oversellAlert.style.display = "none";
+}
 var cartItems = document.querySelectorAll(".product-form__input--quantity");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 
-  cartItems[i].onblur = function (event) {
- 
-    var inputMax = event.target.max;
-    var inputValue = Number(event.target.value);
+  cartItems[i].oninput = function (event) {
+      var inputMax = event.target.max;
+      var inputValue = Number(event.target.value);
+      oversellAlert.style.display = "none";
 
-    if (inputValue > inputMax) {
-      event.target.value = event.target.max;
-         }
+      if (inputValue > inputMax) {
+        setTimeout(() => {
+          event.target.value = event.target.max;
+          oversellAlert.style.display = "block";
+        }, 250);
+      }
   };
 }
