@@ -441,7 +441,7 @@
        }
 		console.log(prod_varitaion);
           console.log(prod_varitaion_html);
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'<div>'+prod_varitaion_html+'</div></div></div></li>';
 			
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
@@ -533,6 +533,7 @@
         }        
       });
     })();
+    $(".sort-by__select [data-sort-direction='"+sort_direction+"'][value='"+sort_field+"']").prop('selected',true);
     return false;
   }
   function alphabets(e) {
@@ -575,7 +576,7 @@
       var sort_direction = '';
     }
     let pagination_value = 1;
-    
+    console.log(sort_direction);
     $.ajax({
       type: "POST",
       url: 'https://getblooming.mobikasa.net/api/collectionsproducts?page='+ pagination_value +'',  
@@ -595,6 +596,7 @@
         }
 //         console.log('hello');
 //         console.log(response);
+        $(".sort-by__select [data-sort-direction='"+sort_direction+"'][value='"+sort_field+"']").prop('selected',true);
         document.getElementById("count_update").innerHTML = '';
         all_products_count = response.total_records;
         document.getElementById("count_update").innerHTML += all_products_count;
@@ -751,11 +753,13 @@
        	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
        }        
 
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'<div>'+prod_varitaion_html+'</div></div></div></li>';
 
         document.getElementById("product-grid-custom").innerHTML += product_list;
-
+		
         }
+       $(".sort-by__select [data-sort-direction='"+sort_direction+"'][value='"+sort_field+"']").prop('selected',true);
+       // console.log( $(".sort-by__select [data-sort-direction='"+sort_direction+"'][value='"+sort_field+"']").prop('selected',true));
         document.getElementById("loader").style.display = "none";
       },
       error: function () {
@@ -840,6 +844,7 @@
       }else{
         document.getElementById("list--inline-pagination").innerHTML = '';
       } 
+    $(".sort-by__select [data-sort-direction='"+sort_direction+"'][value='"+sort_field+"']").prop('selected',true);
     
   }
   function removealphabet(e){
@@ -1056,7 +1061,7 @@
        	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
        }       
 
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'<div>'+prod_varitaion_html+'</div></div></div></li>';
 
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
@@ -1326,7 +1331,7 @@
        	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
        }
 
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'<div>'+prod_varitaion_html+'</div></div></div></li>';
 
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
@@ -1550,7 +1555,7 @@
        	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
        }
           
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'<div>'+prod_varitaion_html+'</div></div></div></li>';
 
         document.getElementById("product-grid-custom").innerHTML += product_list;
 
@@ -1810,7 +1815,7 @@
        {
        	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
        }
-        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+ prod_varitaion_html +'</div></div></li>'
+        var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'<div>'+ prod_varitaion_html +'</div></div></div></li>';
 
         document.getElementById("product-grid-custom").innerHTML += product_list;                    
 
@@ -2101,7 +2106,7 @@
        {
        	 prod_varitaion_html = `<small> ${prod_varitaion} Color Options</small>`;                                    
        }
-            var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description fffff"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'</div>'+prod_varitaion_html+'</div></div></li>'
+            var product_list = '<li class="product-grid__item product-card-'+ prod_id +'"><div class="grid-view-item  product-card"><a class="grid-view-item__link grid-view-item__image-container full-width-link" href="/products/'+ prod_url +'"> <span class="visually-hidden">'+ prod_title +'</span></a><div class="product-card__image-with-placeholder-wrapper"><div id="ProductCardImageWrapper-collection-template-'+ prod_id +'" class="grid-view-item__image-wrapper product-card__image-wrapper js"><img id="ProductCardImage-collection-template-'+ prod_id +'" class="grid-view-item__image ls-is-cached lazyloaded" src="'+ prod_img +'" alt=""></div></div><div class="grid-view-item__description fffff"><div class="grid-view-item__description-top"><div class="grid-view-item__title product-card__title" aria-hidden="true">'+ prod_title +'</div>'+ price_dom +'</div>'+ left_qty +'<div>'+prod_varitaion_html+'</div></div></div></li>';
 
             document.getElementById("product-grid-custom").innerHTML += product_list;                    
 

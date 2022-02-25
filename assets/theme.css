@@ -8399,6 +8399,7 @@ thead.cart__row {
 }
 #alphabet .alphabet-inner.false {
     display: none;
+    opacity: .5;
 }
 #alphabet .slick-track {
 }
