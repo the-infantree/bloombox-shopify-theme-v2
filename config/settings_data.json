@@ -1,7 +1,8 @@
 {
   "current": {
     "open_store": true,
-    "countdown_date": "2022-02-15",
+    "countdown_date": "2022-03-15",
+    "countdown_time": "09:00:00",
     "color_text": "#58938d",
     "color_body_text": "#3e3838",
     "color_button": "#368079",
@@ -13,6 +14,7 @@
     "type_base_font": "nunito_n4",
     "social_facebook_link": "http:\/\/www.facebook.com\/getblooming",
     "social_instagram_link": "http:\/\/instagram.com\/getblooming",
+    "social_tiktok_link": "https:\/\/www.tiktok.com\/@bloomboxtok",
     "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UC0SlDtibHGunOnS1I2DCumg?pbjreload=102",
     "favicon": "shopify:\/\/shop_images\/favicon.png",
     "zip_check_disabled_pages": "\/pages\/planter-giveaway\n\/pages\/thank-you-p\n\/pages\/flower-show-coupon-gift\n\/pages\/coupon\n\/pages\/flower-show-coupon-form\n\/pages\/thank-you-c",
@@ -33,8 +35,8 @@
           "main_linklist": "main-menu",
           "message": true,
           "home_page_only": false,
-          "message_text": "We are OPEN for Spring! Pre-order thru 3\/14 and receive 10% off! All pre-orders will be delivered between March 19th and April 5th.",
-          "message_link": "shopify:\/\/collections\/perennials",
+          "message_text": "Fall is here! We're stocked with mums, pumpkins and more. Fast delivery on all orders!",
+          "message_link": "shopify:\/\/collections\/annuals",
           "color_bg": "#3a3a3a",
           "color_text": "#000000"
         }
@@ -44,14 +46,14 @@
         "settings": {
           "image": "shopify:\/\/shop_images\/hero-bloombox-delivered-large.jpeg",
           "alignment": "top",
-          "title": "We are open for spring!",
-          "text": "<p>Pre-order now to receive 10% off!<\/p>",
-          "button_label_1": "Shop Perennials",
-          "button_link_1": "shopify:\/\/collections\/perennials",
-          "button_label_2": "Shop Annuals",
-          "button_link_2": "shopify:\/\/collections\/annuals",
-          "button_label_3": "Shop Shrubs",
-          "button_link_3": "shopify:\/\/collections\/shrubs"
+          "title": "OCTOBERFEST AT BLOOMBOX",
+          "text": "<p><strong>Enjoy up to 70% off fall plants from 10\/6-10\/9.<\/strong><\/p>",
+          "button_label_1": "SHOP FALL",
+          "button_link_1": "shopify:\/\/collections\/fall-favorites",
+          "button_label_2": "SHOP KITS",
+          "button_link_2": "shopify:\/\/collections\/diy-planter-kits",
+          "button_label_3": "SHOP ANNUALS",
+          "button_link_3": "shopify:\/\/collections\/annuals"
         }
       },
       "feature-row": {
@@ -476,12 +478,12 @@
           "cart_ajax_enable": true,
           "cart_notes_enable": true,
           "promo_enable": false,
-          "promo_image": "shopify:\/\/shop_images\/BEE2A9AE-FB8E-45E7-88F1-2038318E6C04_4_5005_c_900x.progressive_7221bb43-cb58-464e-b796-dd546005db8b.jpg",
-          "promo_variant": "41599618351259",
-          "promo_required_spend": "25",
-          "promo_headline": "FREE $10 gift card with all purchases over $25!",
-          "promo_description": "CYBER MONDAY! Get a FREE $10 gift card to use later when you spend $25 or more.",
-          "promo_disclaimer": "Offer valid until 11:59PM 11\/29\/21"
+          "promo_image": "shopify:\/\/shop_images\/52691-PK-P1.jpg",
+          "promo_variant": "42828406718619",
+          "promo_required_spend": "50",
+          "promo_headline": "5 FREE Pumpkins!",
+          "promo_description": "Get 5 FREE mini pumpkins when you spend $50 or more!",
+          "promo_disclaimer": "Offer valid until 11:59PM 9\/22\/22 or while supplies last."
         }
       },
       "feature-columns-products": {
@@ -940,6 +942,7 @@
       "social_facebook_link": "",
       "social_pinterest_link": "",
       "social_instagram_link": "",
+      "social_tiktok_link": "",
       "social_tumblr_link": "",
       "social_snapchat_link": "",
       "social_youtube_link": "",

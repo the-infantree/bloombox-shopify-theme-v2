@@ -89,7 +89,7 @@
         });
     }
     // let countdownDate = '2022-02-15 09:00:00';
-    var countdownDate = '{{ timer_date | timer_time }}';
+    var countdownDate = '{{ timer_date }} {{ timer_time }}';
     var my_timer = countdownDate.replace(/-/g, '/');
     var deadline = new Date(my_timer);
 

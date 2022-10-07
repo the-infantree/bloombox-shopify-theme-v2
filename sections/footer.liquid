@@ -6,6 +6,7 @@
   settings.social_facebook_link != blank
   or settings.social_pinterest_link != blank
   or settings.social_instagram_link != blank
+  or settings.social_tiktok_link != blank
   or settings.social_youtube_link != blank
   or settings.social_vimeo_link != blank
   or request.page_type == 'article'
@@ -21,7 +22,7 @@
   <div class="container--wide">
 
       <p class="h6 off-white no-margin">We now offer over-the-phone ordering!<br />
-      <span class="h4 pink">Call to order: 717-984-6214</span></p>
+      <span class="h4 pink">Call to order: 717-970-5446</span></p>
 
   </div>
   {%- endif -%}
@@ -108,7 +109,7 @@
                       Android</a>
                  </li>
             </ul>
-            {%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr Snapchat YouTube Vimeo" | split: ' ' -%}
+            {%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr TikTok Snapchat YouTube Vimeo" | split: ' ' -%}
             {%- if social_icons -%}
               <ul class="list__social list--inline">
                 {%- for social in socials -%}

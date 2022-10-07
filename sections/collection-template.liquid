@@ -123,6 +123,8 @@
             console.log(cInventoryData);
           </script> {% endcomment %}
           
+            <div class="collection-inventory-info" data-tomit-product-id="{{product.id}}"
+ data-tomit-variant-id="['{{ variantIDs }}']" aria-hidden="true"></div>
             {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
           </li>
         

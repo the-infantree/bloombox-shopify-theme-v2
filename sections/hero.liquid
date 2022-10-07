@@ -65,6 +65,8 @@
                     {{- section.settings.button_label_3 | escape -}}
                 </a>
             {%- endif -%}
+
+            <a href="#videoAbout" class="btn--secondary btn--secondary__play">WHY BLOOMBOX?</a>
         </div>
         {%- endif -%}
       </div>
@@ -73,6 +75,15 @@
       <div class="hero"{% if section.settings.image %}{% unless section.settings.image.alt == blank %} role="img" aria-label="{{ section.settings.image.alt | escape }}"{% endunless %} style="background-image: url('{{ section.settings.image | img_url: '2048x' }}'); background-position: center {{ section.settings.alignment }};"{% endif %}></div>
     </noscript>
 -->
+  <div class="modal-video" id="videoAbout">
+    <div class="modal__inner">
+      <button class="modal__close">
+        Close
+        {% render 'icon-close' %}
+      </button>
+      <iframe src="https://player.vimeo.com/video/740390515?h=a37872e6c6" width="1000" height="563" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
 </section>
 
 

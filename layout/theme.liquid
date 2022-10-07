@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
     <head>
+      
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -120,11 +121,24 @@
             document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
         </script>
 
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWM7F4EW85"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-RWM7F4EW85'); // GA4 Script
+        </script>
+      
+      
         {%- if request.page_type contains 'customers/' -%}
         <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
         {%- endif -%}
 
         <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+        <script src="{{ 'product-variant-availability.js' | asset_url }}"></script>
 
         <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
 
@@ -138,32 +152,6 @@
                 scripts.parentNode.insertBefore(polyfill, scripts);
             }
         </script>
-
-        <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0073/7110.js" async="async"></script>
-
-        <!-- Facebook Pixel Code -->
-        <script>
-            !(function (f, b, e, v, n, t, s) {
-                if (f.fbq) return;
-                n = f.fbq = function () {
-                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-                };
-                if (!f._fbq) f._fbq = n;
-                n.push = n;
-                n.loaded = !0;
-                n.version = "2.0";
-                n.queue = [];
-                t = b.createElement(e);
-                t.async = !0;
-                t.src = v;
-                s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s);
-            })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-            fbq("init", "243068326493819");
-            fbq("track", "PageView");
-        </script>
-        <noscript><img height="1" width="1" style="display: none" src="https://www.facebook.com/tr?id=243068326493819&ev=PageView&noscript=1" /></noscript>
-        <!-- End Facebook Pixel Code -->
 
         {{
             content_for_header
@@ -263,7 +251,8 @@
               };
             })();
         </script>
-    </head>
+      {%- render 'bold-subscription-widget' -%}
+</head>
     {% comment %} Logic to add product zone info as body class {% endcomment %} {%- assign product_is_pa = false -%} {%- assign product_is_md = false -%} {%- for collection in product.collections -%} {%- if collection.handle == 'pa' -%} {%- assign product_is_pa = true -%} {%- endif -%} {%- if collection.handle == 'md' -%} {%- assign product_is_md = true -%} {%- endif -%} {%- endfor -%} {%- if template.name == "product" -%} {%- if product_is_pa == true and product_is_md == true -%} {%- assign productZoneClass = 'product--is-pa-md' -%} {%- elsif product_is_pa == true -%} {%- assign productZoneClass = 'product--is-pa' -%} {%- elsif product_is_md == true -%} {%- assign productZoneClass = 'product--is-md' -%} {%- endif -%} {%- endif -%} {%- unless product.available -%} {%- assign productSoldOut = ' product--sold-out' -%} {%- endunless -%}
 
     <body class="template-{{ request.page_type | handle }} {{ productZoneClass }}{{ productSoldOut }} {%- if product.id -%}product-{{ product.id }} {%- endif -%}{%- if settings.open_store == false -%} store-closed{%- endif -%}{%- if product.metafields.accentuate.hide_zip_code_popup -%} hide-zipcode-popup{% endif %}">
@@ -271,9 +260,13 @@
         {{ the_snippet_content }}
         {% endunless %}
         <div id="loader" style="display: none">
-            <img src="{{ 'ajax-loader.gif' | asset_url }}" />
+            <div class="loader__content">
+                <svg class="loader__spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                </svg>
+                <p class="loader__text">Pulling products in your location</p>
+            </div>
         </div>
-
         <script type="text/javascript">
             function getCookieCustom(name) {
                 var value = "; " + document.cookie;
@@ -370,5 +363,7 @@
         {% endunless %} {% if template == 'page.faq' or 'page.policies' or 'page.locations' %}
         <script src="{{ 'accordion.js' | asset_url }}"></script>
         {% endif %}
-    </body>
+    <!--Gorgias Chat Widget Start--><script id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=15349"></script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
+</body>
 </html>

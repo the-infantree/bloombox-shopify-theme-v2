@@ -10311,3 +10311,47 @@ for (var i = 0; i < tagLink.length; i++) {
         };
     });
 })();
+
+(function() {
+    let vidBtn = document.querySelector('a[href="#videoModal"]');
+    let vidModal = document.querySelector('#videoModal');
+    let vidClose = document.querySelector('#videoModal .modal__close');
+    let vidSrc = document.querySelector('#videoModal iframe').src;
+
+    vidBtn.addEventListener('click', function(event){
+        event.preventDefault();
+        vidModal.classList.add('modal__is-active');
+        document.querySelector('.page-container').classList.add('modalActive');
+        document.querySelector('body').classList.add('bodyModalActive');
+    }, false);
+
+    vidClose.addEventListener('click', function(){
+        vidModal.classList.remove('modal__is-active');
+        document.querySelector('.page-container').classList.remove('modalActive');
+        document.querySelector('body').classList.remove('bodyModalActive');
+        document.querySelector('#videoModal iframe').src = '';
+        document.querySelector('#videoModal iframe').src = vidSrc;
+    }, false);
+})();
+
+(function() {
+    let vidBtn = document.querySelector('a[href="#videoAbout"]');
+    let vidModal = document.querySelector('#videoAbout');
+    let vidClose = document.querySelector('#videoAbout .modal__close');
+    let vidSrc = document.querySelector('#videoAbout iframe').src;
+
+    vidBtn.addEventListener('click', function(event){
+        event.preventDefault();
+        vidModal.classList.add('modal__is-active');
+        document.querySelector('.page-container').classList.add('modalActive');
+        document.querySelector('body').classList.add('bodyModalActive');
+    }, false);
+
+    vidClose.addEventListener('click', function(){
+        vidModal.classList.remove('modal__is-active');
+        document.querySelector('.page-container').classList.remove('modalActive');
+        document.querySelector('body').classList.remove('bodyModalActive');
+        document.querySelector('#videoAbout iframe').src = '';
+        document.querySelector('#videoAbout iframe').src = vidSrc;
+    }, false);
+})();

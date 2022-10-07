@@ -16,7 +16,6 @@ async function inventorystatusapi()
             "location_ids": location_id, 
             "product_id": product_id 
         }
-          
 
         let options = {
             method: 'POST',
@@ -28,7 +27,7 @@ async function inventorystatusapi()
         }
   
         // Fake api for making post requests
-        const response = await fetch("https://getblooming.mobikasa.net/api/product",options);
+        const response = await fetch("https://inventory.getblooming.com/api/product",options);
 		return response.json();
         
         
@@ -54,7 +53,12 @@ function checkavailablity(variation_value)
       console.log(data);
 			 
       for (variable in data) {
+//         console.log(variable);
+//         console.log(data[variable]);
+//         console.log(variation_value);
+        
         var locationvar = data[variable];
+        
         if(variable == variation_value )
         {
           for (locvariable in locationvar) 
@@ -62,29 +66,41 @@ function checkavailablity(variation_value)
            // console.log(locvariable);
             if(location_id == locvariable)
             {
-              console.log(locationvar[locvariable]);
-              console.log('variation qty',locationvar[locvariable]['qty']);
+//               console.log(locationvar[locvariable]);
+//               console.log('variation qty',locationvar[locvariable]['qty']);
+
               if(locationvar[locvariable]['qty'] < 1)
               {
-                document.querySelectorAll(".product-form__row")[0].style.display = "none";
-                
-                 if(locationvar[locvariable]['incoming_qty'] > 0)
+                document.querySelectorAll(".product-form__row")[0].style.display = "none";                            
+                document.querySelector("#product__variant-qty").style.display = "none";
+
+                if(locationvar[locvariable]['incoming_qty'] > 0)
                 {
-					
-                    document.querySelectorAll(".alert__sold-out")[0].style.display = "block";
-                
+                  
+                  document.querySelectorAll(".alert--coming-soon")[0].style.display = "block";
+					                
                 }else{
                   
-					document.querySelectorAll(".alert--coming-soon")[0].style.display = "block";
+                  document.querySelectorAll(".alert__sold-out")[0].style.display = "block";
                 
                 }
               	
               }else{
+                var variantQty = locationvar[locvariable]["qty"];
+
                 document.querySelectorAll("#Quantity-product-template")[0].setAttribute("max",locationvar[locvariable]['qty'] );
-                if(locationvar[locvariable]['qty'] < 10){document.querySelectorAll(".qtyerrorapi")[0].innerHTML=`<span class="qtynotice">Only ${locationvar[locvariable]['qty']} Left.</span>`;}
-              	document.querySelectorAll(".product-form__row")[0].style.display = "block";
-                document.querySelectorAll(".alert--coming-soon")[0].style.display = "none";
+
+                if(locationvar[locvariable]['qty'] < 10){
+                  document.querySelector("#product__variant-qty").innerHTML = `<span class="qtynotice">Only ${variantQty} Left.</span>`;
+                } else {
+                  document.querySelector("#product__variant-qty").innerHTML = variantQty + " Available";
+                }
                 
+                  document.querySelector("#product__variant-qty").style.display = "block";
+                  document.querySelectorAll(".product-form__row")[0].style.display = "block";
+                  document.querySelectorAll(".alert--coming-soon")[0].style.display = "none";
+                  document.querySelectorAll(".alert__sold-out")[0].style.display = "none";
+
               }
             }
 
@@ -100,7 +116,7 @@ function checkavailablity(variation_value)
 
 
 // document.querySelectorAll(".alert--coming-soon")[0].style.display = "none";
-document.querySelectorAll(".product-form__row")[0].style.display = "none";
+// document.querySelectorAll(".product-form__row")[0].style.display = "none";
 var variationoption = document.querySelectorAll(".single-option-selector");
 
 if(variationoption.length > 0)
@@ -110,7 +126,7 @@ if(variationoption.length > 0)
       variationoption[i].addEventListener('change', function(){
         setTimeout(function(){ 
       		var variation_value = document.querySelectorAll("#ProductSelect-product-template")[0].value;    
-      		//console.log(variation_value);
+//       		console.log(variation_value);
        
 		checkavailablity(variation_value);
   		}, 1000);
@@ -126,7 +142,7 @@ if(variationoption.length > 0)
 }else{
  var variation_value = document.querySelectorAll("#ProductSelect-product-template")[0].value;   
   
-      console.log('variation_value',variation_value);
+//   console.log('variation_value',variation_value);
   setTimeout(function(){ 
 checkavailablity(variation_value);
   
@@ -135,17 +151,25 @@ checkavailablity(variation_value);
 
 }
  
+var oversellAlert = document.querySelector("#inventoryOversellAlert");
+var closeButton = oversellAlert.querySelector(".well__close");
+closeButton.onclick = function () {
+    oversellAlert.style.display = "none";
+}
 var cartItems = document.querySelectorAll(".product-form__input--quantity");
 for (var i = 0; i < cartItems.length; i++) {
   var cartItem = cartItems[i];
 
-  cartItems[i].onblur = function (event) {
- 
-    var inputMax = event.target.max;
-    var inputValue = Number(event.target.value);
+  cartItems[i].oninput = function (event) {
+      var inputMax = event.target.max;
+      var inputValue = Number(event.target.value);
+      oversellAlert.style.display = "none";
 
-    if (inputValue > inputMax) {
-      event.target.value = event.target.max;
-         }
+      if (inputValue > inputMax) {
+        setTimeout(() => {
+          event.target.value = event.target.max;
+          oversellAlert.style.display = "block";
+        }, 250);
+      }
   };
 }

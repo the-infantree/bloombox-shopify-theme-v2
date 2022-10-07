@@ -160,7 +160,7 @@
         </div>
       </div>
     
-      <div class="product-page__alert alert__sold-out">
+          <div class="product-page__alert alert__sold-out">
         <div class="well well--pink">
           <h3 class="well__title">Sold Out</h3>
           <div class="well__body">
@@ -307,21 +307,19 @@
         {% endfor %}
       </select>
 
-      <div id="inventoryOversellAlert" style="display: none;">
-       <div class="well well--pink">
-          <h3 class="well__title">We're sorry, we don't have that many in stock.</h3>
-          <div class="well__body">
-            <p>Quantities have been adjusted to match current availability.</p>
-          </div>
-        </div>
-      </div>
+      {% unless product.selected_or_first_available_variant.inventory_management == null %}
+          <div id="inventoryLocationInformation"></div>
+      {% endunless %}
 
       <div class="product-form__row">
         {% if product.available %}
           {% if section.settings.show_quantity_selector %}
             <div class="product-form__controls-group product-form__controls-group--quantity">
               <div class="product-form__item brown">
-                <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+                <label for="Quantity-{{ section.id }}">
+                  {{ 'products.product.quantity' | t }}
+                  <div id="product__variant-qty" style="display: none;"></div>
+                </label>
                 <input type="number" id="Quantity-{{ section.id }}"
                   name="quantity" value="1" min="1" pattern="[0-9]*"
                   class="product-form__input product-form__input--quantity brown" data-quantity-input
@@ -370,6 +368,15 @@
     </div>
     {% endform %}
 
+    <div id="inventoryOversellAlert" style="display: none;">
+      <div class="well well--pink">
+        <h3 class="well__title">We're sorry! We don't have that many in stock.</h3>
+        <div class="well__body">
+          <p>Your quantity has been updated to match availability.</p>
+        </div>
+        <button class="well__close" aria-label="Dismiss alert">&#10005;</button>
+      </div>
+    </div>
 
     {%- include 'free-shipping-notice' -%}
   </div>
