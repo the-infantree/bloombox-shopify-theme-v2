@@ -1,92 +1,91 @@
 <section data-section-id="{{ section.id }}" data-section-type="hero-section">
-
-    <!-- Hero BG Image -->
-    <div class="hero hero__home lazyload js"
-         {%- if section.settings.image -%}
-          {% unless section.settings.image.alt == blank %}
-          role="img"
-          aria-label="{{ section.settings.image.alt | escape }}"
-          data-alt="{{ section.settings.image.alt | escape }}"
-          {% endunless %}
-         data-bg="{{ section.settings.image | img_url: '300x300' }}"
-         data-bgset="{% include 'bgset', image: section.settings.image %}"
-         data-sizes="auto"
-         data-parent-fit="cover"
-         style="background-position: {{ section.settings.alignment }};"
-         {%- endif -%}>
-
-     <!--
-        Hero Content
-        Holiday Styles: add bg--red to hero__content div
+  <!-- Hero BG Image -->
+  <div
+    class="hero hero__home lazyload js"
+    {%- if section.settings.image -%}
+      {% unless section.settings.image.alt == blank %}
+        role="img"
+        aria-label="{{ section.settings.image.alt | escape }}"
+        data-alt="{{ section.settings.image.alt | escape }}"
+      {% endunless %}
+      data-bg="{{ section.settings.image | img_url: '300x300' }}"
+      data-bgset="{% include 'bgset', image: section.settings.image %}"
+      data-sizes="auto"
+      data-parent-fit="cover"
+      style="background-position: {{ section.settings.alignment }};"
+    {%- endif -%}
+  >
+    <!--
+      Hero Content
+      Holiday Styles: add bg--red to hero__content div
     -->
-     <div class="hero__content">
-        <div>
+    <div class="hero__content">
+      <div class="bg--red">
+        {%- if settings.open_store == true -%}
+          {%- if section.settings.title != blank -%}
+            <h2 class="h1">{{ section.settings.title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <p>{{ section.settings.text }}</p>
+          {%- endif -%}
+        {%- endif -%}
 
-            {%- if settings.open_store == true -%}
-
-                {%- if section.settings.title != blank -%}
-                    <h2 class="h1">{{ section.settings.title | escape }}</h2>
-                {%- endif -%}
-                {%- if section.settings.text != blank -%}
-                    <p>{{ section.settings.text }}</p>
-                {%- endif -%}
-
-            {%- endif -%}
-
-            {%- if settings.open_store == false -%}
-
-                <h2><span>Closed for the Season</span>We're Re-opening in</h2>
-                {%- include 'countdown-timer' -%}
-
-            {%- endif -%}
-
-        </div>
-
-        <!-- Quick Links -->
-        {%- if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank -%}
-        <div class="hero__content-buttons">
-
-            <!-- Button 1 -->
-            <a href="{{ section.settings.button_link_1 }}" class="btn--secondary">
-                {{- section.settings.button_label_1 | escape -}}
-            </a>
-
-            <!-- Button 2 -->
-            {%- if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank -%}
-                <a href="{{ section.settings.button_link_2 }}" class="btn--secondary">
-                    {{- section.settings.button_label_2 | escape -}}
-                </a>
-            {%- endif -%}
-
-
-            <!-- Button 3 -->
-            {%- if section.settings.button_label_3 != blank and section.settings.button_link_3 != blank -%}
-                <a href="{{ section.settings.button_link_3 }}" class="btn--secondary">
-                    {{- section.settings.button_label_3 | escape -}}
-                </a>
-            {%- endif -%}
-
-            <a href="#videoAbout" class="btn--secondary btn--secondary__play">WHY BLOOMBOX?</a>
-        </div>
+        {%- if settings.open_store == false -%}
+          <h2><span>Closed for the Season</span>We're Re-opening in</h2>
+          {%- include 'countdown-timer' -%}
         {%- endif -%}
       </div>
-  </div> <!-- End Hero Background -->
-    <!--<noscript>
+
+      <!-- Quick Links -->
+      {%- if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank -%}
+        <div class="hero__content-buttons">
+          <!-- Button 1 -->
+          <a href="{{ section.settings.button_link_1 }}" class="btn--secondary">
+            {{- section.settings.button_label_1 | escape -}}
+          </a>
+
+          <!-- Button 2 -->
+          {%- if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank -%}
+            <a href="{{ section.settings.button_link_2 }}" class="btn--secondary">
+              {{- section.settings.button_label_2 | escape -}}
+            </a>
+          {%- endif -%}
+
+          <!-- Button 3 -->
+          {%- if section.settings.button_label_3 != blank and section.settings.button_link_3 != blank -%}
+            <a href="{{ section.settings.button_link_3 }}" class="btn--secondary">
+              {{- section.settings.button_label_3 | escape -}}
+            </a>
+          {%- endif -%}
+
+          <a href="#videoAbout" class="btn--secondary btn--secondary__play">WHY BLOOMBOX?</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  <!-- End Hero Background -->
+  <!--
+    <noscript>
       <div class="hero"{% if section.settings.image %}{% unless section.settings.image.alt == blank %} role="img" aria-label="{{ section.settings.image.alt | escape }}"{% endunless %} style="background-image: url('{{ section.settings.image | img_url: '2048x' }}'); background-position: center {{ section.settings.alignment }};"{% endif %}></div>
     </noscript>
--->
+  -->
   <div class="modal-video" id="videoAbout">
     <div class="modal__inner">
       <button class="modal__close">
         Close
         {% render 'icon-close' %}
       </button>
-      <iframe src="https://player.vimeo.com/video/740390515?h=a37872e6c6" width="1000" height="563" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      <iframe
+        src="https://player.vimeo.com/video/740390515?h=a37872e6c6"
+        width="1000"
+        height="563"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 </section>
-
-
 
 {% schema %}
 {
